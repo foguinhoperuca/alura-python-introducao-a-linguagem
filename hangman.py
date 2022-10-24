@@ -1,12 +1,14 @@
 from random import randrange
 import datetime
 import logging
+from time import sleep
+from util import Util
 
 def show_welcome_message(good_guess, initial_attempts):
     print("*********************************************")
     print("| Welcome to hangman game! Fruits Version !!|")
     print("*********************************************")
-    print(f"starting {good_guess=} with {initial_attempts} attempts!!")
+    logging.info(Util.info(f"starting {good_guess=} with {initial_attempts} attempts!!"))
 
 
 def load_seeds(seed_file="hangman_seed.dat", start_line=0):
@@ -27,6 +29,7 @@ def initialize_good_guess(secret_word):
 
 
 def ask_guess():
+    sleep(1)
     guess = input("Choose a letter: ")
     return guess.strip().upper()
 
@@ -156,6 +159,7 @@ def play():
     bad_guess = []
     bad_word = []
     good_guess = initialize_good_guess(secret_word)
+    logging.basicConfig(level=logging.INFO, format=Util.LOG_FORMAT_SIMPLE)
 
     show_welcome_message(good_guess, initial_attempts)
 
