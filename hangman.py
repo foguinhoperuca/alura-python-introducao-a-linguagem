@@ -1,49 +1,64 @@
-def play():
-    print("****************************")
-    print("| Welcome to hangman game! |")
-    print("****************************")
+from random import random, randrange
 
-    secret_word = "banana"
-    attempts = 3
+def play():
+    print("*********************************************")
+    print("| Welcome to hangman game! Fruits Version !!|")
+    print("*********************************************")
+
+    possible_secret_words = (
+        "banana",
+        "maçã",
+        "laranja",
+        "limão",
+        "pera",
+        "uva",
+        "mamão",
+        "melancia"
+    )
+    secret_word = possible_secret_words[randrange(0, 8)].upper()
+    attempts = randrange(1, 11)
     bingo = False
     bad_guess = []
     bad_word = []
-    good_guess = []
+    good_guess = ["?" for letter in secret_word]
+    # for index, letter in enumerate(secret_word):
+    #     good_guess.insert(index, "?")
 
-    for index, letter in enumerate(secret_word):
-        good_guess.insert(index, "?")
-
-    print(f"starting {good_guess=}")
+    print(f"starting {good_guess=} with {attempts} attempts!!")
 
     while (not bingo and not attempts == 0):
         guess = input("Choose a letter: ")
-        found = False
-        for index, letter in enumerate(secret_word):
-            # if secret_word.find(guess) != -1:
-            if guess == letter:
-                found = True
-                # print(f"Your {guess=} found at {index=}")
-                good_guess[index] = guess
+        guess = guess.strip().upper()
+        if guess in secret_word:
+            for index, letter in enumerate(secret_word):
+                # if secret_word.find(guess) != -1:
+                if guess.upper() == letter.upper():
+                    # print(f"Your {guess=} found at {index=}")
+                    good_guess[index] = guess
 
-        if found:
             print(f"Your {guess=} is right!")
         else:
             print(f"Nay! No good {guess=}! Try another one!")
             bad_guess.extend([guess])
             attempts -= 1
 
-        # TODO scape from game if secret word is correct!
         print("*** Here the status: ***")
-        print(f"{good_guess}")
-        print(f"{sorted(bad_guess)=}")
+        print(f"{good_guess} - missing {good_guess.count('?')} letter(s)")
+        print(f"{sorted(bad_guess)=}: {len(bad_guess)} error(s)")
+
+        if "?" not in good_guess:
+            bingo = True
+            break
+
         guess_word = input("Would you try to guess the full word? ")
+        guess_word = guess_word.strip().upper()
         if guess_word == secret_word:
             bingo = True
             print(f"Good! You found the secret word! {guess_word=} == {secret_word=}")
         else:
             bingo = False  # FIXME need it!?
             bad_word.extend([guess_word])
-            print("Oh boy! Not this time! Try again")
+            print(f"Oh boy! Not this time! You have {attempts} attempts.")
             print(f"{bad_word=}")
 
         print("--------------------------------------------------")
