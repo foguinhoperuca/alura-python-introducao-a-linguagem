@@ -14,7 +14,7 @@ def show_welcome_message(good_guess, initial_attempts):
 def load_seeds(seed_file="hangman_seed.dat", start_line=0):
     possible_secret_words = []
     # hangman_seed = open(seed_file, "r", encoding="utf-8")
-    with open("hangman_seed.dat", "r", encoding="utf-8") as hangman_seed:
+    with open(seed_file, "r", encoding="utf-8") as hangman_seed:
         for seed in hangman_seed:
             possible_secret_words.append(seed.strip().upper())
     # hangman_seed.close()
@@ -36,15 +36,13 @@ def ask_guess():
 
 def guess_mark_as_correct(good_guess, guess, secret_word):
     for index, letter in enumerate(secret_word):
-        # if secret_word.find(guess) != -1:
         if guess == letter:
-            # print(f"Your {guess=} found at {index=}")
             # FIXME good_guess was not returned. Why the program still works?!
             good_guess[index] = guess
 
 
 def log_game(attempts, bad_guess, bad_word, good_guess, initial_attempts, secret_word, status):
-    with open(f"logs/hangman.log", "a", encoding="utf-8") as file_log:
+    with open(f"../logs/hangman.log", "a", encoding="utf-8") as file_log:
         file_log.write(f"timestamp for this log: **{datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S')}**\n")
         file_log.write(f"good guesses: **{good_guess}**\n")
         file_log.write(f"bad guesses: **{bad_guess}**\n")
@@ -151,7 +149,6 @@ def draw_gibbet(attempts, initial_attempts):
 
 
 def play():
-    # possible_secret_words = load_seeds()
     secret_word = load_seeds()
     attempts = randrange(1, 8)
     initial_attempts = attempts
