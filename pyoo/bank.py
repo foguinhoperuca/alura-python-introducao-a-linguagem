@@ -3,6 +3,7 @@
 import logging
 from decimal import Decimal
 from random import randrange
+from util import Util
 
 
 class Owner:
@@ -11,7 +12,10 @@ class Owner:
         self.__age = age
 
     def say_hello(self):
-        print(f"Hello! My name is {self.__name}! I am {self.__age} years old.")
+        hello = f"Hello! My name is {self.__name}! I am {self.__age} years old."
+        logging.debug(Util.warning(hello))
+
+        return hello
 
     @property
     def name(self):
@@ -27,13 +31,21 @@ class Owner:
 
 
 class Account:
-    def __init__(self, owner, number=randrange(0, 1000, ), limit=1000.00):
+    @staticmethod
+    def bank_codes():
+        return {'BB': '001', 'Caixa': '104', 'Bradesco': '237'}
+
+    BANK_CODE = bank_codes()['BB']
+    # BANK_CODE = bank_codes.__func__()['BB']
+
+    def __init__(self, owner: Owner, number=randrange(0, 1000, ), limit=1000.00):
         self.__owner = owner
         self.__number = number
         self.__max_limit = limit
         self.__limit = limit
         self.__balance = 0.00
         self.__transfer_rate = 8.0
+        # self.__bank_code = "001"
 
     def deposit(self, value):
         self.__balance += value
@@ -48,7 +60,7 @@ class Account:
         if self.__can_withdrawn(value):
             self.__balance -= value
         else:
-            raise Exception(f"Not allowed borrow this amount ${borrowed_money}.")
+            raise Exception(f"Not allowed borrow this amount ${value}.")
 
         return value
 
@@ -76,13 +88,15 @@ class Account:
 
     def transfer(self, value, destiny_account: 'Account') -> Decimal:
         original_balance = self.__balance
-        money = self.withdrawn(value)
+        money = (self.withdrawn(value + self.__transfer_rate) - self.__transfer_rate)
+        rate_paid = self.__transfer_rate
         destiny_account.deposit(money)
 
         logging.info(
-            f"Asked ${value} to be transferred. In fact, was transferred ${money} to account #{destiny_account.number}"
-            f" owner {destiny_account.owner}. Now, {self.__owner}, you still have ${self.__balance} of original "
-            f"balance ${original_balance} in account #{self.__number} with limit ${self.__limit}"
+            f"Asked ${value} to be transferred. In fact, was transferred ${money} (paid {rate_paid})"
+            f" to account #{destiny_account.number} owner {destiny_account.owner.name}. "
+            f"Now, {self.__owner.name}, you still have ${self.__balance} of original "
+            f"balance ${original_balance} in account #{self.__number} with limit ${self.__limit}."
         )
 
         # print("**********************")
@@ -92,7 +106,7 @@ class Account:
         return value
 
     def bank_statement(self):
-        statement = f"Your balance, **{self.__owner}** acc #{self.__number}, is ${self.__balance}. You still have " \
+        statement = f"Your balance, **{self.__owner.name}** acc #{self.__number}, is ${self.__balance}. You still have " \
                     f"the follow limit: ${self.__limit}. "
         logging.info(statement)
 
