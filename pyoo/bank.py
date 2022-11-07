@@ -2,20 +2,31 @@
 # from typing import Self
 import logging
 from decimal import Decimal
+from datetime import date, datetime, timezone, timedelta
 from random import randrange
+import pytz
 from util import Util
 
 
 class Owner:
-    def __init__(self, name: str, age: int):
+    def __init__(self, name: str, age: int, birthday: datetime = date.today(), works_start: datetime = datetime.now(), works_end: datetime = datetime.now()):
         self.__name = name
         self.__age = age
+        self.__birthday = birthday
+        self.__works_start = works_start.astimezone(timezone(timedelta(hours=-3)))
+        self.__works_end = works_end.astimezone(pytz.timezone('America/Sao_Paulo'))
+
+    def __str__(self):
+        return f"My name is {self.__name}! I am {self.__age} years old. " \
+               f"My birthday is in {self.__birthday.strftime('%d/%m/%Y')}. " \
+               f"I start working at {self.__works_start.strftime('%d/%m/%Y %H:%M')} and " \
+               f"finish at {self.__works_end.strftime('%d/%m/%Y %H:%M')}."
 
     def say_hello(self):
-        hello = f"Hello! My name is {self.__name}! I am {self.__age} years old."
+        hello = f"Hello!! {self.__str__()}"
         logging.debug(Util.warning(hello))
 
-        return hello
+        print(hello)
 
     @property
     def name(self):
@@ -29,6 +40,14 @@ class Owner:
     def age(self, age):
         self.__age = age
 
+    @property
+    def birthday(self):
+        return self.__birthday
+
+    @birthday.setter
+    def birthday(self, birthday):
+        self.__birthday = birthday
+
 
 class Account:
     @staticmethod
@@ -36,6 +55,7 @@ class Account:
         return {'BB': '001', 'Caixa': '104', 'Bradesco': '237'}
 
     BANK_CODE = bank_codes()['BB']
+
     # BANK_CODE = bank_codes.__func__()['BB']
 
     def __init__(self, owner: Owner, number=randrange(0, 1000, ), limit=1000.00):
@@ -51,7 +71,8 @@ class Account:
         self.__balance += value
 
     def __can_withdrawn(self, value: float) -> bool:
-        logging.debug(f"{value=} :: {(self.__balance + self.__limit)=} :: {(value <= (self.__balance + self.__limit))=}")
+        logging.debug(
+            f"{value=} :: {(self.__balance + self.__limit)=} :: {(value <= (self.__balance + self.__limit))=}")
 
         available_value = self.__balance + self.__limit
         return value <= available_value
