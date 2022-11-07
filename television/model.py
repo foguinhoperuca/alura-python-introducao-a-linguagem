@@ -1,7 +1,9 @@
 from dataclasses import dataclass
+from collections.abc import Sized
+from abc import abstractmethod, ABC
 
 
-class TVShow:
+class TVShow(ABC):
     @staticmethod
     def midia_types():
         return [
@@ -39,6 +41,10 @@ class TVShow:
     def dislike(self):
         self.__likes -= 1
 
+    @abstractmethod
+    def synopsis(self):
+        pass
+
 
 class Movies(TVShow):
     def __init__(self, name, year, duration: int):
@@ -62,6 +68,8 @@ class Movies(TVShow):
 
         self.__duration = duration
 
+    def synopsis(self):
+        return f"Movie synopsis: {self.__str__()}"
 
 class Series(TVShow):
     def __init__(self, name, year, seasons: int = 1):
@@ -85,6 +93,9 @@ class Series(TVShow):
 
         self.__seasons = seasons
 
+    def synopsis(self):
+        return f"Series synopsis: {self.__str__()}"
+
 
 @dataclass
 class Documentary:
@@ -93,18 +104,25 @@ class Documentary:
     duration: int
 
 
-class Playlist:
+class Playlist(Sized):
     @classmethod
     def print(cls, playlist):
-        for item in playlist:
-            close_statement = f"Movie duration: {item.duration}" if hasattr(item,
-                                                                            'duration') else f"Series season: {item.seasons}"
-            print(f"{item} {close_statement} :: {type(item)}")
+        for show in playlist:
+            close_statement = f"Movie duration: {show.duration}" if hasattr(show,
+                                                                            'duration') else f"Series season: {show.seasons}"
+            print(f"{show} {close_statement} :: {type(show)}")
+
+        print("***************************************************************************************")
 
     def __init__(self, name, shows):
         self.__name = name
         self.__shows = shows
-        self.__size = shows.__sizeof__()
+
+    def __len__(self):
+        return len(self.__shows)
+
+    def __getitem__(self, item):
+        return self.__shows[item]
 
     @property
     def name(self):
@@ -122,6 +140,16 @@ class Playlist:
     def shows(self, shows):
         self.__shows = shows
 
+
+class PlaylistInheritance(list):
+    def __init__(self, name, shows):
+        self.__name = name
+        super().__init__(shows)
+
     @property
-    def size(self):
-        return self.__shows.__sizeof__()
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, name):
+        self.__name = name
