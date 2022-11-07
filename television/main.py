@@ -90,3 +90,9 @@ if __name__ == "__main__":
     # simple_like_it()
     # popular_shows()
     # forced_update_private_methods()
+
+    kids_movie = Movies(name="Fantasia", year="1940", duration=90)
+    print(".....................................................")
+    print(f"Has the movie searched? {playlist_weekday.has_show(kids_movie)}")
+    print(".....................................................")
+

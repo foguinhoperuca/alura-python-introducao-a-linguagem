@@ -23,6 +23,9 @@ class TVShow(ABC):
     def __str__(self):
         return f"Media name: **{self.__name}** from year **{self.__year}** and, by now, has {self.__likes} likes."
 
+    def __eq__(self, tv_show):
+        return self.name == tv_show.name and self.year == tv_show.year
+
     @property
     def name(self) -> str:
         return self.__name
@@ -30,6 +33,14 @@ class TVShow(ABC):
     @name.setter
     def name(self, name: str):
         self.__name = name.title()
+
+    @property
+    def year(self):
+        return self.__year
+
+    @year.setter
+    def year(self, year):
+        self.__year = year
 
     @property
     def likes(self):
@@ -70,6 +81,7 @@ class Movies(TVShow):
 
     def synopsis(self):
         return f"Movie synopsis: {self.__str__()}"
+
 
 class Series(TVShow):
     def __init__(self, name, year, seasons: int = 1):
@@ -139,6 +151,16 @@ class Playlist(Sized):
     @shows.setter
     def shows(self, shows):
         self.__shows = shows
+
+    def has_show(self, tv_show_desired):
+        # Alternative implementation
+        # for show in self.__shows:
+        #     if show == tv_show_desired:
+        #         return True
+        #
+        # return False
+        return tv_show_desired in self.__shows
+
 
 
 class PlaylistInheritance(list):
