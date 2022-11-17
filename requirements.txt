@@ -2,3 +2,4 @@ python-dotenv
 termcolor
 print-dict
 pytz
+numpy
