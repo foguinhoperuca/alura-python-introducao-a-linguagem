@@ -1,6 +1,12 @@
+from operator import attrgetter
+from decimal import Decimal
 from tuples_examples import CheckingAccount, SavingAccount, InvestmentAccount
 import array as arr
 import numpy as np
+from another_bank import SalaryAccount, MultipleSalaries
+
+def extract_balance(acc: SalaryAccount) -> Decimal:
+    return acc.balance
 
 
 def next_age(age: int):
@@ -175,3 +181,93 @@ def third_class():
         account.next_month()
     except Exception as e:
         print(e)
+
+
+def until_class_04():
+    gui_payment = SalaryAccount(38)
+    gui_payment.deposit(19)
+    gui_again = SalaryAccount(38)
+    gui_again.deposit(19)
+    paulo_payment = SalaryAccount(40)
+    paulo_payment.deposit(20)
+    payments = [gui_payment]
+    ch_acc = CheckingAccount(38)
+    multiple_salaries = MultipleSalaries(38)
+    print(f"gui_payment == gui_again? {gui_payment == gui_again}")
+    print(f"gui_payment == paulo_payment? {gui_payment == paulo_payment}")
+    print(f"gui_payment in payments? {gui_payment in payments}")
+    print(f"gui_again in payments? {gui_again in payments}")
+    print(f"paulo_payment in payments? {paulo_payment in payments}")
+    print(f"gui_payment == ch_acc? {gui_payment == ch_acc}")
+    print(f"gui_payment == multiple_salaries? {gui_payment == multiple_salaries}")
+
+def until_class_06():
+    ages = [15, 87, 32, 65, 56, 32, 49, 37]
+    i = 0
+    for age in ages:
+        print(f"{i = } {age = }")
+        i += 1
+    print('----------------------------')
+    for i in range(0, len(ages)):
+        print(f"{i = } age: {ages[i]}")
+    print('----------------------------')
+    for i, age in enumerate(ages):
+        print(f"{i = } age: {age}")
+    print('----------------------------')
+    lst = list(enumerate(ages))
+    print(f"{lst = }")
+    for item in lst:
+        print(f"{item[0]:02} -- {item[1]:03}")
+    print('----------------------------')
+    users = [
+        ("Guilherme", 37, 1981),
+        ("Daniela", 31, 1987),
+        ("Paulo", 39, 1979)
+    ]
+    for name, _, _ in users:
+        # print(name, birthday, age)
+        print(name, _, _)
+    print('----------------------------')
+    gen = list(range(len(ages)))
+    print(gen)
+    # print(lst)
+    print('----------------------------')
+    ssss = sorted(ages)
+    srsr = sorted(ages, reverse=True)
+    rrrr = list(reversed(ages))
+    lrsa = list(reversed(sorted(ages)))
+    print(f"{ages = }")
+    print(f"{ssss = }")
+    print(f"{srsr = }")
+    print(f"{rrrr = }")
+    print(f"{lrsa = }")
+    ages.sort()
+    print(f"{ages = }")
+
+def final_class_course_01():
+    gui_acc = SalaryAccount(17)
+    gui_acc.deposit(500)
+    dani_acc = SalaryAccount(3)
+    dani_acc.deposit(1000)
+    paulo_acc = SalaryAccount(133)
+    paulo_acc.deposit(510)
+    joao_acc = SalaryAccount(15)
+    joao_acc.deposit(500)
+    julio_acc = SalaryAccount(169)
+    julio_acc.deposit(1700)
+    accounts = [gui_acc, dani_acc, paulo_acc, joao_acc, julio_acc]
+    for account in accounts:
+        print(account)
+    print(f"{sorted(accounts, key=extract_balance) = }")
+    # print(f"{a = }")
+    print("************************************************")
+    print(f"{(gui_acc < dani_acc) = }")
+    print(f"{(gui_acc > dani_acc) = }")
+    print(f"{sorted(accounts) = }")
+    for a in sorted(accounts, reverse=True):
+        print(a)
+    print(sorted(accounts))
+    print(f"{(gui_acc <= joao_acc) = }")
+    print(f"{(gui_acc == gui_acc) = }")
+
+

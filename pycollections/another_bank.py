@@ -1,3 +1,6 @@
+from functools import total_ordering
+
+@total_ordering
 class SalaryAccount:
     def __init__(self, code):
         self._code = code
@@ -17,12 +20,23 @@ class SalaryAccount:
 
         return eq
 
+    def __lt__(self, other):
+        if self._balance == other.balance:
+            return self._code < other.code
+        else:
+            return self._balance < other.balance
+
     @property
     def code(self):
         return self._code
 
+    @property
+    def balance(self):
+        return self._balance
+
     def deposit(self, value):
         self._balance += value
+
 
 
 class MultipleSalaries(SalaryAccount):
