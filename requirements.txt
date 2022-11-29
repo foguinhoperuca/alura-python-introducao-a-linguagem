@@ -3,3 +3,5 @@ termcolor
 print-dict
 pytz
 numpy
+validate-docbr
+requests
