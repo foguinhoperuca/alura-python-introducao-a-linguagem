@@ -1,7 +1,6 @@
 from decimal import Decimal
 import pytest
 from pytest import mark
-
 from bytebank.model import Employee
 
 
@@ -21,7 +20,7 @@ class TestClass:
     # def test_parse_string(self, employee):
     #     assert str(employee) == "Employee: name>:José Carlos Silva e Santos birthday>:2001-01-31 wage>: $7211.00"
 
-    def test_quando_idade_recebe_13_03_2000_deve_retornar_22(self, tester):
+    def test_when_age_receive_13_03_2000_must_return_22(self, tester):
         print("")
         print("------------------------- XPTO -------------------------")
 
@@ -29,15 +28,15 @@ class TestClass:
         res = tester.age()
         assert res == expected_result
 
-        tester00 = Employee(name="Tester", birthday="2000-04-01", wage=1111.00)
+        tester00 = Employee(name="Tester", birthday="2000-04-01", wage=Decimal(1111.00))
         print(f"Tester age: {tester00.age()}")
         assert tester00.age() == 22
 
-        tester01 = Employee(name="Tester", birthday="1999-03-13", wage=2222.00)
+        tester01 = Employee(name="Tester", birthday="1999-03-13", wage=Decimal(2222.00))
         print(f"Tester age: {tester01.age()}")
         assert tester01.age() == 23
 
-        tester02 = Employee(name="Tester", birthday="1998-05-01", wage=3333.00)
+        tester02 = Employee(name="Tester", birthday="1998-05-01", wage=Decimal(3333.00))
         print(f"Tester age: {tester02.age()}")
         assert tester02.age() == 24
         print("------------------------- XPTO -------------------------")
