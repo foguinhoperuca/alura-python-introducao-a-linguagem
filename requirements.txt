@@ -5,3 +5,5 @@ pytz
 numpy
 validate-docbr
 requests
+pytest
+pytest-cov

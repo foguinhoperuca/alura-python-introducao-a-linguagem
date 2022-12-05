@@ -1,0 +1,6 @@
+[run]
+source = ./bytebank
+
+[report]
+exclude_lines =
+    def __str__
