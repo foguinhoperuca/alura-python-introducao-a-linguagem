@@ -1,18 +1,16 @@
-from fila_normal import filanormal
-from fila_prioritaria import FilaPrioritaria
+from priority_queue import PriorityQueue
+from normal_queue import NormalQueue
 
+pq = PriorityQueue()
+pq.update_queue()
+pq.update_queue()
+pq.update_queue()
+print(pq.call_client(10))
+print(pq.statistics('1993-01-10', 198, 'detail'))
 
-# fila_teste = filanormal()
-# fila_teste.atualizafila()
-# fila_teste.atualizafila()
-# fila_teste.atualizafila()
-# fila_teste.atualizafila()
-# print(fila_teste.chamacliente(5))
-# print(fila_teste.chamacliente(10))
-
-fila_teste_2 = FilaPrioritaria()
-fila_teste_2.atualizafila()
-fila_teste_2.atualizafila()
-fila_teste_2.atualizafila()
-print(fila_teste_2.chamacliente(10))
-print(fila_teste_2.estatistica('10/01/1993', 198, 'detail'))
+nq = NormalQueue()
+nq.update_queue()
+nq.update_queue()
+nq.update_queue()
+print(nq.call_client(5))
+print(nq.call_client(10))
