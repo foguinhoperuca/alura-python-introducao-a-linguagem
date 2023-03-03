@@ -14,3 +14,17 @@ nq.update_queue()
 nq.update_queue()
 print(nq.call_client(5))
 print(nq.call_client(10))
+
+
+estatistica = {'quantidade de clientes atendidos': 0}
+
+estatistica['quantidade de clientes atendidos'] = \
+    len('TESTER')
+
+print(estatistica)
+
+estatistica['quantidade de clientes atendidos'] = (
+    len('LALALALALA')
+)
+
+print(estatistica)

@@ -7,3 +7,5 @@ validate-docbr
 requests
 pytest
 pytest-cov
+mypy
+flake8

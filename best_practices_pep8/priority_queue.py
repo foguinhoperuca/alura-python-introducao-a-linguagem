@@ -1,30 +1,24 @@
-class PriorityQueue:
-    code: int = 0
-    queue: list = []
-    customers_served: list = []
-    actual_password: str = ''
+from base_queue import BaseQueue
 
+
+class PriorityQueue(BaseQueue):
     def generate_actual_password(self) -> None:
         self.actual_password = f'PR{self.code}'
 
-    def reset_queue(self) -> None:
-        if self.code >= 100:
-            self.code = 0
-        else:
-            self.code += 1
-
-    def update_queue(self) -> None:
-        self.reset_queue()
-        self.generate_actual_password()
-        self.queue.append(self.actual_password)
-
-    def call_client(self, bank_teller: int) -> str:
+    def call_client(self, teller) -> list:
+        display = []
         actual_client = self.queue.pop(0)
+        display.append(f'Client: {actual_client} - Teller {teller}')
+
+        if len(self.queue) > 3:
+            display.append(f'Next: {self.queue[0]}')
+            display.append(f'Heads up: {self.queue[1]}')
+
         self.customers_served.append(actual_client)
 
-        return f'Actual client: {actual_client}, go to bank teller {bank_teller}'
+        return display
 
-    def statistics(self, day: str, agency: str, flag: str) -> dict:
+    def statistics(self, day: str, agency: int, flag: str) -> dict:
         if flag != 'detail':
             stats = {f'{agency} - {day}': len(self.customers_served)}
         else:
