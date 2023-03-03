@@ -1,30 +1,32 @@
-from priority_queue import PriorityQueue
-from normal_queue import NormalQueue
+from typing import Any
+import logging
 
-pq = PriorityQueue()
-pq.update_queue()
-pq.update_queue()
-pq.update_queue()
-print(pq.call_client(10))
-print(pq.statistics('1993-01-10', 198, 'detail'))
+from util import LOG_FORMAT_INFO
+from queue import QueueFactory, QueueType, TypeBaseQueue
+from stats import ResumedStats, DetailedStats
 
-nq = NormalQueue()
+
+logging.basicConfig(level=logging.INFO, format=LOG_FORMAT_INFO)
+
+logging.info('--- Normal Queue: ---')
+
+nq: TypeBaseQueue = QueueFactory.fabricate(QueueType.NORMAL_QUEUE)
 nq.update_queue()
 nq.update_queue()
 nq.update_queue()
 print(nq.call_client(5))
 print(nq.call_client(10))
 
+print("++++++++++++++++++++++++++++++++++++++++++++")
+logging.info('Priority Queue:')
 
-estatistica = {'quantidade de clientes atendidos': 0}
-
-estatistica['quantidade de clientes atendidos'] = \
-    len('TESTER')
-
-print(estatistica)
-
-estatistica['quantidade de clientes atendidos'] = (
-    len('LALALALALA')
-)
-
-print(estatistica)
+manufactured: Any = QueueFactory.fabricate(QueueType.PRIORITY_QUEUE)
+manufactured.update_queue()
+manufactured.update_queue()
+manufactured.update_queue()
+manufactured.update_queue()
+print(manufactured.call_client(10))
+print(manufactured.call_client(20))
+print(manufactured.call_client(30))
+print(manufactured.statistics(ResumedStats(day='1993-01-10', agency=198)))
+print(manufactured.statistics(DetailedStats(day='1993-01-10', agency=198)))
