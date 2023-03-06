@@ -11,3 +11,6 @@ mypy
 flake8
 importchecker
 autopep8
+pyautogui
+types-pyautogui
+pillow
