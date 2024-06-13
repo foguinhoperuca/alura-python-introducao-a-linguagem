@@ -13,9 +13,9 @@ while True:
         afk_counter = 0
         curr_coords = pag.position
 
-    if afk_counter > 2:
-        x = random.randint(2560, 5120)
-        y = random.randint(1, 1440)
+    if afk_counter > 1:
+        x = random.randint(1, 1366)
+        y = random.randint(1, 768)
         pag.moveTo(x, y, 0.5)
         curr_coords = pag.position()
 
