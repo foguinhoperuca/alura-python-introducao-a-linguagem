@@ -132,3 +132,9 @@ dmypy.json
 *#*
 *~*
 logs/*
+
+## Geo project
+geo/data/output
+geo/data/rj_city
+geo/data/*.txt
+geo/data/estacoes_metro.geojson

@@ -14,3 +14,5 @@ autopep8
 pyautogui
 types-pyautogui
 pillow
+geopandas
+matplotlib
