@@ -1,0 +1,3 @@
+[submodule "alura_curso_geopandas_02"]
+	path = alura_curso_geopandas_02
+	url = git@github.com:alura-cursos/curso_geopandas.git
