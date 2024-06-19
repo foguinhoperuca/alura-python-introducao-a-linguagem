@@ -16,3 +16,4 @@ types-pyautogui
 pillow
 geopandas
 matplotlib
+folium

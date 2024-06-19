@@ -4,8 +4,11 @@ import logging
 import sys
 import os.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from util import Util
+# import types.ModuleType
+import types
+from typing import Dict, List
 
+from util import Util
 import geopandas_01
 import geopandas_02
 import geopandas_01_new
@@ -20,28 +23,6 @@ if __name__ == "__main__":
     print("")
     logging.basicConfig(level=logging.INFO, format=Util.LOG_FORMAT_SIMPLE)
 
-    # generate_figure_from_shape(in_file='geo/data/map_rj/33MUE250GC_SIR.shp', out='geo/data/output/rj_original', plot_original=True)  # noqa: E501
-    # generate_figure_from_shape(in_file='geo/data/map_rj/33MUE250GC_SIR.shp', out='geo/data/output/rj_black-white', plot_original=False)  # noqa: E501
-
-    # lecture_01()
-    # exercise_01()
-
-    # lecture_02_a()
-    # lecture_02_b()
-
-    # lecture_03()
-
-    # lecture_04()
-
-    # lecture_05()
-    # exercise_05()
-
-    # lecture_06_01()
-    # exercise_06_01()
-    # exercise_06_02()
-    # lecture_06_02()
-    # exercise_06_03()
-
     parser = argparse.ArgumentParser(description="Geoprocessing Alura!!", epilog="Study")  # noqa: E501
     parser.add_argument("-c", "--course", choices=["geo01", "geo01_new", "geo02", "geo02_new"], help="Set course")  # noqa: E501
     parser.add_argument("-a", "--activity", choices=["lecture", "exercise", "challenge"], help="Set activity")  # noqa: E501
@@ -50,7 +31,7 @@ if __name__ == "__main__":
     print(args)
 
     if args.course == 'geo01':
-        module = geopandas_01
+        module: types.ModuleType = geopandas_01
     elif args.course == 'geo02':
         module = geopandas_02
     elif args.course == 'geo01_new':

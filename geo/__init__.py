@@ -4,4 +4,4 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from util import Util
 
 
-print(f'{Util.GEO_OUTPUT=}')
+print(f'{Util.GEO_02_NEW_OUTPUT=}')

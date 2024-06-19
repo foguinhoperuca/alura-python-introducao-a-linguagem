@@ -2,53 +2,40 @@ import os
 from typing import List
 
 import geopandas as gpd
-import matplotlib.pyplot as plt
-import pandas as pd
-from shapely.geometry import Polygon, Point, LineString, MultiPolygon
-
-
-def generate_figure_from_shape(in_file: str, out: str, plot_original: bool = True) -> None:  # # noqa: E501
-    shp: gpd.geodataframe.GeoDataFrame = gpd.read_file(in_file)
-    if plot_original:
-        shp.plot()
-    else:
-        shp.plot(color='white', edgecolor='black', figsize=(15, 8))
-
-    plt.savefig(out)
-    print(f'Columns is: {shp.columns}')
-    print(shp)
-    # logging.debug(Util.warning(shp))
+import matplotlib.pyplot as plt  # type: ignore
+import pandas as pd  # type: ignore
+from shapely.geometry import Polygon, Point, LineString, MultiPolygon  # type: ignore
 
 
 def lecture_01() -> None:
     p1 = Polygon([(0, 0), (1, 0), (1, 1), (0, 1)])
-    g = gpd.GeoSeries(p1)
+    g = gpd.GeoSeries(p1)  # type: ignore[attr-defined]
     print(g)
     g.plot()
     plt.savefig('geo/data/output/N01_polygon-01')
 
     p2 = Polygon([(0, 0), (1, 0), (1, 1)])
-    g2 = gpd.GeoSeries(p2)
+    g2 = gpd.GeoSeries(p2)  # type: ignore[attr-defined]
     print(g2)
     g2.plot()
     plt.savefig('geo/data/output/N01_polygon-02')
 
-    g = gpd.GeoSeries([p1, p2])
+    g = gpd.GeoSeries([p1, p2])  # type: ignore[attr-defined]
     g.plot(cmap="tab20")
     plt.savefig('geo/data/output/N01_polygon-03')
 
     p3 = Polygon([(2, 0), (3, 0), (3, 1), (2, 1)])
-    g = gpd.GeoSeries([p1, p2, p3])
+    g = gpd.GeoSeries([p1, p2, p3])  # type: ignore[attr-defined]
     g.plot(cmap="tab20")
     plt.savefig('geo/data/output/N01_polygon-04')
 
     p4 = LineString([(0, 1), (3, 0), (1, 1)])
-    g = gpd.GeoSeries([p1, p2, p3, p4])
+    g = gpd.GeoSeries([p1, p2, p3, p4])  # type: ignore[attr-defined]
     g.plot(cmap="tab10")
     plt.savefig('geo/data/output/N01_polygon-05')
 
     p5 = Point(0.5, 0.5)
-    g = gpd.GeoSeries([p1, p2, p3, p4, p5])
+    g = gpd.GeoSeries([p1, p2, p3, p4, p5])  # type: ignore[attr-defined]
     g.plot(cmap="tab10")
     plt.savefig('geo/data/output/N01_polygon-06')
 
@@ -59,7 +46,7 @@ def lecture_01() -> None:
 
     p8 = MultiPolygon([p6, p7])
 
-    g = gpd.GeoSeries([p1, p2, p3, p4, p5, p8])
+    g = gpd.GeoSeries([p1, p2, p3, p4, p5, p8])  # type: ignore[attr-defined]
     g.plot(cmap="tab10")
     plt.savefig('geo/data/output/N01_polygon-07')
     print(g)
@@ -67,7 +54,7 @@ def lecture_01() -> None:
 
 def exercise_01() -> None:
     p1 = Polygon([(0, 0), (2, 1), (2, 0), (0, 1)])
-    g = gpd.GeoSeries([p1])
+    g = gpd.GeoSeries([p1])  # type: ignore[attr-defined]
     g.plot(cmap='tab10', figsize=(15, 8))
     plt.savefig('geo/data/output/E01_answer-a')
 
@@ -75,13 +62,13 @@ def exercise_01() -> None:
     for i in [0.5, 0.2, 0]:
         figuras.append(Polygon([(0 - i, 0 + i), (1 - i, 0 - i), (1 + i, 1 - i), (0 + i, 1 + i)]))  # noqa: E501
 
-    g = gpd.GeoSeries(figuras)
+    g = gpd.GeoSeries(figuras)  # type: ignore[attr-defined]
     g.plot(cmap='Spectral', figsize=(15, 8))
     plt.savefig('geo/data/output/E01_answer-b')
 
     p1 = Polygon([(0, 0), (1, 0.5), (0, 1)])
     p2 = Polygon([(2, 0), (1, 0.5), (2, 1)])
-    g = gpd.GeoSeries([p1, p2])
+    g = gpd.GeoSeries([p1, p2])  # type: ignore[attr-defined]
     g.plot(cmap='tab10', figsize=(15, 8))
     plt.savefig('geo/data/output/E01_answer-c')
 
@@ -89,13 +76,13 @@ def exercise_01() -> None:
     p2 = MultiPolygon([Point(0.25, 0.6).buffer(0.1), Point(0.75, 0.6).buffer(0.1)])  # noqa: E501
     p3 = MultiPolygon([Point(0.25, 0.6).buffer(0.02), Point(0.75, 0.6).buffer(0.02)])  # noqa: E501
     p4 = LineString([(0.2, 0.25), (0.8, 0.25)])
-    g = gpd.GeoSeries([p1, p2, p3, p4])
+    g = gpd.GeoSeries([p1, p2, p3, p4])  # type: ignore[attr-defined]
     g.plot(cmap='Wistia', figsize=(15, 8))
     plt.savefig('geo/data/output/E01_answer-d')
 
 
 def lecture_02_a() -> None:
-    rj = gpd.read_file('geo/data/map_rj/33MUE250GC_SIR.shp')
+    rj = gpd.read_file('geo/data/map_rj/33MUE250GC_SIR.shp')  # type: ignore[attr-defined]
 
     rj_city = rj[rj['NM_MUNICIP'] == 'RIO DE JANEIRO']
     print(rj_city)
@@ -122,7 +109,7 @@ def lecture_02_b() -> None:
         'datum': 'WGS84',
         'no_defs': True
     }
-    geo_data: gpd.geodataframe.GeoDataFrame = gpd.GeoDataFrame(data, crs=crs, geometry=points)  # noqaa: E501
+    geo_data: gpd.geodataframe.GeoDataFrame = gpd.GeoDataFrame(data, crs=crs, geometry=points)  # type: ignore[attr-defined, name-defined]
     print(geo_data)
     out_dir: str = 'geo/data/rj_city'
     if not os.path.exists(out_dir):
@@ -134,10 +121,10 @@ def lecture_02_b() -> None:
 
 
 def lecture_03() -> None:
-    rj = gpd.read_file('geo/data/rj_city/rj_city.shp')
+    rj = gpd.read_file('geo/data/rj_city/rj_city.shp')  # type: ignore[attr-defined]
     rj.plot()
     plt.savefig('geo/data/output/rj_city')
-    geo_data = gpd.read_file('geo/data/rj_city/rj_dataset.shp')
+    geo_data = gpd.read_file('geo/data/rj_city/rj_dataset.shp')  # type: ignore[attr-defined]
     geo_data.plot()
     plt.savefig('geo/data/output/rj_dataset')
     print(rj.crs)
@@ -156,8 +143,8 @@ def lecture_03() -> None:
 
 
 def lecture_04() -> None:
-    rj = gpd.read_file('geo/data/rj_city/rj_city.shp')
-    geo_data = gpd.read_file('geo/data/rj_city/rj_dataset.shp')
+    rj = gpd.read_file('geo/data/rj_city/rj_city.shp')  # type: ignore[attr-defined]
+    geo_data = gpd.read_file('geo/data/rj_city/rj_dataset.shp')  # type: ignore[attr-defined]
     base_map = rj.plot(color='grey', edgecolor='black', figsize=(15, 8))
     print(base_map)
 
@@ -188,9 +175,9 @@ def lecture_04() -> None:
 
 
 def lecture_05() -> None:
-    rj = gpd.read_file('geo/data/rj_city/rj_city.shp')
-    geo_data = gpd.read_file('geo/data/rj_city/filtered.shp')
-    metro = gpd.read_file('geo/data/estacoes_metro.geojson')
+    rj = gpd.read_file('geo/data/rj_city/rj_city.shp')  # type: ignore[attr-defined]
+    geo_data = gpd.read_file('geo/data/rj_city/filtered.shp')  # type: ignore[attr-defined]
+    metro = gpd.read_file('geo/data/estacoes_metro.geojson')  # type: ignore[attr-defined]
     metro = metro.to_crs('+proj=utm +zone=23 +south +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=km +no_defs')  # noqa: E501
     # print(metro)
     base_map = rj.plot(color='grey', edgecolor='black', figsize=(15, 8))
@@ -209,7 +196,7 @@ def lecture_05() -> None:
 
 
 def exercise_05() -> None:
-    rj = gpd.read_file('geo/data/rj_city/rj_city.shp')
+    rj = gpd.read_file('geo/data/rj_city/rj_city.shp')  # type: ignore[attr-defined]
     # rj.to_crs('+proj=utm +zone=23 +south +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=km +no_defs', inplace=True)  # noqa: E501
     base_map = rj.plot(color='grey', edgecolor='black', figsize=(15, 8))
 
@@ -222,7 +209,7 @@ def exercise_05() -> None:
     geo = gpd.GeoDataFrame(data, crs={'init': 'epsg:4326'}, geometry=[Point((el[2], el[1])) for el in data])  # noqa: E501
     geo.to_crs('+proj=utm +zone=23 +south +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=km +no_defs', inplace=True)  # noqa: E501
 
-    metro = gpd.read_file('geo/data/estacoes_metro.geojson')
+    metro = gpd.read_file('geo/data/estacoes_metro.geojson')  # type: ignore[attr-defined]
     metro.to_crs('+proj=utm +zone=23 +south +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=km +no_defs', inplace=True)  # noqa: E501
 
     geo['Metro_MIN'] = geo['geometry'].apply(lambda x: metro.iloc[metro.distance(x).idxmin()].Nome)  # noqa: E501
@@ -237,14 +224,14 @@ def exercise_05() -> None:
 
 
 def lecture_06_01() -> None:
-    rj = gpd.read_file('geo/data/rj_city/rj_city.shp')
-    geo_data = gpd.read_file('geo/data/rj_city/filtered.shp')
-    metro = gpd.read_file('geo/data/estacoes_metro.geojson')
+    rj = gpd.read_file('geo/data/rj_city/rj_city.shp')  # type: ignore[attr-defined]
+    geo_data = gpd.read_file('geo/data/rj_city/filtered.shp')  # type: ignore[attr-defined]
+    metro = gpd.read_file('geo/data/estacoes_metro.geojson')  # type: ignore[attr-defined]
     metro.to_crs('+proj=utm +zone=23 +south +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=km +no_defs', inplace=True)  # noqa: E501
-    trem = gpd.read_file('geo/data/estacoes_trem.geojson')
+    trem = gpd.read_file('geo/data/estacoes_trem.geojson')  # type: ignore[attr-defined]
     trem.to_crs('+proj=utm +zone=23 +south +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=km +no_defs', inplace=True)  # noqa: E501
     trem = trem[trem.within(rj.iloc[0].geometry)]
-    brt = gpd.read_file('geo/data/estacoes_brt.geojson')
+    brt = gpd.read_file('geo/data/estacoes_brt.geojson')  # type: ignore[attr-defined]
     brt.to_crs('+proj=utm +zone=23 +south +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=km +no_defs', inplace=True)  # noqa: E501
 
     base_map = rj.plot(color='grey', edgecolor='black', figsize=(15, 8))
@@ -262,10 +249,10 @@ def lecture_06_01() -> None:
 
 
 def lecture_06_02() -> None:
-    rj = gpd.read_file('geo/data/rj_city/rj_city.shp')
+    rj = gpd.read_file('geo/data/rj_city/rj_city.shp')  # type: ignore[attr-defined]
     base_map = rj.plot(color='lightgrey', edgecolor='black', figsize=(15, 8))
-    geo_data = gpd.read_file('geo/data/rj_city/filtered.shp')
-    beachs = gpd.read_file('geo/data/cobertura_vegetal_e_uso_da_terra_2016.geojson')  # noqa: E501
+    geo_data = gpd.read_file('geo/data/rj_city/filtered.shp')  # type: ignore[attr-defined]
+    beachs = gpd.read_file('geo/data/cobertura_vegetal_e_uso_da_terra_2016.geojson')  # type: ignore[attr-defined]
     beachs.to_crs('+proj=utm +zone=23 +south +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=km +no_defs', inplace=True)  # noqa: E501
     beachs = beachs[beachs['legenda'] == 'Praia']
     geo_data['Dist_Beach_KM'] = geo_data['geometry'].apply(lambda x: beachs.distance(x).min())  # noqa: E501
@@ -284,8 +271,8 @@ def exercise_06_01() -> None:
     Square = Polygon([(0, 0), (1, 0), (1, 1), (0, 1)])
     Point_A = Point(1.1, 1.1)
     Point_B = Point(0.5, 0.5)
-    points = gpd.GeoDataFrame(geometry=[Point_A, Point_B], index=['A', 'B'])
-    polygon = gpd.GeoDataFrame(geometry=[Square], index=['P'])
+    points = gpd.GeoDataFrame(geometry=[Point_A, Point_B], index=['A', 'B'])  # type: ignore[attr-defined]
+    polygon = gpd.GeoDataFrame(geometry=[Square], index=['P'])  # type: ignore[attr-defined]
 
     base = polygon.plot(color='white', edgecolor='red', figsize=(15, 8))
     points.plot(ax=base, markersize=150)
@@ -331,7 +318,7 @@ def exercise_06_02() -> None:
 
 
 def exercise_06_03() -> None:
-    rj = gpd.read_file('geo/data/map_rj/33MUE250GC_SIR.shp')
+    rj = gpd.read_file('geo/data/map_rj/33MUE250GC_SIR.shp')  # type: ignore[attr-defined]
     rj.to_crs('+proj=utm +zone=23 +south +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=km +no_defs', inplace=True)  # noqa: E501
     capital = rj[rj['NM_MUNICIP'] == 'RIO DE JANEIRO']
     capital.to_crs('+proj=utm +zone=23 +south +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=km +no_defs', inplace=True)  # noqa: E501
