@@ -32,6 +32,9 @@ class Util:
     LOG_FORMAT_FULL = colored('[%(asctime)s][%(process)d:%(processName)s]', 'green', attrs=['bold', 'dark']) + colored('[%(filename)s#%(funcName)s:%(lineno)d]', 'white', attrs=['bold', 'dark']) + colored('[%(levelname)s]', 'magenta', attrs=['bold', 'dark']) + ' %(message)s'
     LOG_FORMAT_DEBUG = colored('[%(filename)s#%(funcName)s:%(lineno)d]', 'white', attrs=['bold', 'dark']) + colored('[%(levelname)s]', 'magenta', attrs=['bold', 'dark']) + ' %(message)s'
     LOG_FORMAT_SIMPLE = colored('[%(levelname)s]', 'magenta', attrs=['bold', 'dark']) + ' %(message)s'
+    GEO_02_NEW_OUTPUT: str = 'geo/data/geo02_new/output'
+    GEO_02_NEW_INPUT: str = 'geo/data/geo02_new/input'
+    GEO_02_NEW_DATA: str = 'alura_curso_geopandas_02/dados'
 
     # # FIXME Why I need instantiate Util class?!?! Make all methods statics wouldn't be enough?!?
     # def __init__(self):
