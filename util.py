@@ -51,6 +51,9 @@ class Util:
     GEO_02_NEW_OUTPUT: str = 'geo/data/geo02_new/output'
     GEO_02_NEW_INPUT: str = 'geo/data/geo02_new/input'
     GEO_02_NEW_DATA: str = 'alura_curso_geopandas_02/dados'
+    GEO_02_OUTPUT: str = 'geo/data/geo02/output'
+    GEO_02_INPUT: str = 'geo/data/geo02/input'
+    GEO_02_THIRD_PARTY: str = 'geo/data/geo02/third_party'
 
     # # FIXME Why I need instantiate Util class?!?! Make all methods statics wouldn't be enough?!?  # noqa: E501
     # def __init__(self):

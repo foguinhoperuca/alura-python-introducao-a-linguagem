@@ -206,7 +206,7 @@ def exercise_05() -> None:
         ('C', '-22.8463', '-43.3007'),
         ('D', '-22.8969', '-43.3165')
     ]
-    geo = gpd.GeoDataFrame(data, crs={'init': 'epsg:4326'}, geometry=[Point((el[2], el[1])) for el in data])  # noqa: E501
+    geo = gpd.GeoDataFrame(data, crs={'init': 'epsg:4326'}, geometry=[Point((el[2], el[1])) for el in data])  # type: ignore[attr-defined]
     geo.to_crs('+proj=utm +zone=23 +south +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=km +no_defs', inplace=True)  # noqa: E501
 
     metro = gpd.read_file('geo/data/estacoes_metro.geojson')  # type: ignore[attr-defined]
