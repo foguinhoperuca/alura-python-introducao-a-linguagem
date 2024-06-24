@@ -1,4 +1,4 @@
-import geopandas as gpd
+import geopandas as gpd  # type: ignore
 import matplotlib.pyplot as plt  # type: ignore
 from termcolor import colored
 

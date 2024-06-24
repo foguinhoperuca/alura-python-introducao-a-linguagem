@@ -1,7 +1,7 @@
 import os
 from typing import List
 
-import geopandas as gpd
+import geopandas as gpd         # type: ignore
 import matplotlib.pyplot as plt  # type: ignore
 import pandas as pd  # type: ignore
 from shapely.geometry import Polygon, Point, LineString, MultiPolygon  # type: ignore
