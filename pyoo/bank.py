@@ -9,7 +9,7 @@ from util import Util
 
 
 class Owner:
-    def __init__(self, name: str, age: int, birthday: datetime = date.today(), works_start: datetime = datetime.now(), works_end: datetime = datetime.now()):
+    def __init__(self, name: str, age: int, birthday: date = date.today(), works_start: datetime = datetime.now(), works_end: datetime = datetime.now()):
         self.__name = name
         self.__age = age
         self.__birthday = birthday

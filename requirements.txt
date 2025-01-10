@@ -18,3 +18,5 @@ geopandas
 matplotlib
 folium
 xlrd
+nuitka
+pyperclip
