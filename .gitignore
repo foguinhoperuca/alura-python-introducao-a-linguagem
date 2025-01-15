@@ -132,6 +132,7 @@ dmypy.json
 *#*
 *~*
 logs/*
+*.swp
 
 ## Geo project
 geo/data/output

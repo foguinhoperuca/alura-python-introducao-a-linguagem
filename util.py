@@ -1,6 +1,6 @@
 import geopandas as gpd  # type: ignore
 import matplotlib.pyplot as plt  # type: ignore
-from termcolor import colored
+from termcolor import colored    # type: ignore
 
 
 def account_factory(number, owner, balance, limit):

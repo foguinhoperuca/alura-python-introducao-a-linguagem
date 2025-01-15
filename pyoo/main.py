@@ -30,6 +30,7 @@ def test_owner():
     luffy.age = 25
     print(f"Happy birthday {luffy.name} :: {luffy.age}")
 
+
 def test_shanks():
     print("+++++++++++")
     shanks = Owner(name="Shanks Mugiwara OO Owner", age=35)
