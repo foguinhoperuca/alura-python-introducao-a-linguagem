@@ -15,3 +15,4 @@ Study the follow PEPs:
 ## Courses ##
 
 - [Testes automatizados: TDD com Python](https://cursos.alura.com.br/course/tdd-com-python "tdd_com_python")
+- [Python: Manipulação de Strings](https://cursos.alura.com.br/course/python-manipulando-strings "python_manipulando_string")

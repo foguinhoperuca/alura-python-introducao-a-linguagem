@@ -4,3 +4,6 @@
 [submodule "tdd_com_python/official_reference_material"]
 	path = tdd_com_python/official_reference_material
 	url = https://github.com/alura-cursos/testes-python.git
+[submodule "python_manipulando_strings/original_repos"]
+	path = python_manipulando_strings/original_repos
+	url = https://github.com/alura-cursos/manipulacao_strings/
