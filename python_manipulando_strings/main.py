@@ -6,7 +6,9 @@ sys.path.append('.')
 from util import Util  # noqa: E402
 
 
-URL: str = 'https://python-string.alura.com.br/exchange?origin=BRL&destiny=USD&value=4.99'
+URL_00: str = 'https://python-string.alura.com.br/exchange?origin=BRL&destiny=USD&value=04,99'
+URL_01: str = 'https://python-string.alura.com.br/exchange?origin=BRL&destiny=USD&value=04,99'
+URL_02: str = 'https://python-string.alura.com.br/exchange?origin=BRL&destiny=USD&value=169.52'
 
 
 def slice_string(vl: str, sep: str = '=') -> None:
@@ -22,18 +24,25 @@ if __name__ == "__main__":
     print(f'My first string: {vl}')
     slice_string(vl='origin=BRL')
 
-    print(f'Is valid URL? {UrlParser.validate_url(url=URL)}')
+    print(f'Is valid URL? {UrlParser.validate_url(url=URL_00)}')
 
-    url_parser: UrlParser = UrlParser(url=URL)
+    url_parser_00: UrlParser = UrlParser(url=URL_00)
+    url_parser_01: UrlParser = UrlParser(url=URL_01)
+    url_parser_02: UrlParser = UrlParser(url=URL_02)
+    print(f'equal? {URL_00 == URL_01} :: {url_parser_00 == url_parser_01}')
+    print(f'equal? {URL_00 == URL_02} :: {url_parser_00 == url_parser_02}')
 
-    url_parser.change_currency(currency_value='EUR', currency_type=UrlParser.PARAMS.DESTINY_CURRENCY)
+    url_parser_00.change_currency(currency_value='EUR', currency_type=UrlParser.PARAMS.DESTINY_CURRENCY)
     print('')
-    print('actual url is:', url_parser.url)
+    print('actual url is:', url_parser_00.url)
     print('-------')
     print('')
 
-    url_parser.change_currency(currency_value='GBP', currency_type=UrlParser.PARAMS.ORIGIN_CURRENCY)
+    url_parser_00.change_currency(currency_value='GBP', currency_type=UrlParser.PARAMS.ORIGIN_CURRENCY)
     print('')
-    print('actual url is:', url_parser.url)
+    print('actual url is:', url_parser_00.url)
     print('-------')
     print('')
+
+    print(f'get value: {url_parser_00.get_value()}')
+    assert url_parser_00.get_value() == 4.99

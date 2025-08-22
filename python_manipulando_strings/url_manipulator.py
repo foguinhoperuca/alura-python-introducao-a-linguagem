@@ -23,6 +23,20 @@ class UrlParser:
 
         self.__url: str = url
 
+    def __len__(self: Self) -> int:
+        return len(self.__url)
+
+    def __str__(self: Self) -> str:
+        return self.__url
+
+    def __repr__(self: Self) -> str:
+        return self.__str__()
+
+    def __eq__(self: Self, other: Self) -> bool:
+        logging.debug("local: {} other: {}".format(self, other))
+
+        return self.url == other.url
+
     @property
     def url(self: Self) -> str:
         return self.__url
@@ -48,8 +62,16 @@ class UrlParser:
         logging.debug(f'currency_current_value {currency_current_value}')
         logging.debug(f'changed url with {currency_value} in {currency_type} and url now: {self.__url}')
 
-    # TODO implement regex here
     def get_value(self: Self) -> float:
-        vl: float = 0.00
+        vl: float = None
+        value_index: int = self.__url.find(f'{UrlParser.PARAMS.VALUE}=')
+        raw_value: str = self.__url[(value_index + len(f'{UrlParser.PARAMS.VALUE}=')):]
+        raw_value = raw_value.replace(',', '.')
+        if re.search('[0-9]*\.[0-9]{2}', raw_value):
+            vl = float(raw_value)
+
+        logging.debug(f'{value_index}')
+        logging.debug(f'{raw_value}')
+        logging.debug(f'{vl}')
 
         return vl
