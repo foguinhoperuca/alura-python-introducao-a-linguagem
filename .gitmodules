@@ -7,3 +7,6 @@
 [submodule "python_manipulando_strings/original_repos"]
 	path = python_manipulando_strings/original_repos
 	url = https://github.com/alura-cursos/manipulacao_strings/
+[submodule "python-crie-sua-primeira-aplicacao/original_repos"]
+	path = python-crie-sua-primeira-aplicacao/original_repos
+	url = git@github.com:alura-cursos/curso-python-1.git
