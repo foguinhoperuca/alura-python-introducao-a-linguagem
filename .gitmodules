@@ -10,3 +10,6 @@
 [submodule "python-crie-sua-primeira-aplicacao/original_repos"]
 	path = python-crie-sua-primeira-aplicacao/original_repos
 	url = git@github.com:alura-cursos/curso-python-1.git
+[submodule "python-crie-sua-primeira-aplicacao/course_02"]
+	path = python-crie-sua-primeira-aplicacao/course_02
+	url = git@github.com:alura-cursos/curso-python-2.git
