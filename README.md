@@ -24,5 +24,6 @@ Study the follow PEPs:
 
 Domine a linguagem python com a formação da Alura! Aprenda os fundamentos da linguagem e desenvolva projetos práticos com foco em orientação a objetos. Esta formação é ideal para quem está iniciando e quer se tornar um programador Python completo!
 
-- [Python: Crie sua Primeira Aplicação](https://cursos.alura.com.br/course/python-crie-sua-primeira-aplicacao "python-crie-sua-primeira-aplicacao")
-- [Python: aplicando a Orientação a Objetos](https://cursos.alura.com.br/course/python-aplicando-orientacao-objetos "python-crie-sua-primeira-aplicacao")
+- [Python: Crie sua Primeira Aplicação](https://cursos.alura.com.br/course/python-crie-sua-primeira-aplicacao "pyoov3")
+- [Python: aplicando a Orientação a Objetos](https://cursos.alura.com.br/course/python-aplicando-orientacao-objetos "pyoov3")
+- [Python: avance na Orientação a Objetos e consuma API](https://cursos.alura.com.br/course/python-avance-orientacao-objetos-consuma-api "pyoov3")

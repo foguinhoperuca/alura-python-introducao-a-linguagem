@@ -8,8 +8,8 @@
 	path = python_manipulando_strings/original_repos
 	url = https://github.com/alura-cursos/manipulacao_strings/
 [submodule "python-crie-sua-primeira-aplicacao/original_repos"]
-	path = python-crie-sua-primeira-aplicacao/original_repos
+	path = pyoov3/course_01
 	url = git@github.com:alura-cursos/curso-python-1.git
 [submodule "python-crie-sua-primeira-aplicacao/course_02"]
-	path = python-crie-sua-primeira-aplicacao/course_02
+	path = pyoov3/course_02
 	url = git@github.com:alura-cursos/curso-python-2.git
