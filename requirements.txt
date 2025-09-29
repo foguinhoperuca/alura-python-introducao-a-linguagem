@@ -20,3 +20,7 @@ folium
 xlrd
 nuitka
 pyperclip
+
+# pyoov3
+fastapi
+uvicorn

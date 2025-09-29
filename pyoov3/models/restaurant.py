@@ -1,6 +1,8 @@
 from enum import StrEnum
 from time import sleep
-from typing import List, Optional, Self
+from typing import Any, Dict, List, Optional, Self
+
+from models.menu import Item
 
 
 class Categories(StrEnum):
@@ -84,9 +86,10 @@ class Restaurant:
         self._category: Categories = category
         self._state: bool = False
         self._reviews: List[Review] = []
+        self._menu: List[Item] = []
 
     def __str__(self: Self) -> str:
-        return f'Restaurant [{self._category.value}] {self._name} is {self._state} | Has {len(self._reviews)} reviews'
+        return f'Restaurant [{self._category.value}] {self._name} is {self._state} | Has {len(self._reviews)} reviews | Has {len(self._menu)} item(s) in menu'
 
     def __repr__(self: Self) -> str:
         return self.__str__()
@@ -109,10 +112,19 @@ class Restaurant:
 
     @reviews.setter
     def reviews(self: Self, vl: Review) -> None:
-        if Review.validate(vl):
+        if Review.validate(vl.client, vl.rating):
             self._reviews.append(vl)
+        else:
+            raise ValueError(f'Value {vl} is invalid. No review is added')
 
-        raise ValueError(f'Value {vl} is invalid. No review is added')
+    @property
+    def menu(self: Self) -> List[Item]:
+        return self._menu
+
+    @menu.setter
+    def menu(self: Self, vl: List[Item]):
+        if isinstance(vl, Item):
+            self._menu.append(vl)
 
     @classmethod
     def get_category_from_str(cls: Self, cat: str) -> Optional[Categories]:
@@ -126,6 +138,7 @@ class Restaurant:
     def toggle_state(self) -> None:
         self._state = not self._state
 
+    @property
     def avarage_rating(self: Self) -> float:
         """
         Return avarage rating from all reviews.
@@ -136,6 +149,16 @@ class Restaurant:
             return 0.0
 
         return round(sum(review._rating for review in self._reviews) / len(self._reviews), 2)
+
+    def show_menu(self):
+        print(f'Menu from restaurant {self._name}')
+        for index, item in enumerate(self._menu, start=1):
+            if hasattr(item, 'description'):
+                print('It is a dish!!')
+            else:
+                print('It is a bevarage!!')
+
+            print(f'{index} -- {item}')
 
     @classmethod
     def factory(cls: Self, name_factory: Optional[str] = None, category_factory: Optional[str] = None) -> Optional[Self]:
@@ -162,3 +185,16 @@ class Restaurant:
             print(f'Could not create music. Error: {e}')
             sleep(5)
             return None
+
+    @staticmethod
+    def filter_restaurant(restaurants: List[Self]) -> Self:
+        while True:
+            name: str = input("Inform the restaurant's name:\n")
+            rests: List[Dict[str, Any]] = list(filter(lambda r: r.name == name, restaurants))
+            if len(rests) == 0:
+                print(f'Restaurant {name} not found!!')
+                continue
+            restaurant: Restaurant = rests.pop(0)
+            break
+
+        return restaurant

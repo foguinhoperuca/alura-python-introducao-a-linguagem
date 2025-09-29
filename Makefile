@@ -22,3 +22,9 @@ run-test-tdd-all:
 	python3 -m unittest tests.tdd_com_python.domain
 	python3 -m pytest tests/tdd_com_python/bidder.py
 	@date
+
+pyoov3-run-fastapi:
+	@clear
+	@date
+	uvicorn app:app --reload
+	@date
