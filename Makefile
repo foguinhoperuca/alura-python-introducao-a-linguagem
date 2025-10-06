@@ -28,3 +28,9 @@ pyoov3-run-fastapi:
 	@date
 	uvicorn app:app --reload
 	@date
+
+
+# TODO migrate all file to use this aproach
+MAKEFILE_DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
+
+include $(MAKEFILE_DIR)python_testes_com_dubles/Makefile

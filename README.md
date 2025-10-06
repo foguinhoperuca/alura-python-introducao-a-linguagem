@@ -16,7 +16,7 @@ Study the follow PEPs:
 
 - [Testes automatizados: TDD com Python](https://cursos.alura.com.br/course/tdd-com-python "tdd_com_python")
 - [Python: Manipulação de Strings](https://cursos.alura.com.br/course/python-manipulando-strings "python_manipulando_string")
-
+- [Testes em Python: trabalhando com dublês de testes](https://cursos.alura.com.br/course/python-testes-com-dubles "python-testes-com-dubles")
 
 ## Formations ##
 

@@ -16,3 +16,6 @@
 [submodule "pyoov3/course_03"]
 	path = pyoov3/course_03
 	url = git@github.com:alura-cursos/python-curso03.git
+[submodule "python_testes_com_dubles/upstream"]
+	path = python_testes_com_dubles/upstream
+	url = git@github.com:alura-cursos/dubles-de-testes.git
