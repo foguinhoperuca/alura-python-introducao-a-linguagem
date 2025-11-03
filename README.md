@@ -20,7 +20,7 @@ Study the follow PEPs:
 
 ## Formations ##
 
-### [Aprenda a programar em Python com Orientação a Objetos](https://cursos.alura.com.br/formacao-linguagem-python) ###
+### [Aprenda a Programar em Python com Orientação a Objetos](https://cursos.alura.com.br/formacao-linguagem-python) ###
 
 Domine a linguagem python com a formação da Alura! Aprenda os fundamentos da linguagem e desenvolva projetos práticos com foco em orientação a objetos. Esta formação é ideal para quem está iniciando e quer se tornar um programador Python completo!
 

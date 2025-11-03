@@ -24,3 +24,6 @@ pyperclip
 # pyoov3
 fastapi
 uvicorn
+
+# python-testes-com-dubles
+httmock
