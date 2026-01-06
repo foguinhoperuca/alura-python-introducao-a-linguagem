@@ -19,3 +19,6 @@
 [submodule "python_testes_com_dubles/upstream"]
 	path = python_testes_com_dubles/upstream
 	url = git@github.com:alura-cursos/dubles-de-testes.git
+[submodule "virtual_environments/upstream"]
+	path = virtual_environments/upstream
+	url = git@github.com:alura-cursos/virtualenv-python.git
