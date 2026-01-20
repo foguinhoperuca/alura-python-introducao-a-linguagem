@@ -18,6 +18,11 @@ Study the follow PEPs:
 - [Python: Manipulação de Strings](https://cursos.alura.com.br/course/python-manipulando-strings "python_manipulando_string")
 - [Testes em Python: trabalhando com dublês de testes](https://cursos.alura.com.br/course/python-testes-com-dubles "python-testes-com-dubles")
 
+### Virtual Environment ###
+
+- [Python: introdução a ambientes virtuais](https://cursos.alura.com.br/course/python-ambientes-virtuais "virtual_environmets")
+- [Python: ambientes virtuais com Docker e ASDF](https://cursos.alura.com.br/course/python-ambientes-virtuais-docker-asdf "virtual_environments")
+
 ## Formations ##
 
 ### [Aprenda a Programar em Python com Orientação a Objetos](https://cursos.alura.com.br/formacao-linguagem-python) ###
