@@ -4,8 +4,14 @@ services:
   app:
     build:
       context: .
+      args:
+        - DEBUG_ARG=True
+        - ALLOWED_HOSTS_ARG=127.0.0.0,localhost
+        - SECRET_KEY_ARG=PUT_YOUR_KEY_OVER_HERE
+        - REQUIREMENTS_ARG=requirements-dev.txt
     ports:
       - 8000:8000
     tty: true
+    command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
       - ./src:/src
