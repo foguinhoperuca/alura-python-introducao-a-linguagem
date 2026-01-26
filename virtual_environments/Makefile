@@ -6,7 +6,7 @@ run:
 	# docker-compose run app django-admin.py startproject app . # old way
 	# docker-compose run app python manage.py startapp core # oldway
 
-	docker compose build
+	docker compose build --no-cache
 	docker compose up
 	docker compose run app django-admin.py startproject app .
 	docker compose run app python manage.py startapp core

@@ -8,6 +8,10 @@ services:
         - DEBUG_ARG=True
         - ALLOWED_HOSTS_ARG=127.0.0.0,localhost
         - SECRET_KEY_ARG=PUT_YOUR_KEY_OVER_HERE
+        - USER_ARG=postgres
+        - PASSWORD_ARG=senhadanasa
+        - HOST_ARG=db
+        - DBNAME=app
         - REQUIREMENTS_ARG=requirements-dev.txt
     ports:
       - 8000:8000
@@ -15,3 +19,10 @@ services:
     command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
       - ./src:/src
+
+  db:
+    image: postgres:18-alpine
+    environment:
+      - POSTGRES_DB=app
+      - POSTGRES_USER=postgres
+      - POSTGRS_PASSWORD=senhadanasa
