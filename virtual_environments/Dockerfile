@@ -32,3 +32,6 @@ USER alura
 
 # RUN pip install pip --upgrade && pip install -r ${REQUIREMENTS_ARG}
 RUN pip install pip --upgrade && pip install pipenv && pipenv install --system --ignore-pipfile --deploy
+
+ADD https://github.com/krallin/tini/releases/download/v0.10.0/tini /tini 
+RUN chmod +x /tini
