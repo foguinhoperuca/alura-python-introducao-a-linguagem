@@ -25,3 +25,6 @@
 [submodule "virtual_environments/upstream/course02"]
 	path = virtual_environments/upstream/course02
 	url = https://github.com/alura-cursos/curso-ambientes-virtuais-2.git
+[submodule "boas_praticas02_4145/upstream"]
+	path = best_practices_solid_4145/upstream
+	url = git@github.com:alura-cursos/4145-boas-praticas-python-curso02.git

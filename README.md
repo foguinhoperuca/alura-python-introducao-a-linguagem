@@ -17,6 +17,7 @@ Study the follow PEPs:
 - [Testes automatizados: TDD com Python](https://cursos.alura.com.br/course/tdd-com-python "tdd_com_python")
 - [Python: Manipulação de Strings](https://cursos.alura.com.br/course/python-manipulando-strings "python_manipulando_string")
 - [Testes em Python: trabalhando com dublês de testes](https://cursos.alura.com.br/course/python-testes-com-dubles "python-testes-com-dubles")
+- [Python: construindo sistemas eficientes com SOLID e Design Patterns](https://cursos.alura.com.br/course/python-construindo-sistemas-eficientes-solid-design-patterns "best_practices_solid_4145")
 
 ### Virtual Environment ###
 
