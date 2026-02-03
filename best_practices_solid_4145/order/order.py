@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from decimal import Decimal
+from enum import Enum
 import logging
 from typing import Self, List
 
@@ -39,9 +40,6 @@ class Delivery(Order):
     def __str__(self: Self) -> str:
         return super().__str__().replace(' -> ', f' -> delivery fee: ${self._delivery_fee}; ')
 
-    def __repr__(self: Self) -> str:
-        return self.__str__()
-
     def total(self: Self) -> Decimal:
         return Decimal(sum(item.price for item in self._itens)) + self._delivery_fee
 
@@ -49,3 +47,29 @@ class Delivery(Order):
 class Takeout(Order):
     def total(self: Self) -> Decimal:
         return Decimal(sum(item.price for item in self._itens))
+
+
+class Gift(Order):
+    class GiftCardType(Enum):
+        NORMAL = Decimal('4.99')
+        URGENT = Decimal('9.99')
+
+    def __init__(self: Self, client: Client, itens: List[Item], gift_card: GiftCardType = GiftCardType.NORMAL) -> None:
+        super().__init__(client=client, itens=itens)
+        self._gift_card: Gift.GiftCardType = gift_card
+
+    def __str__(self: Self) -> str:
+        return super().__str__().replace(' -> ', f' -> gift card: ${round(self._gift_card.value, 2)} ({self._gift_card.name}); ')
+
+    def total(self: Self) -> Decimal:
+        return round(Decimal(sum(item.price for item in self._itens)) + self._gift_card.value, 2)
+
+
+class Special(Order):
+    HANDLING_FEE: Decimal = Decimal('0.10')
+
+    def __str__(self: Self) -> str:
+        return super().__str__().replace(' -> ', f' -> original total plus {Special.HANDLING_FEE * 100}% as handling fee; ')
+
+    def total(self: Self) -> Decimal:
+        return round(Decimal(sum(item.price for item in self._itens)) * Decimal(1 + Special.HANDLING_FEE), 2)
