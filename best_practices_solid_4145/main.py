@@ -1,10 +1,11 @@
 from decimal import Decimal
 import logging
+from time import sleep
 from typing import List
 
 from client import Client
 from item import Item
-from order import Delivery, Gift, Order, Special, Takeout
+from order import Delivery, Gift, ObserverOrderStatus, Order, OrderStatus, Special, Takeout
 from payment import Payment, PaymentFactory, PaymentStatus, PaymentType
 from notification import NotificationFacade
 from util import LOG_FORMAT_INFO
@@ -15,6 +16,7 @@ if __name__ == "__main__":
     credit_card: Payment = PaymentFactory.manufacture(PaymentType.CREDIT_CARD)
     pix: Payment = PaymentFactory.manufacture(PaymentType.PIX)
     notification: NotificationFacade = NotificationFacade()
+    observer: ObserverOrderStatus = ObserverOrderStatus(notification)
 
     client: Client = Client('John', 'rua da Alura')
     pizza: Item = Item('Pizza', 30.0)
@@ -22,11 +24,19 @@ if __name__ == "__main__":
     itens: List[Item] = [pizza, soda]
     delivery: Order = Delivery(client=client, itens=itens, delivery_fee=Decimal(3.00))
     print(f'{delivery}')
+    delivery.add_observer(observer)
     john_payment: PaymentStatus = credit_card.process(value=delivery.total())
     if john_payment is PaymentStatus.SUCCESS:
-        notification.send(client=client, message=f'Your order with {len(itens)} is ready to go!')
+        delivery.status = OrderStatus.CONFIRMED
+        sleep(1)
+        delivery.status = OrderStatus.ON_PREPARE
+        sleep(2)
+        delivery.status = OrderStatus.ON_ROUTE
+        sleep(3)
+        delivery.status = OrderStatus.DELIVERED
     print('----------')
 
+    # Bellow: old way!
     albert: Client = Client('Albert', 'Back St., 231')
     burguer: Item = Item(name='Burguer', price=45.00)
     beer: Item = Item(name='Beer', price=15.00)
@@ -35,6 +45,7 @@ if __name__ == "__main__":
     print(f'{takeout}')
     albert_payment: PaymentStatus = pix.process(value=takeout.total())
     if albert_payment is PaymentStatus.SUCCESS:
+        takeout.status = OrderStatus.CONFIRMED
         notification.send(client=albert, message=f'Your order with {len(albert_cart)} is ready to go!')
     print('----------')
 
@@ -46,6 +57,7 @@ if __name__ == "__main__":
     print(f'{gift}')
     mark_payment: PaymentStatus = pix.process(value=gift.total())
     if mark_payment is PaymentStatus.SUCCESS:
+        gift.status = OrderStatus.CONFIRMED
         notification.send(client=mark, message=f'Your order with {len(mark_cart)} is ready to go!')
     print('----------')
 
@@ -57,6 +69,7 @@ if __name__ == "__main__":
     print(f'{special}')
     joseph_payment: PaymentStatus = credit_card.process(value=special.total())
     if joseph_payment is PaymentStatus.SUCCESS:
+        special.status = OrderStatus.CONFIRMED
         notification.send(client=joseph, message=f'Your order with {len(joseph_cart)} is ready to go!')
 
     try:

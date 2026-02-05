@@ -1,23 +1,62 @@
 from abc import ABC, abstractmethod
 from decimal import Decimal
-from enum import Enum
+from enum import auto, Enum
 import logging
-from typing import Self, List
+from typing import List, Self
 
 from client import Client
 from item import Item
+from notification import NotificationFacade
+
+
+class OrderStatus(Enum):
+    CREATED: int = auto()
+    CONFIRMED: int = auto()
+    ON_PREPARE: int = auto()
+    ON_ROUTE: int = auto()
+    DELIVERED: int = auto()
 
 
 class Order(ABC):
     def __init__(self: Self, client: Client, itens: List[Item]) -> None:
         self._client: Client = client
         self._itens: List[Item] = itens
+        self._status: OrderStatus = OrderStatus.CREATED
+        self._observers: List[ObserverOrderStatus] = []
 
     def __str__(self: Self) -> str:
         return f"Receipt for {self._client} -> {self.quantity()} iten(s) with total: ${self.total()} -> {[item for item in self._itens]}"
 
     def __repr__(self: Self) -> str:
         return self.__str__()
+
+    @property
+    def client(self: Self) -> Client:
+        return self._client
+
+    @property
+    def itens(self: Self) -> List[Item]:
+        return self._itens
+
+    @property
+    def status(self: Self) -> OrderStatus:
+        return self._status
+
+    @status.setter
+    def status(self: Self, vl: OrderStatus) -> None:
+        if vl is OrderStatus.CONFIRMED:
+            logging.info(f'Order for {self._client} is CONFIRMED!!')
+
+        self._status = vl
+        self.notify()
+
+    # FIXME should be a @property?
+    def add_observer(self, observer) -> None:
+        self._observers.append(observer)
+
+    def notify(self: Self) -> None:
+        for observer in self._observers:
+            observer.update(self)
 
     @abstractmethod
     def total(self: Self) -> Decimal:
@@ -73,3 +112,11 @@ class Special(Order):
 
     def total(self: Self) -> Decimal:
         return round(Decimal(sum(item.price for item in self._itens)) * Decimal(1 + Special.HANDLING_FEE), 2)
+
+
+class ObserverOrderStatus:
+    def __init__(self: Self, notification: NotificationFacade) -> None:
+        self._notification: NotificationFacade = notification
+
+    def update(self: Self, order: Order) -> None:
+        self._notification.send(client=order.client, message=f'[{order.status.name}] Your order with {len(order.itens)} is ready to go!')
