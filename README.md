@@ -18,6 +18,7 @@ Study the follow PEPs:
 - [Python: Manipulação de Strings](https://cursos.alura.com.br/course/python-manipulando-strings "python_manipulando_string")
 - [Testes em Python: trabalhando com dublês de testes](https://cursos.alura.com.br/course/python-testes-com-dubles "python-testes-com-dubles")
 - [Python: construindo sistemas eficientes com SOLID e Design Patterns](https://cursos.alura.com.br/course/python-construindo-sistemas-eficientes-solid-design-patterns "best_practices_solid_4145")
+- [Python: Fundamento e Padrões de Arquitetura de Software](https://cursos.alura.com.br/course/python-fundamentos-padroes-arquitetura-software "arq_sw")
 
 ### Virtual Environment ###
 
@@ -33,3 +34,10 @@ Domine a linguagem python com a formação da Alura! Aprenda os fundamentos da l
 - [Python: Crie sua Primeira Aplicação](https://cursos.alura.com.br/course/python-crie-sua-primeira-aplicacao "pyoov3")
 - [Python: aplicando a Orientação a Objetos](https://cursos.alura.com.br/course/python-aplicando-orientacao-objetos "pyoov3")
 - [Python: avance na Orientação a Objetos e consuma API](https://cursos.alura.com.br/course/python-avance-orientacao-objetos-consuma-api "pyoov3")
+
+
+## [Praticando Python](https://cursos.alura.com.br/formacao-praticando-python "training_py") ##
+
+Learn python with  pratical exercises.
+
+- [Praticando Python: Condicionais if, elif e else](https://cursos.alura.com.br/course/praticando-python-condicionais-if-elif-else "http://cdn3.gnarususercontent.com.br/4298-praticando-python-condicionais/Curso%20pratico_%20python%20condicionais.pdf")

@@ -28,3 +28,6 @@
 [submodule "boas_praticas02_4145/upstream"]
 	path = best_practices_solid_4145/upstream
 	url = git@github.com:alura-cursos/4145-boas-praticas-python-curso02.git
+[submodule "arq_sw/upstream"]
+	path = arq_sw/upstream
+	url = git@github.com:arthurmiy/arquitetura-de-software-python-projetos.git
