@@ -19,6 +19,7 @@ Study the follow PEPs:
 - [Testes em Python: trabalhando com dublês de testes](https://cursos.alura.com.br/course/python-testes-com-dubles "python-testes-com-dubles")
 - [Python: construindo sistemas eficientes com SOLID e Design Patterns](https://cursos.alura.com.br/course/python-construindo-sistemas-eficientes-solid-design-patterns "best_practices_solid_4145")
 - [Python: Fundamento e Padrões de Arquitetura de Software](https://cursos.alura.com.br/course/python-fundamentos-padroes-arquitetura-software "arq_sw")
+- [Python: testes automatizados e qualidade de código](https://cursos.alura.com.br/course/python-testes-automatizados-qualidade-codigo "ptaqc")
 
 ### Virtual Environment ###
 
@@ -36,7 +37,7 @@ Domine a linguagem python com a formação da Alura! Aprenda os fundamentos da l
 - [Python: avance na Orientação a Objetos e consuma API](https://cursos.alura.com.br/course/python-avance-orientacao-objetos-consuma-api "pyoov3")
 
 
-## [Praticando Python](https://cursos.alura.com.br/formacao-praticando-python "training_py") ##
+### [Praticando Python](https://cursos.alura.com.br/formacao-praticando-python "training_py") ###
 
 Learn python with  pratical exercises.
 
