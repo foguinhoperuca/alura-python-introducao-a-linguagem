@@ -1,15 +1,16 @@
 from abc import abstractmethod, ABC
+import logging
 from typing import List, Self
 from tkinter import Button, END, Entry, Frame, Label, messagebox, Tk
 
 import controller
 from model import Attendant
-from util import init_logger
+from util import DEFAULT_LOGGER_NAME
 
 
 class View(ABC):
     def __init__(self: Self) -> None:
-        self._logger = init_logger(log_type='normal')
+        self._logger = logging.getLogger(DEFAULT_LOGGER_NAME)
 
     @property
     def logger(self):
@@ -64,7 +65,7 @@ class ViewCli(View):
             if command.endswith('+') and command[:-1].isdigit():
                 attendants: List[Attendant] = controller.get_all()
                 attendant: Attendant = attendants[int(command[:-1]) - 1]
-                self.logger.info(f'{attendant.name=}')
+                self.logger.debug(f'[VIEW] {attendant.name=}')
                 controller.sales(name=attendant.name)
             else:
                 controller.add(command)
@@ -86,6 +87,9 @@ class ViewTk(View):
         self.__btn_reset = Button(self.__window, text='Reset Attendants', command=lambda: controller.reset())
         self.__btn_reset.pack()
 
+        self.__btn_order = Button(self.__window, text='Order Attendants', command=lambda: controller.order())
+        self.__btn_order.pack()
+
         self.__frame: Frame = Frame(self.__window)
         self.__frame.pack(pady=10)
 
@@ -101,7 +105,8 @@ class ViewTk(View):
             label: Label = Label(self.__frame, text=f'{attendant}')
             label.grid(row=index, column=-0, sticky='w')
 
-            btn_increment: Button = Button(self.__frame, text='+1', command=lambda: controller.sales(name=attendant.name, sales=1))
+            self.logger.debug(f'[VIEW] {attendant.name=}')
+            btn_increment: Button = Button(self.__frame, text='+1', command=lambda name=attendant.name: controller.sales(name=name, sales=1))
             btn_increment.grid(row=index, column=1)
 
     def mainloop(self: Self) -> None:
