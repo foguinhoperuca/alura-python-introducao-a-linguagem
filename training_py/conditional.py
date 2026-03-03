@@ -1,3 +1,4 @@
+from datetime import datetime, time
 from decimal import Decimal
 
 
@@ -37,7 +38,6 @@ def exerc_03() -> None:
 
 
 def exerc_04() -> None:
-    print('TODO must implement it!')
     weight: Decimal = round(Decimal(input('Inform your weight: ')), 2)
     height: Decimal = round(Decimal(input('Inform your height: ')), 2)
     imc: Decimal = weight / (height ** 2)
@@ -51,15 +51,43 @@ def exerc_04() -> None:
 
 
 def exerc_05() -> None:
-    print('TODO must implement it!')
+    LIMIT: Decimal = round(Decimal('3000.00'))
+    expenses: Decimal = round(Decimal(input('Inform your expenses: ')), 2)
+    if expenses > LIMIT:
+        print(f'Watch out! Your expenses ${expenses:.2f} supprass the limit ${LIMIT:.2f}')
+    else:
+        print(f'Your expenses ${expenses:.2f} is OK!')
 
 
 def exerc_06() -> None:
-    print('TODO must implement it!')
+    MIN_HOUR: time = time(hour=8, minute=0, second=0)
+    MAX_HOUR: time = time(hour=18, minute=0, second=0)
+    TIME_FMT: str = '%H:%M'
+
+    entrace_time: time = datetime.strptime(input('Inform entrace time (HH:MM 24 hours): '), TIME_FMT).time()
+    print(f'entrace time {entrace_time}')
+
+    if entrace_time > MAX_HOUR or entrace_time < MIN_HOUR:
+        print('Access denied!!')
+    else:
+        print('Access allowed!!')
 
 
 def exerc_07() -> None:
-    print('TODO must implement it!')
+    grade_01: Decimal = round(Decimal(input('Inform the first grade: ')), 2)
+    grade_02: Decimal = round(Decimal(input('Inform the second grade: ')), 2)
+    grade_03: Decimal = round(Decimal(input('Inform the third grade: ')), 2)
+    avg: Decimal = (grade_01 + grade_02 + grade_03) / 3
+    status: str = 'Failed'
+
+    if avg >= 7.00:
+        status = 'Approved'
+    elif avg >= 5.00 and avg < 7.00:
+        status = 'Under Review'
+    else:
+        status = 'Failed'
+
+    print(f'For grades: {grade_01:.2f} {grade_02:.2f} {grade_03:.2f} with avarage {avg:.2f} make your status as *{status}*')
 
 
 def exerc_08() -> None:
