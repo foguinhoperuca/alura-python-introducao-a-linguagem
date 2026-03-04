@@ -91,7 +91,15 @@ def exerc_07() -> None:
 
 
 def exerc_08() -> None:
-    print('TODO must implement it!')
+    distance: Decimal = round(Decimal(input('Inform the distance (KM): ')), 2)
+    toll: Decimal = Decimal('10.00')
+
+    if distance > Decimal('100.00') and distance <= Decimal('200.00'):
+        toll = Decimal('20.00')
+    elif distance > Decimal('200.00'):
+        toll = Decimal('30.00')
+
+    print(f'For your distance {distance:.2f} KM the toll will be ${toll:.2f}')
 
 
 def exerc_09() -> None:
