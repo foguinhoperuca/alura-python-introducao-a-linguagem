@@ -103,7 +103,16 @@ def exerc_08() -> None:
 
 
 def exerc_09() -> None:
-    print('TODO must implement it!')
+    game_number: int = int(input('Inform a number (integer): '))
+    remainder: int = game_number % 2
+    game_number_type: str = 'even'
+
+    if remainder == 0:
+        game_number_type = 'even'
+    else:
+        game_number_type = 'odd'
+
+    print(f'The game number {game_number} has remainder {remainder} and is *{game_number_type}*')
 
 
 def exerc_10() -> None:
