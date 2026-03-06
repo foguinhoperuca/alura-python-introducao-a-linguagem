@@ -1,5 +1,6 @@
 from datetime import datetime, time
 from decimal import Decimal
+from enum import StrEnum
 
 
 def exerc_01() -> None:
@@ -116,4 +117,25 @@ def exerc_09() -> None:
 
 
 def exerc_10() -> None:
-    print('TODO must implement it!')
+    class IncomeStatus(StrEnum):
+        APPROVED: str = 'approved'
+        REJECTED: str = 'rejected by default'
+        REJECTED_INCOME: str = 'rejected by income'
+        REJECTED_INSTALLMENTS: str = 'rejected by installment'
+
+    MIN_INCOME: Decimal = round(Decimal('2000.00'), 2)
+    MAX_RATE_INSTALLMENTS_INCOME: Decimal = round(Decimal('0.3'), 2)
+    status: IncomeStatus = IncomeStatus.REJECTED
+
+    income: Decimal = round(Decimal(input('Inform your income: $')), 2)
+    installment_value: Decimal = round(Decimal(input('Inform the value of installments: $')), 2)
+    installment_rate: Decimal = round((installment_value / income), 2)
+
+    if income > MIN_INCOME and installment_rate <= MAX_RATE_INSTALLMENTS_INCOME:
+        status = IncomeStatus.APPROVED
+    elif income <= MIN_INCOME:
+        status = IncomeStatus.REJECTED_INCOME
+    else:
+        status = IncomeStatus.REJECTED_INSTALLMENTS
+
+    print(f'Your income {income:.2f} with installment value {installment_value:.2f} is {status} (installment_rate is {installment_rate:.2f} - {installment_rate <= MAX_RATE_INSTALLMENTS_INCOME})')  # noqa: F821
