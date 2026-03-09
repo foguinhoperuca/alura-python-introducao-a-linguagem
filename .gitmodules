@@ -31,3 +31,6 @@
 [submodule "arq_sw/upstream"]
 	path = arq_sw/upstream
 	url = git@github.com:arthurmiy/arquitetura-de-software-python-projetos.git
+[submodule "pysolid02/upstream"]
+	path = pysolid02/upstream
+	url = https://github.com/GuiCastroo/curso-solid.git
