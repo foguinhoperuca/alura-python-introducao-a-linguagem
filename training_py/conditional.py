@@ -4,6 +4,7 @@ from enum import StrEnum
 
 
 def exerc_01() -> None:
+    print('[CONDITIONAL] e01')
     apples: int = int(input("How many apples was sold? "))
     bananas: int = int(input("How many bananas was sold? "))
     winner: str = ""
@@ -19,6 +20,7 @@ def exerc_01() -> None:
 
 
 def exerc_02() -> None:
+    print('[CONDITIONAL] e02')
     project_a: int = int(input("How many day for project A? "))
     project_b: int = int(input("How many day for project B? "))
     project_c: int = int(input("How many day for project C? "))
@@ -31,6 +33,7 @@ def exerc_02() -> None:
 
 
 def exerc_03() -> None:
+    print('[CONDITIONAL] e03')
     temperature: int = int(input('Enter the temperature: '))
     if temperature > 25:
         print(f'Too hot at {temperature}°!!')
@@ -39,6 +42,7 @@ def exerc_03() -> None:
 
 
 def exerc_04() -> None:
+    print('[CONDITIONAL] e04')
     weight: Decimal = round(Decimal(input('Inform your weight: ')), 2)
     height: Decimal = round(Decimal(input('Inform your height: ')), 2)
     imc: Decimal = weight / (height ** 2)
@@ -52,6 +56,7 @@ def exerc_04() -> None:
 
 
 def exerc_05() -> None:
+    print('[CONDITIONAL] e05')
     LIMIT: Decimal = round(Decimal('3000.00'))
     expenses: Decimal = round(Decimal(input('Inform your expenses: ')), 2)
     if expenses > LIMIT:
@@ -61,6 +66,7 @@ def exerc_05() -> None:
 
 
 def exerc_06() -> None:
+    print('[CONDITIONAL] e06')
     MIN_HOUR: time = time(hour=8, minute=0, second=0)
     MAX_HOUR: time = time(hour=18, minute=0, second=0)
     TIME_FMT: str = '%H:%M'
@@ -75,6 +81,7 @@ def exerc_06() -> None:
 
 
 def exerc_07() -> None:
+    print('[CONDITIONAL] e07')
     grade_01: Decimal = round(Decimal(input('Inform the first grade: ')), 2)
     grade_02: Decimal = round(Decimal(input('Inform the second grade: ')), 2)
     grade_03: Decimal = round(Decimal(input('Inform the third grade: ')), 2)
@@ -92,6 +99,7 @@ def exerc_07() -> None:
 
 
 def exerc_08() -> None:
+    print('[CONDITIONAL] e08')
     distance: Decimal = round(Decimal(input('Inform the distance (KM): ')), 2)
     toll: Decimal = Decimal('10.00')
 
@@ -104,6 +112,7 @@ def exerc_08() -> None:
 
 
 def exerc_09() -> None:
+    print('[CONDITIONAL] e09')
     game_number: int = int(input('Inform a number (integer): '))
     remainder: int = game_number % 2
     game_number_type: str = 'even'
@@ -123,6 +132,7 @@ def exerc_10() -> None:
         REJECTED_INCOME: str = 'rejected by income'
         REJECTED_INSTALLMENTS: str = 'rejected by installment'
 
+    print('[CONDITIONAL] e10')
     MIN_INCOME: Decimal = round(Decimal('2000.00'), 2)
     MAX_RATE_INSTALLMENTS_INCOME: Decimal = round(Decimal('0.3'), 2)
     status: IncomeStatus = IncomeStatus.REJECTED

@@ -11,7 +11,7 @@ Study the follow PEPs:
 - [PEP 0008](https://peps.python.org/pep-0008/ "Style Guide for Python Code")
 - [PEP 0362](https://peps.python.org/pep-0362/ "Function Signature Object")
 - [PEP 0526](https://peps.python.org/pep-0526/ "Syntax for Variable Annotations")
-
+https://cursos.alura.com.br/course/praticando-python-lacos-for-while
 ## Courses ##
 
 - [Testes automatizados: TDD com Python](https://cursos.alura.com.br/course/tdd-com-python "tdd_com_python")
@@ -42,3 +42,4 @@ Domine a linguagem python com a formação da Alura! Aprenda os fundamentos da l
 Learn python with  pratical exercises.
 
 - [Praticando Python: Condicionais if, elif e else](https://cursos.alura.com.br/course/praticando-python-condicionais-if-elif-else "http://cdn3.gnarususercontent.com.br/4298-praticando-python-condicionais/Curso%20pratico_%20python%20condicionais.pdf")
+- [Praticando Python: Laços for e while](https://cursos.alura.com.br/course/praticando-python-lacos-for-while "https://cdn3.gnarususercontent.com.br/4297-praticando-python-lacos-for-while/Curso%20pratico_%20python%20la%C3%A7os.pdf")
