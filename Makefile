@@ -29,6 +29,11 @@ pyoov3-run-fastapi:
 	uvicorn app:app --reload
 	@date
 
+solid02-poetry:
+	curl -sSL https://install.python-poetry.org | python3 -
+	poetry --version
+	poetry install
+	poetry shell
 
 # TODO migrate all file to use this aproach
 MAKEFILE_DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
