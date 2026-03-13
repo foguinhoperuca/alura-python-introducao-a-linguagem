@@ -1,3 +1,6 @@
+from typing import List
+
+
 def exerc_01():
     print('[LOOP] exerc_01')
     for client in ['João', 'Maria', 'Carlos', 'Ana', 'Beatriz']:
@@ -35,7 +38,15 @@ def exerc_03():
 
 
 def exerc_04():
-    print('[LOOP] TODO implement exerc_04')
+    print('[LOOP] exerc_04')
+    sales: List[float] = [10.00, 20.00, 30.00, 40.00, 50.00]
+    print(f'Total sales is: ${sum(sales)}')
+
+    total: float = 0.00
+    for sale in sales:
+        total += sale
+
+    print(f'Total sales loop: ${total}')
 
 
 def exerc_05():
