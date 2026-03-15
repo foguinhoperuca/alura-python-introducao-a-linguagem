@@ -50,7 +50,11 @@ def exerc_04():
 
 
 def exerc_05():
-    print('[LOOP] TODO implement exerc_05')
+    print('[LOOP] exerc_05')
+    name: str
+    for project in ['website', 'game', 'data analysis', None, 'mobile app']:
+        name = project if project is not None else '*** MISSING PROJECT ***'
+        print(f'PROJECT NAME..: {name}')
 
 
 def exerc_06():
