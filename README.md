@@ -20,7 +20,10 @@ Study the follow PEPs:
 - [Python: construindo sistemas eficientes com SOLID e Design Patterns](https://cursos.alura.com.br/course/python-construindo-sistemas-eficientes-solid-design-patterns "best_practices_solid_4145")
 - [Python: Fundamento e Padrões de Arquitetura de Software](https://cursos.alura.com.br/course/python-fundamentos-padroes-arquitetura-software "arq_sw")
 - [Python: testes automatizados e qualidade de código](https://cursos.alura.com.br/course/python-testes-automatizados-qualidade-codigo "ptaqc")
-- [Princípio SOLID com Python: Construindo código eficientes e escaláveis](https://cursos.alura.com.br/course/design-python-solid-boas-praticas)
+
+### [Princípio SOLID com Python: Construindo código eficientes e escaláveis](https://cursos.alura.com.br/course/design-python-solid-boas-praticas) ###
+
+[Chapter 01 reference: PAIXÃO, João Roberto da. O que é SOLID: O guia completo para você entender os 5 princípios da POO. Medium, 6 jan. 2019. Disponível em: https://medium.com/desenvolvendo-com-paixao/o-que-%C3%A9-solid-o-guia-completo-para-voc%C3%AA-entender-os-5-princ%C3%ADpios-da-poo-2b937b3fc530. (Obs: Mesmo sendo em Java esse artigo me ajudou muito a entender os princípios)](https://medium.com/desenvolvendo-com-paixao/o-que-%C3%A9-solid-o-guia-completo-para-voc%C3%AA-entender-os-5-princ%C3%ADpios-da-poo-2b937b3fc530)
 
 ### Virtual Environment ###
 
