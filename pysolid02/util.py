@@ -6,7 +6,7 @@ from termcolor import colored
 LOG_FORMAT_FULL = colored('[%(asctime)s][%(process)d:%(processName)s]', 'green', attrs=['bold', 'dark']) + colored('[%(filename)s#%(funcName)s:%(lineno)d]', 'white', attrs=['bold', 'dark']) + colored('[%(levelname)s]', 'magenta', attrs=['bold', 'dark']) + ' %(message)s '
 LOG_FORMAT_INFO = colored('[%(asctime)s]', 'green', attrs=['bold', 'dark']) + colored('[%(filename)s:%(lineno)d]', 'white', attrs=['bold', 'dark']) + colored('[%(levelname)s]', 'magenta', attrs=['bold', 'dark']) + ' %(message)s'
 LOG_FORMAT_SIMPLE = colored('[%(levelname)s]', 'magenta', attrs=['bold', 'dark']) + ' %(message)s'
-DEFAULT_LOGGER_NAME = 'pysolid02'
+DEFAULT_LOGGER_NAME = 'PYSOLID02'
 DATETIME_FORMAT = "%Y-%m-%dT%H-%M-%S"
 
 

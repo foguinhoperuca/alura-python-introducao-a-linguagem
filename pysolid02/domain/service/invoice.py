@@ -1,7 +1,9 @@
 from decimal import Decimal
+import logging
 from typing import Dict, Protocol, List, Self
 
 from domain.entities import Order
+from util import DEFAULT_LOGGER_NAME
 
 
 class TaxStrategy(Protocol):
@@ -88,8 +90,13 @@ class InvoiceService:
     def __init__(self: Self, order: Order, taxes: List[TaxStrategy] = [ISS(), ICMS()]) -> None:
         assert order is not None
         assert len(taxes) >= 1
+
         self._order: Order = order
         self._taxes: List[TaxStrategy] = taxes
+
+        self.__logger = logging.getLogger(DEFAULT_LOGGER_NAME)
+        # self.__logger.setLevel = logging.DEBUG
+        # self.__logger.setFormatter(logging.Formatter(Util.LOG_FORMAT_DEBUG))
 
     def generate_document(self: Self) -> str:
         return f'Invoice for {self._order.client}: ${self.calculate_total():.2f} with taxes already included.'
@@ -104,6 +111,7 @@ class InvoiceService:
         total_taxes: Decimal = sum(value for index, value in tax_values.items())
         total: Decimal = base_value + total_taxes
 
+        self.__logger.info(f'*** SOME LOGGING {DEFAULT_LOGGER_NAME} ***')
         print('')
         print('----- CALCULATION MEMORY -----')
         print(f'base value...: ${base_value:.2f}')
