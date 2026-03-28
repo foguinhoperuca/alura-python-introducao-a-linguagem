@@ -2,7 +2,8 @@ from decimal import Decimal
 import logging
 from typing import Dict, Protocol, List, Self
 
-from domain.entities import Order
+from domain.entities import Order, ShippingType
+from domain.service.shipping import EconomyShippingStrategy, ExpressShippingStrategy, NormalShippingStrategy
 from util import DEFAULT_LOGGER_NAME
 
 
@@ -104,19 +105,31 @@ class InvoiceService:
     def calculate_total(self: Self) -> Decimal:
         base_value: Decimal = self._order.calculate_total()
 
+        # TODO implement shipping before tax
+        shipping_value: Decimal = round(Decimal('0.00'), 2)
+        if self._order.shipping_type is ShippingType.NORMAL:
+            shipping_value = NormalShippingStrategy().calculate_shipping(order=self._order)
+        elif self._order.shipping_type is ShippingType.EXPRESS:
+            shipping_value = ExpressShippingStrategy().calculate_shipping(order=self._order)
+        elif self._order.shipping_type is ShippingType.ECONOMY:
+            shipping_value = EconomyShippingStrategy().calculate_shipping(order=self._order)
+
+        selling_price: Decimal = base_value + shipping_value
         tax_values: Dict = {}
         for tax in self._taxes:
-            tax_values[tax] = tax.calculate(base=base_value)
+            tax_values[tax] = tax.calculate(base=selling_price)
 
         total_taxes: Decimal = sum(value for index, value in tax_values.items())
-        total: Decimal = base_value + total_taxes
+        total: Decimal = selling_price + total_taxes
 
         self.__logger.info(f'*** SOME LOGGING {DEFAULT_LOGGER_NAME} ***')
         print('')
         print('----- CALCULATION MEMORY -----')
-        print(f'base value...: ${base_value:.2f}')
-        print(f'total taxes..: ${total_taxes:.2f} {[f"{index} = ${value}" for index, value in tax_values.items()]}')
-        print(f'total........: ${total:.2f}')
+        print(f'base value......: ${base_value:.2f}')
+        print(f'shipping value..: ${shipping_value:.2f}')
+        print(f'selling price...: ${selling_price:.2f}')
+        print(f'total taxes.....: ${total_taxes:.2f} {[f"{index} = ${value}" for index, value in tax_values.items()]}')
+        print(f'total...........: ${total:.2f}')
         print('----- CALCULATION MEMORY -----')
         print('')
 
