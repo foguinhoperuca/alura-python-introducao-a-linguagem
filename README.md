@@ -47,3 +47,4 @@ Learn python with  pratical exercises.
 
 - [Praticando Python: Condicionais if, elif e else](https://cursos.alura.com.br/course/praticando-python-condicionais-if-elif-else "http://cdn3.gnarususercontent.com.br/4298-praticando-python-condicionais/Curso%20pratico_%20python%20condicionais.pdf")
 - [Praticando Python: Laços for e while](https://cursos.alura.com.br/course/praticando-python-lacos-for-while "https://cdn3.gnarususercontent.com.br/4297-praticando-python-lacos-for-while/Curso%20pratico_%20python%20la%C3%A7os.pdf")
+- [Praticando Python: Strings e Regex](https://cursos.alura.com.br/course/praticando-python-strings-regex "https://cdn3.gnarususercontent.com.br/4476-strings-regex/Praticando%20Python_%20Strings%20e%20Regex%20-%20Slides%20Oficial.pptx.pdf")

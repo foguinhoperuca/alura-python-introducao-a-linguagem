@@ -4,7 +4,7 @@ from typing import List
 def exerc_01():
     print('[LOOP] exerc_01')
     for client in ['João', 'Maria', 'Carlos', 'Ana', 'Beatriz']:
-        print(f'[LOOP_E01] client name: {client}')
+        print(f'[LOOP][]E01] client name: {client}')
 
 
 def exerc_02():
@@ -21,32 +21,32 @@ def exerc_03():
     try:
         total: int = int(input('Inform the total of times to show message: '))
     except Exception as e:
-        print(f'Using default value: 1 --> {e}')
+        print(f'[LOOP][E03] Using default value: 1 --> {e}')
         total = 1
     finally:
         if total <= 0:
             total = 1
 
     while counter <= total:
-        print(f'WHILE: Welcome to ALURA Buscante for {counter}th time!')
+        print(f'[LOOP][E03] WHILE: Welcome to ALURA Buscante for {counter}th time!')
         counter += 1
 
     print('----------')
 
     for i in range(total):
-        print(f'FOR: Welcome to ALURA Buscante for {i}th time!')
+        print(f'[LOOP][E03] FOR: Welcome to ALURA Buscante for {i}th time!')
 
 
 def exerc_04():
     print('[LOOP] exerc_04')
     sales: List[float] = [10.00, 20.00, 30.00, 40.00, 50.00]
-    print(f'Total sales is: ${sum(sales)}')
+    print(f'[LOOP][E04] Total sales is: ${sum(sales)}')
 
     total: float = 0.00
     for sale in sales:
         total += sale
 
-    print(f'Total sales loop: ${total}')
+    print(f'[LOOP][E04] Total sales loop: ${total}')
 
 
 def exerc_05():
@@ -54,12 +54,12 @@ def exerc_05():
     name: str
     for project in ['website', 'game', 'data analysis', None, 'mobile app']:
         name = project if project is not None else '*** MISSING PROJECT ***'
-        print(f'PROJECT NAME..: {name}')
+        print(f'[LOOP][E05] PROJECT NAME..: {name}')
 
 
 def exerc_06():
     TARGET: str = 'The Hobbit'
-    print('[LOOP] exerc_06')
+    print('[LOOP][E06] exerc_06')
     books: List[str] = [
         '1984',
         'Dom Casmurro',
@@ -72,11 +72,11 @@ def exerc_06():
 
     for book in books:
         if search == TARGET:
-            print(f'Book found: {search} !!')
+            print(f'[LOOP][E06] Book found: {search} !!')
             break
 
     if search in books:
-        print(f'FYI: The book {search} searched is in our books collection.')
+        print(f'[LOOP][E06] FYI: The book {search} searched is in our books collection.')
 
 
 def exerc_07():
@@ -85,16 +85,16 @@ def exerc_07():
     for item in range(INVENTORY):
         leftover = INVENTORY - (item + 1)
         if leftover >= 0:
-            print(f'[FOR] Selling done! [item: {item}] Still in inventory: {leftover}')
+            print(f'[LOOP][E07] [FOR] Selling done! [item: {item}] Still in inventory: {leftover}')
 
     print('-----')
     stock: int = INVENTORY
     while stock > 0:
         stock -= 1
-        print(f'[WHILE] Selling is done! Still in stock: {stock}')
+        print(f'[LOOP][E07] [WHILE] Selling is done! Still in stock: {stock}')
 
     print('')
-    print('Inventory/Stock is over!!')
+    print('[LOOP][E07] Inventory/Stock is over!!')
 
 
 def exerc_08():
@@ -102,11 +102,11 @@ def exerc_08():
     print('[LOOP] exerc_08')
     for final_countdown in range(COUNTDOWN, 0, -1):
         if final_countdown % 2 == 0:
-            print(f"Only {final_countdown} left - don't miss the promotion!!")
+            print(f"[LOOP][E08] Only {final_countdown} left - don't miss the promotion!!")
         else:
-            print(f"The countdown is going on: only {final_countdown} seconds.")
+            print(f"[LOOP][E08] The countdown is going on: only {final_countdown} seconds.")
 
-    print('Go ahead and enjoy your promotion!!')
+    print('[LOOP][E08] Go ahead and enjoy your promotion!!')
 
 
 def exerc_09():
@@ -125,7 +125,7 @@ def exerc_09():
         if book['stock'] == 0:
             continue
 
-        print(f'Book still available (stock: {book["stock"]}) :: {book["name"]}')
+        print(f'[LOOP][E09] Book still available (stock: {book["stock"]}) :: {book["name"]}')
         # else:
         #     print(f'Book *** MISSING *** (stock: {book["stock"]}) :: {book["name"]}')
 
@@ -136,16 +136,16 @@ def exerc_10():
     print('[LOOP] exerc_10')
 
     while True:
-        username: str = input('Inform your username..: ')
-        password: str = input('Inform your password..: ')
+        username: str = input('[LOOP][E10] Inform your username..: ')
+        password: str = input('[LOOP][E10] Inform your password..: ')
 
         if len(username) < USERNAME_MIN_LENGHT:
-            print(f'Your username {username} is invalid: it should contain at least {USERNAME_MIN_LENGHT} character (has {len(username)} characters)!!')
+            print(f'[LOOP][E10] Your username {username} is invalid: it should contain at least {USERNAME_MIN_LENGHT} character (has {len(username)} characters)!!')
             continue
 
         if len(password) < PASSWORD_MIN_LENGHT:
-            print(f'Your password {password} is invalid: it should contain at least {PASSWORD_MIN_LENGHT} character (has {len(password)} characters)!!')
+            print(f'[LOOP][E10] Your password {password} is invalid: it should contain at least {PASSWORD_MIN_LENGHT} character (has {len(password)} characters)!!')
             continue
 
-        print(f'Username: {username} and password: *** successfully registered!!')
+        print(f'[LOOP][E10] Username: {username} and password: *** successfully registered!!')
         break
