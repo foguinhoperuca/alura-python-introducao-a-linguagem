@@ -148,12 +148,47 @@ def exerc_07() -> None:
 
 def exerc_08() -> None:
     print('[REGEXP] exerc_08')
-    print('[REGEX][08] TODO implement it!!')
+    cpfs: List[str] = [
+        '992.605.200-29',
+        '758.762.600-02',
+        '530.534.560-01',
+        '236.001.580-07',
+        '159.872.45-07',
+        '789.52.123.88',
+        '85.456.827-99',
+        '0789.711.981-80',
+        '816.934.878.03',
+        '749.635.860*71',
+        '402.928.510-49'
+    ]
+    custom_cpf: str = input('Inform a custom cpf: ')
+    cpfs.insert(0, custom_cpf)
+    for cpf in cpfs:
+        valid: bool = re.fullmatch(r'\d{3}.\d{3}.\d{3}-\d{2}', cpf) is not None
+        color: str = 'blue' if valid else 'red'
+
+        print(f'[REGEX][08] ORIGINAL: {colored(f'{cpf:15s}', 'white', attrs=COLLORED_GENERAL_ATTRS)} :: VALID {colored(valid, color, attrs=COLLORED_GENERAL_ATTRS)}')
 
 
 def exerc_09() -> None:
     print('[REGEXP] exerc_09')
-    print('[REGEX][09] TODO implement it!!')
+    titles: List[str] = [
+        'As Aventuras de Alíce no País das Maravilhas',
+        'Prato do Dia: Bife a Cavalo',
+        'As Aventuras de Guliliver',
+        'O Senhor dos Anéis',
+        'A Odisséia',
+        'Memórias Póstumas de Brás Cubas',
+        'O Médico e o Monstro',
+        'As Aventuras de Tintin'
+    ]
+    custom_title: str = input('Inform a custom title: ')
+    letter: str = input('Inform a letter to search: ')
+    titles.insert(0, custom_title)
+    for title in titles:
+        found: List[str] = re.findall(rf'\b{letter}[a-zà-ÿ]*', title, re.IGNORECASE)
+
+        print(f'[REGEX][09] ORIGINAL: {colored(f'Letter: {letter} -> {title}', 'white', attrs=COLLORED_GENERAL_ATTRS)} :: FOUND {colored(found, 'green', attrs=COLLORED_GENERAL_ATTRS)}')
 
 
 def exerc_10() -> None:
