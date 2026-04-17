@@ -193,4 +193,28 @@ def exerc_09() -> None:
 
 def exerc_10() -> None:
     print('[REGEXP] exerc_10')
-    print('[REGEX][10] TODO implement it!!')
+    names: List[str] = [
+        'maria martin - 1990',
+        'Jeff Fields - 2004',
+        'Jhon Snow - 1984',
+        'Paul Jr. X - 1970',
+        'Chiu Sey2 Han - 1928',
+        'Mark humble - 2015'
+    ]
+    custom_name: str = input('Inform a custom name: ')
+    names.insert(0, custom_name)
+    for name in names:
+        match = re.search(r'^[\w]+', name)
+        first_name: str = match.group() if match else 'XXX'
+        match = re.findall(r'[\w]+', name)
+        surname: str = match[1] if match else 'XXX'
+        match = re.search(r'\d{4}', name)
+        birthday_year: str = match.group() if match else 'XXX'
+
+        result = re.search(r'(\w+) (\w+) - (\d{4})', name)
+        res_name: str = result.group(1) if result else 'XXX'
+        res_surname: str = result.group(2) if result else 'XXX'
+        res_byear: str = result.group(3) if result else 'XXX'
+
+        print(f'[REGEX][10]{colored('[MINE]', 'red', attrs=COLLORED_GENERAL_ATTRS)} ORIGINAL: {colored(name, 'white', attrs=COLLORED_GENERAL_ATTRS)} :: FIRSTNAME {colored(first_name, 'yellow', attrs=COLLORED_GENERAL_ATTRS)} :: SURNAME {colored(surname, 'green', attrs=COLLORED_GENERAL_ATTRS)} :: BIRTHDAY YEAR {colored(birthday_year, 'blue', attrs=COLLORED_GENERAL_ATTRS)}')
+        print(f'[REGEX][10]{colored('[MINE]', 'red', attrs=COLLORED_GENERAL_ATTRS)} ORIGINAL: {colored(name, 'white', attrs=COLLORED_GENERAL_ATTRS)} :: FIRSTNAME {colored(res_name, 'magenta', attrs=COLLORED_GENERAL_ATTRS)} :: SURNAME {colored(res_surname, 'red', attrs=COLLORED_GENERAL_ATTRS)} :: BIRTHDAY YEAR {colored(res_byear, 'cyan', attrs=COLLORED_GENERAL_ATTRS)}')
