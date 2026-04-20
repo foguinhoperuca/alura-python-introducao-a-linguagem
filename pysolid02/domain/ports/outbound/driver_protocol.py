@@ -25,19 +25,21 @@ class TaxiDriver(SimpleDriver):
         print('RECEIVE RIDE...')
 
 
-class Ubser(AppDriver):
+class Uber(AppDriver):
     def shared_ride(self: Self) -> None:
         print('SHARED DRIVE...')
 
 
-class Correios(TransportDriver):
+class Carrier(TransportDriver):
     def transport_cargo(self: Self) -> None:
         print('TRANSPORT CARGO...')
 
 
 if __name__ == '__main__':
-    individual: SimpleDriver = SimpleDriver()
-    uber: AppDriver = AppDriver()
-    transport: TransportDriver = TransportDriver()
+    individual: SimpleDriver = TaxiDriver()
+    uber: AppDriver = Uber()
+    transport: TransportDriver = Carrier()
 
-    
+    individual.receive_ride()
+    uber.shared_ride()
+    transport.transport_cargo()
