@@ -1,0 +1,23 @@
+.PHONY=training
+
+
+TRAINING ?= "lists_tuples"
+EXERCISE ?= "e01"
+
+training:
+	@clear
+	@date
+	python3 training_py/main.py --training $(TRAINING) --exercise $(EXERCISE)
+	@date
+
+training-conditional: TRAINING="conditional"
+training-conditional: training
+
+training-loop: TRAINING="loop"
+training-loop: training
+
+training-regex: TRAINING="regex"
+training-regex: training
+
+training-lists-tuples: TRAINING="lists_tuples"
+training-lists-tuples: training

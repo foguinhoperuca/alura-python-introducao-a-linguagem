@@ -39,3 +39,5 @@ solid02-poetry:
 MAKEFILE_DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 
 include $(MAKEFILE_DIR)python_testes_com_dubles/Makefile
+include $(MAKEFILE_DIR)training_py/Makefile
+
