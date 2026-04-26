@@ -25,6 +25,8 @@ if __name__ == '__main__':
         order.add(notebook)
         invoice_service: InvoiceService = InvoiceService(order=order, taxes=[ISS(), ICMS(), IVA()])
         EmailService.send(recipient=mariah.email, subject='Your Invoice.', message=invoice_service.generate_document())
+
+        jonh: Client = Client(name='Jonh', email='jonh@alura.com.br')
     elif args.run == 'exerc_ch_02':
         product_price: Decimal = round(Decimal('100.00'), 2)
         print(f'[$100.00] Birthday Discount..: {ApplyDiscountStrategy(strategy=BirthdayDiscountStrategy()).apply_discount(value=product_price)}')

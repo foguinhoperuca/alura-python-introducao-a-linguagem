@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 
 from termcolor import colored
 
@@ -53,19 +53,82 @@ def exerc_02() -> None:
 
 
 def exerc_03() -> None:
+    """
+    Uma ONG está organizando uma campanha de arrecadação de alimentos e precisa registrar os nomes dos voluntários que vão ajudar na ação. À medida que os voluntários se inscrevem, seus nomes devem ser adicionados à lista e quando for digitado a palavra sair o programa deve encerrar.
+    Ajude a ONG a criar um programa que permita registrar os voluntários e exiba a lista completa no final.
+    Exemplo de Entrada:
+    Digite o nome do voluntário (ou 'sair' para encerrar): Ana
+    Digite o nome do voluntário (ou 'sair' para encerrar): João
+    Digite o nome do voluntário (ou 'sair' para encerrar): Mariana
+    Digite o nome do voluntário (ou 'sair' para encerrar): sair
+    Saída esperada: Voluntários registrados: ['Ana', 'João', 'Mariana']
+    """
     print(f'{colored("[LISTS_TUPLES][03]", "white", attrs=CGATTRS)} --- EXERCISE ---')
+    volunteers: List[str] = []
+    while True:
+        name: str = input('Inform the name of volunter: ')
+        if name.lower() in ('exit', 'e', 'end', '', 'sair', 'salir'):
+            print(f'{colored("[LISTS_TUPLES][03]", "white", attrs=CGATTRS)} Volunteers: {colored(volunteers, "red", attrs=CGATTRS)}')
+            break
+
+        volunteers.append(name)
 
 
 def exerc_04() -> None:
+    """
+    Armano trabalha com a gestão de dois estoques de mercadorias que são representados como tuplas. Agora, ele precisa criar um relatório unificado com os produtos dos dois estoques juntos.
+    Para ajudá-lo, como você criaria um programa que ler as informações dos estoques e gera um relatório com todos os produtos juntos?
+    Exemplo de Entrada:
+        Produtos do estoque 1 (separados por vírgula): Arroz, Feijão, Macarrão
+        Produtos do estoque 2 (separados por vírgula): Óleo, Sal, Açúcar
+    Saída esperada: Estoque combinado: ('Arroz', 'Feijão', 'Macarrão', 'Óleo', 'Sal', 'Açúcar')
+    """
     print(f'{colored("[LISTS_TUPLES][04]", "white", attrs=CGATTRS)} --- EXERCISE ---')
+    pantry_01: Tuple(str) = ('Arroz', 'Feijão', 'Macarrão')
+    pantry_02: Tuple(str) = ('Óleo', 'Sal', 'Açúcar')
+    pantry: Tuple(str) = pantry_01 + pantry_02
+    print(f'{colored("[LISTS_TUPLES][04]", "white", attrs=CGATTRS)} Full pantry: {pantry}')
 
 
 def exerc_05() -> None:
+    """
+    Camila adora receber amigos para jantares temáticos. Para o próximo encontro, ela quer garantir que a ordem de chegada seja respeitada, mas ainda precisa fazer ajustes na lista de convidados. Camila quer adicionar novos nomes e organizá-los em posições específicas.
+    Como você criaria um programa que mostre a lista inicial, permita a inserção de um novo nome em uma posição escolhida e exiba a lista atualizada?
+    Exemplo de Entrada:
+        Lista atual de convidados: ['Ana', 'Pedro', 'Carlos']
+        Digite o nome do novo convidado: João
+        Digite a posição na qual deseja inserir o convidado: 2
+    Saída esperada: Lista atualizada de convidados: ['Ana', 'João', 'Pedro', 'Carlos']
+    """
     print(f'{colored("[LISTS_TUPLES][05]", "white", attrs=CGATTRS)} --- EXERCISE ---')
+    guests: List[str] = []
+    while True:
+        guest: str = input(f'{colored("[LISTS_TUPLES][05]", "white", attrs=CGATTRS)} Inform guest name (exit to finish the program): ')
+        if guest in ('exit', 'e', 'end', '', 'sair', 'salir'):
+            break
+        position: int = int(input(f'{colored("[LISTS_TUPLES][05]", "white", attrs=CGATTRS)} Inform the desired position (integer number between 0 - {len(guests) if len(guests) > 0 else 0}): '))
+        if position < 0 or position > len(guests) or len(guests) == 0:
+            position = 0
+            print(f'{colored("[LISTS_TUPLES][05]", "white", attrs=CGATTRS)} Position will be DEFAULT: 0')
+
+        guests.insert(position, guest)
+        print(f'{colored("[LISTS_TUPLES][05]", "white", attrs=CGATTRS)} {colored(guests, "red", attrs=CGATTRS)}')
 
 
 def exerc_06() -> None:
+    """
+    A Futuro Eventos, uma empresa especializada em organização de conferências, cometeu um erro ao registrar a sequência dos eventos de uma conferência importante. Os eventos foram registrados na ordem inversa à que deveriam acontecer. Agora, a equipe precisa corrigir a ordem dos eventos para garantir que a conferência aconteça conforme o planejamento original.
+    Considerando a lista inicial de eventos, crie um programa que permita ao organizador ordená-los, de forma que a lista final siga a sequência correta.
+    eventos_registrados = ['Encerramento', 'Palestra 3', 'Palestra 2', 'Abertura']
+    Saída esperada: Ordem corrigida: ['Abertura', 'Palestra 2', 'Palestra 3', 'Encerramento']
+    """
     print(f'{colored("[LISTS_TUPLES][06]", "white", attrs=CGATTRS)} --- EXERCISE ---')
+    events: List[str] = ['Encerramento', 'Palestra 3', 'Palestra 2', 'Abertura']
+    print(f'{colored("[LISTS_TUPLES][06]", "white", attrs=CGATTRS)} original {colored(events, "blue", attrs=CGATTRS)} :: NORMAL')
+    print(f'{colored("[LISTS_TUPLES][06]", "white", attrs=CGATTRS)} reversed {colored(list(reversed(events)), "red", attrs=CGATTRS)} :: list(reversed(events))')
+    print(f'{colored("[LISTS_TUPLES][06]", "white", attrs=CGATTRS)} reversed {colored(events[::-1], "yellow", attrs=CGATTRS)} :: events[::-1]')
+    events.reverse()
+    print(f'{colored("[LISTS_TUPLES][06]", "white", attrs=CGATTRS)} reversed {colored(events, "green", attrs=CGATTRS)} :: events.reverse()')
 
 
 def exerc_07() -> None:
