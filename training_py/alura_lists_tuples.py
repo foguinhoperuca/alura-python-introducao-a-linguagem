@@ -133,15 +133,19 @@ def exerc_06() -> None:
 
 def exerc_07() -> None:
     print(f'{colored("[LISTS_TUPLES][07]", "white", attrs=CGATTRS)} --- EXERCISE ---')
+    print(f'{colored("[LISTS_TUPLES][07]", "white", attrs=CGATTRS)} TODO implement!!')
 
 
 def exerc_08() -> None:
     print(f'{colored("[LISTS_TUPLES][08]", "white", attrs=CGATTRS)} --- EXERCISE ---')
+    print(f'{colored("[LISTS_TUPLES][08]", "white", attrs=CGATTRS)} TODO implement!!')
 
 
 def exerc_09() -> None:
     print(f'{colored("[LISTS_TUPLES][09]", "white", attrs=CGATTRS)} --- EXERCISE ---')
+    print(f'{colored("[LISTS_TUPLES][09]", "white", attrs=CGATTRS)} TODO implement!!')
 
 
 def exerc_10() -> None:
     print(f'{colored("[LISTS_TUPLES][10]", "white", attrs=CGATTRS)} --- EXERCISE ---')
+    print(f'{colored("[LISTS_TUPLES][10]", "white", attrs=CGATTRS)} TODO implement!!')

@@ -4,7 +4,7 @@ from typing import List
 from termcolor import colored
 
 
-COLLORED_GENERAL_ATTRS: List[str] = ['bold', ]
+CGATTRS: List[str] = ['bold', ]
 
 
 def exerc_01() -> None:
@@ -17,6 +17,7 @@ def exerc_01() -> None:
     Saída esperada:
     chocolate branco
     """
+    print(f'{colored("[REGEX][01]", "white", attrs=CGATTRS)} --- EXERCISE ---')
     products: List[str] = [
         'ChocoLAte Branco',
         'ChoColate Negro',
@@ -28,7 +29,6 @@ def exerc_01() -> None:
         'Bandeija de       Ovos',
         'Margarina seM SaL          ',
     ]
-    print('[REGEXP] exerc_01')
     custom: str = input('Inform a custom product: ')
     products.insert(0, custom)
 
@@ -38,14 +38,14 @@ def exerc_01() -> None:
 
 
 def exerc_02() -> None:
-    print('[REGEXP] exerc_02')
+    print(f'{colored("[REGEX][02]", "white", attrs=CGATTRS)} --- EXERCISE ---')
     name: str = input('Inform your name: ')
     city: str = input('Inform your city: ')
     print(f'[REGEX][02] Hello, {name}! Welcome to system of {city}.')
 
 
 def exerc_03() -> None:
-    print('[REGEXP] exerc_03')
+    print(f'{colored("[REGEX][03]", "white", attrs=CGATTRS)} --- EXERCISE ---')
     words: List[str] = [
         'Misterioso',
         'Respanwing',
@@ -61,11 +61,11 @@ def exerc_03() -> None:
     for word in words:
         start: str = word[0:3]
         end: str = word[-3:]
-        print(f'[REGEX][03] ORIGINAL: {colored(word, 'yellow', attrs=COLLORED_GENERAL_ATTRS)} :: START {colored(start, 'magenta', attrs=COLLORED_GENERAL_ATTRS)} :: END {colored(end, 'blue', attrs=COLLORED_GENERAL_ATTRS)}')
+        print(f'[REGEX][03] ORIGINAL: {colored(word, 'yellow', attrs=CGATTRS)} :: START {colored(start, 'magenta', attrs=CGATTRS)} :: END {colored(end, 'blue', attrs=CGATTRS)}')
 
 
 def exerc_04() -> None:
-    print('[REGEXP] exerc_04')
+    print(f'{colored("[REGEX][04]", "white", attrs=CGATTRS)} --- EXERCISE ---')
     urls: List[str] = [
         'https://google.com',
         'https://kernel.org',
@@ -82,15 +82,15 @@ def exerc_04() -> None:
     custom_url: str = input('Inform a custom url to be validate: ')
     urls.insert(0, custom_url)
     for url in urls:
-        valid: str = colored(False, 'red', attrs=COLLORED_GENERAL_ATTRS)
+        valid: str = colored(False, 'red', attrs=CGATTRS)
         if url.startswith('https://') and url.endswith('.com'):
-            valid = colored(True, 'blue', attrs=COLLORED_GENERAL_ATTRS)
+            valid = colored(True, 'blue', attrs=CGATTRS)
 
-        print(f'[REGEX][04] ORIGINAL: {colored(url, 'yellow', attrs=COLLORED_GENERAL_ATTRS)} :: VALID {valid}')
+        print(f'[REGEX][04] ORIGINAL: {colored(url, 'yellow', attrs=CGATTRS)} :: VALID {valid}')
 
 
 def exerc_05() -> None:
-    print('[REGEXP] exerc_05')
+    print(f'{colored("[REGEX][05]", "white", attrs=CGATTRS)} --- EXERCISE ---')
     prescriptions: List[str] = [
         'A receita 1087568 foi enviada pelo cliente.',
         'A receita 86592217 não possui remédios em estoque.',
@@ -102,16 +102,16 @@ def exerc_05() -> None:
     prescriptions.insert(0, custom_prescription)
     for prescription in prescriptions:
         numbers: List[str] = re.findall(r'\d+', prescription)
-        print(f'[REGEX][05] ORIGINAL: {colored(prescription, 'yellow', attrs=COLLORED_GENERAL_ATTRS)}')
+        print(f'[REGEX][05] ORIGINAL: {colored(prescription, 'yellow', attrs=CGATTRS)}')
 
         for number in numbers:
-            print(f'[REGEX][05] prescription found: {colored(number, 'red', attrs=COLLORED_GENERAL_ATTRS)}')
+            print(f'[REGEX][05] prescription found: {colored(number, 'red', attrs=CGATTRS)}')
 
         print('**********************')
 
 
 def exerc_06() -> None:
-    print('[REGEXP][E06] exerc_06')
+    print(f'{colored("[REGEX][06]", "white", attrs=CGATTRS)} --- EXERCISE ---')
     phrases: List[str] = [
         'O dia está bom, tudo está bom.'
     ]
@@ -120,18 +120,18 @@ def exerc_06() -> None:
     good_word: str = input('Inform the new desired word: ')
     phrases.insert(0, custom_phrase)
     for phrase in phrases:
-        new_phrase_replace: str = colored(phrase, 'yellow', attrs=COLLORED_GENERAL_ATTRS)
-        new_phrase_replace = new_phrase_replace.replace(bad_word, colored(good_word, 'red', attrs=COLLORED_GENERAL_ATTRS))
+        new_phrase_replace: str = colored(phrase, 'yellow', attrs=CGATTRS)
+        new_phrase_replace = new_phrase_replace.replace(bad_word, colored(good_word, 'red', attrs=CGATTRS))
         new_phrase_regex: str = phrase
-        new_phrase_regex = re.sub(rf'\b{bad_word}\b', colored(good_word, 'magenta', attrs=COLLORED_GENERAL_ATTRS), new_phrase_regex)
-        # new_phrase_regex: str = colored(phrase, 'blue', attrs=COLLORED_GENERAL_ATTRS)
+        new_phrase_regex = re.sub(rf'\b{bad_word}\b', colored(good_word, 'magenta', attrs=CGATTRS), new_phrase_regex)
+        # new_phrase_regex: str = colored(phrase, 'blue', attrs=CGATTRS)
         # new_phrase_regex = re.sub(rf'\b{bad_word}\b', good_word, new_phrase_regex)
-        print(f'[REGEX][06][REPLACE] ORIGINAL: {colored(phrase, 'white', attrs=COLLORED_GENERAL_ATTRS)} :: NEW {new_phrase_replace}')
-        print(f'[REGEX][06][REGEX] ORIGINAL: {colored(phrase, 'white', attrs=COLLORED_GENERAL_ATTRS)} :: NEW {new_phrase_regex}')
+        print(f'[REGEX][06][REPLACE] ORIGINAL: {colored(phrase, 'white', attrs=CGATTRS)} :: NEW {new_phrase_replace}')
+        print(f'[REGEX][06][REGEX] ORIGINAL: {colored(phrase, 'white', attrs=CGATTRS)} :: NEW {new_phrase_regex}')
 
 
 def exerc_07() -> None:
-    print('[REGEXP] exerc_07')
+    print(f'{colored("[REGEX][07]", "white", attrs=CGATTRS)} --- EXERCISE ---')
     names: List[str] = [
         'maria123',
         'Jeff Fields',
@@ -152,11 +152,11 @@ def exerc_07() -> None:
         full_match_valid: bool = re.fullmatch(r'[A-Z][a-z]*', name) is not None
         valid_multiple_names: bool = re.fullmatch(r'[A-Z][\w]*', name) is not None
 
-        print(f'[REGEX][07] ORIGINAL: {colored(name, 'white', attrs=COLLORED_GENERAL_ATTRS)} :: VALID {colored(valid, 'red', attrs=COLLORED_GENERAL_ATTRS)} :: FULLMATCH {colored(full_match_valid, 'blue', attrs=COLLORED_GENERAL_ATTRS)} :: ANOTHER {colored(valid_multiple_names, 'green', attrs=COLLORED_GENERAL_ATTRS)}')
+        print(f'[REGEX][07] ORIGINAL: {colored(name, 'white', attrs=CGATTRS)} :: VALID {colored(valid, 'red', attrs=CGATTRS)} :: FULLMATCH {colored(full_match_valid, 'blue', attrs=CGATTRS)} :: ANOTHER {colored(valid_multiple_names, 'green', attrs=CGATTRS)}')
 
 
 def exerc_08() -> None:
-    print('[REGEXP] exerc_08')
+    print(f'{colored("[REGEX][08]", "white", attrs=CGATTRS)} --- EXERCISE ---')
     cpfs: List[str] = [
         '992.605.200-29',
         '758.762.600-02',
@@ -176,11 +176,11 @@ def exerc_08() -> None:
         valid: bool = re.fullmatch(r'\d{3}.\d{3}.\d{3}-\d{2}', cpf) is not None
         color: str = 'blue' if valid else 'red'
 
-        print(f'[REGEX][08] ORIGINAL: {colored(f'{cpf:15s}', 'white', attrs=COLLORED_GENERAL_ATTRS)} :: VALID {colored(valid, color, attrs=COLLORED_GENERAL_ATTRS)}')
+        print(f'[REGEX][08] ORIGINAL: {colored(f'{cpf:15s}', 'white', attrs=CGATTRS)} :: VALID {colored(valid, color, attrs=CGATTRS)}')
 
 
 def exerc_09() -> None:
-    print('[REGEXP] exerc_09')
+    print(f'{colored("[REGEX][09]", "white", attrs=CGATTRS)} --- EXERCISE ---')
     titles: List[str] = [
         'As Aventuras de Alíce no País das Maravilhas',
         'Prato do Dia: Bife a Cavalo',
@@ -197,11 +197,11 @@ def exerc_09() -> None:
     for title in titles:
         found: List[str] = re.findall(rf'\b{letter}[a-zà-ÿ]*', title, re.IGNORECASE)
 
-        print(f'[REGEX][09] ORIGINAL: {colored(f'Letter: {letter} -> {title}', 'white', attrs=COLLORED_GENERAL_ATTRS)} :: FOUND {colored(found, 'green', attrs=COLLORED_GENERAL_ATTRS)}')
+        print(f'[REGEX][09] ORIGINAL: {colored(f'Letter: {letter} -> {title}', 'white', attrs=CGATTRS)} :: FOUND {colored(found, 'green', attrs=CGATTRS)}')
 
 
 def exerc_10() -> None:
-    print('[REGEXP] exerc_10')
+    print(f'{colored("[REGEX][10]", "white", attrs=CGATTRS)} --- EXERCISE ---')
     names: List[str] = [
         'maria martin - 1990',
         'Jeff Fields - 2004',
@@ -225,5 +225,5 @@ def exerc_10() -> None:
         res_surname: str = result.group(2) if result else 'XXX'
         res_byear: str = result.group(3) if result else 'XXX'
 
-        print(f'[REGEX][10]{colored('[MINE]', 'red', attrs=COLLORED_GENERAL_ATTRS)} ORIGINAL: {colored(name, 'white', attrs=COLLORED_GENERAL_ATTRS)} :: FIRSTNAME {colored(first_name, 'yellow', attrs=COLLORED_GENERAL_ATTRS)} :: SURNAME {colored(surname, 'green', attrs=COLLORED_GENERAL_ATTRS)} :: BIRTHDAY YEAR {colored(birthday_year, 'blue', attrs=COLLORED_GENERAL_ATTRS)}')
-        print(f'[REGEX][10]{colored('[MINE]', 'red', attrs=COLLORED_GENERAL_ATTRS)} ORIGINAL: {colored(name, 'white', attrs=COLLORED_GENERAL_ATTRS)} :: FIRSTNAME {colored(res_name, 'magenta', attrs=COLLORED_GENERAL_ATTRS)} :: SURNAME {colored(res_surname, 'red', attrs=COLLORED_GENERAL_ATTRS)} :: BIRTHDAY YEAR {colored(res_byear, 'cyan', attrs=COLLORED_GENERAL_ATTRS)}')
+        print(f'[REGEX][10]{colored('[MINE]', 'red', attrs=CGATTRS)} ORIGINAL: {colored(name, 'white', attrs=CGATTRS)} :: FIRSTNAME {colored(first_name, 'yellow', attrs=CGATTRS)} :: SURNAME {colored(surname, 'green', attrs=CGATTRS)} :: BIRTHDAY YEAR {colored(birthday_year, 'blue', attrs=CGATTRS)}')
+        print(f'[REGEX][10]{colored('[MINE]', 'red', attrs=CGATTRS)} ORIGINAL: {colored(name, 'white', attrs=CGATTRS)} :: FIRSTNAME {colored(res_name, 'magenta', attrs=CGATTRS)} :: SURNAME {colored(res_surname, 'red', attrs=CGATTRS)} :: BIRTHDAY YEAR {colored(res_byear, 'cyan', attrs=CGATTRS)}')
