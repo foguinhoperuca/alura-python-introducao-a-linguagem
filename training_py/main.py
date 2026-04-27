@@ -42,7 +42,6 @@ if __name__ == "__main__":
     exercises: Dict[str, Dict[str, str]] = {
         f'{training_type.name.lower()}': {f'{key}': f'alura_{training_type.name.lower()}.exerc_{key.replace("e", "")}' for key in DEFAULT_EXERCISES} for training_type in TrainingTypes
     }
-
     parser = argparse.ArgumentParser(description="Training python...")
     parser.add_argument("-t", "--training", action="store_true", help="")
     subparser = parser.add_subparsers(dest='training', help="Choose training", required=True)
