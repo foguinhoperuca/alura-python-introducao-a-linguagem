@@ -1,3 +1,5 @@
+from decimal import Decimal
+from statistics import mean
 from typing import List, Tuple
 
 from termcolor import colored
@@ -173,7 +175,16 @@ def exerc_09() -> None:
     Saída esperada: Média final da turma: 7.88
     """
     print(f'{colored("[LISTS_TUPLES][09]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[LISTS_TUPLES][09]", "white", attrs=CGATTRS)} TODO implement!!')
+    grades: List[float] = [round(Decimal('10.0'), 2), round(Decimal('9.5'), 2), round(Decimal('9.0'), 2), round(Decimal('9.5'), 2), round(Decimal('10.0'), 2)]
+    while True:
+        grade: Decimal = round(Decimal(input('Inform the grade: ')), 2)
+        if grade < 0:
+            print(f'{colored("[LISTS_TUPLES][09]", "white", attrs=CGATTRS)} Grades: {colored(grades, "red", attrs=CGATTRS)}')
+            break
+
+        grades.append(grade)
+
+    print(f'{colored("[LISTS_TUPLES][09]", "white", attrs=CGATTRS)} sum {colored(sum(grades), "yellow", attrs=CGATTRS)} :: items {colored(len(grades), "magenta", attrs=CGATTRS)} :: mean: {colored(mean(grades), "blue", attrs=CGATTRS)}')
 
 
 def exerc_10() -> None:
