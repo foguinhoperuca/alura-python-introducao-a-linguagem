@@ -141,3 +141,4 @@ geo/data/rj_city
 geo/data/*.txt
 geo/data/estacoes_metro.geojson
 geo/data/geo02
+.aider*

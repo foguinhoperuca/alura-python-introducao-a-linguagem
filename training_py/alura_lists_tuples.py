@@ -132,16 +132,46 @@ def exerc_06() -> None:
 
 
 def exerc_07() -> None:
+    """
+    O clube de atletismo Alura Runners organizou uma corrida e divulgou a lista com a classificação final dos participantes. Mas, um erro foi identificado: um dos nomes está incorreto. O organizador precisa de um programa que permita localizar o nome errado e substituí-lo pelo correto.
+    Como você escreveria um programa que solicite o nome errado, o nome correto e atualize a lista exibindo a nova classificação ao final?
+    Exemplo de Entrada: Digite o nome incorreto: Carlos Digite o nome correto: João
+    Saída esperada: O nome Carlos foi substituído por João. Lista atualizada: ['Ana', 'João', 'Pedro']
+    """
     print(f'{colored("[LISTS_TUPLES][07]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[LISTS_TUPLES][07]", "white", attrs=CGATTRS)} TODO implement!!')
+    participants: List[str] = ['Ana', 'João', 'Pedro', 'Lucas', 'José', 'Mário', 'Jorge', 'Maria', 'Marta', 'Otto', 'Júlia', 'Priscila', 'Emerson']
+    correct: str = input(f'{colored("[LISTS_TUPLES][07]", "white", attrs=CGATTRS)} Inform the correct name: ')
+    wrong: str = input(f'{colored("[LISTS_TUPLES][07]", "white", attrs=CGATTRS)} Inform the wrong name: ')
+    print(f'{colored("[LISTS_TUPLES][07]", "white", attrs=CGATTRS)} original..: {colored(participants, "red", attrs=CGATTRS)}')
+    for index, participant in enumerate(participants):
+        if participant == wrong:
+            participants[index] = correct
+            break
+
+    print(f'{colored("[LISTS_TUPLES][07]", "white", attrs=CGATTRS)} correct...: {colored(participants, "blue", attrs=CGATTRS)}')
 
 
 def exerc_08() -> None:
+    """
+    Paulo está criando uma lista de pedidos para a lanchonete. Ele já tem todos os pedidos, mas percebeu que o último foi inserido por engano e precisa removê-lo.
+    Diante deste problema, ajude Paulo criando um programa que automatize essa operação, permitindo listar os pedidos e remover o último item automaticamente.
+    Exemplo de Entrada: Pedidos feitos (separados por vírgula): Sanduíche, Suco, Sobremesa
+    Saída esperada: Pedidos finais: ['Sanduíche', 'Suco']
+    """
     print(f'{colored("[LISTS_TUPLES][08]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[LISTS_TUPLES][08]", "white", attrs=CGATTRS)} TODO implement!!')
+    orders: List[str] = ['Sanduíche', 'Suco', 'Sobremesa', 'Proção Fritas', 'Refrigerante', 'Pastel']
+    print(f'{colored("[LISTS_TUPLES][08]", "white", attrs=CGATTRS)} original..: {colored(orders, "red", attrs=CGATTRS)}')
+    order_removed: str = orders.pop()
+    print(f'{colored("[LISTS_TUPLES][08]", "white", attrs=CGATTRS)} after.....: {colored(orders, "yellow", attrs=CGATTRS)} :: removed {colored(order_removed, "blue", attrs=CGATTRS)}')
 
 
 def exerc_09() -> None:
+    """
+    A professora Helena quer facilitar sua rotina na hora de calcular a média das notas finais da turma. Ela sempre anota as notas dos alunos ao longo do semestre e, no final, precisa de um relatório para saber se a turma está indo bem.
+    Para isso, ajude a professora a criar um programa que receba as notas finais de todos os alunos e calcule a média da turma.
+    Exemplo de Entrada: Digite as notas dos alunos separadas por vírgula: 8.5, 7.0, 9.2, 6.8
+    Saída esperada: Média final da turma: 7.88
+    """
     print(f'{colored("[LISTS_TUPLES][09]", "white", attrs=CGATTRS)} --- EXERCISE ---')
     print(f'{colored("[LISTS_TUPLES][09]", "white", attrs=CGATTRS)} TODO implement!!')
 
