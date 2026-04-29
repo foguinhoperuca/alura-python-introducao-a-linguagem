@@ -1,8 +1,8 @@
 .PHONY=training
 
 
-TRAINING ?= "lists_tuples"
-EXERCISE ?= "e01"
+TRAINING ?= "sets_dicts"
+EXERCISE ?= "e04"
 
 training:
 	@clear
