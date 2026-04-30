@@ -55,20 +55,32 @@ def exerc_06() -> None:
 
 
 def exerc_07() -> None:
+    """
+    TODO start it
+    """
     print(f'{colored("[FN][07]", "white", attrs=CGATTRS)} --- EXERCISE ---')
     print(f'{colored("[FN][07]", "white", attrs=CGATTRS)} TODO implement!!')
 
 
 def exerc_08() -> None:
+    """
+    TODO start it
+    """
     print(f'{colored("[FN][08]", "white", attrs=CGATTRS)} --- EXERCISE ---')
     print(f'{colored("[FN][08]", "white", attrs=CGATTRS)} TODO implement!!')
 
 
 def exerc_09() -> None:
+    """
+    TODO start it
+    """
     print(f'{colored("[FN][09]", "white", attrs=CGATTRS)} --- EXERCISE ---')
     print(f'{colored("[FN][09]", "white", attrs=CGATTRS)} TODO implement!!')
 
 
 def exerc_10() -> None:
+    """
+    TODO start it
+    """
     print(f'{colored("[FN][10]", "white", attrs=CGATTRS)} --- EXERCISE ---')
     print(f'{colored("[FN][10]", "white", attrs=CGATTRS)} TODO implement!!')

@@ -2,7 +2,7 @@
 
 
 TRAINING ?= "sets_dicts"
-EXERCISE ?= "e04"
+EXERCISE ?= "e10"
 
 training:
 	@clear
