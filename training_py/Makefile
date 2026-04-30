@@ -1,8 +1,8 @@
 .PHONY=training
 
 
-TRAINING ?= "sets_dicts"
-EXERCISE ?= "e10"
+TRAINING ?= "fn"
+EXERCISE ?= "e05"
 
 training:
 	@clear

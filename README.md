@@ -63,3 +63,4 @@ Learn python with pratical exercises.
 - [Praticando Python: Strings e Regex](https://cursos.alura.com.br/course/praticando-python-strings-regex "https://cdn3.gnarususercontent.com.br/4476-strings-regex/Praticando%20Python_%20Strings%20e%20Regex%20-%20Slides%20Oficial.pptx.pdf")
 - [Praticando Python: Listas e Tuplas](https://cursos.alura.com.br/course/praticando-python-listas-tuplas "https://cdn3.gnarususercontent.com.br/4477-praticando-python-listas-tuplas/Praticando%20Python_%20Listas%20e%20Tuplas%20-%20Slide%20Oficial.pptx.pdf")
 - [Praticando Python: conjuntos e dicionários](https://cursos.alura.com.br/course/praticando-python-listas-tuplas "https://cdn3.gnarususercontent.com.br/4520-python/Python-Conjuntos%20e%20Dicion%C3%A1rios.pdf")
+- [Praticando Python: funções](https://cursos.alura.com.br/course/praticando-python-funcoes "https://cdn3.gnarususercontent.com.br/4521-python/Praticando%20Python%20-%20Fun%C3%A7%C3%B5es.pdf")
