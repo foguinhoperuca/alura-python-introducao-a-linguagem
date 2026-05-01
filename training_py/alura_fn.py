@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import Callable, List, Set, Tuple
 from datetime import datetime
 
 from termcolor import colored
@@ -96,47 +96,126 @@ def exerc_04() -> None:
 
 def exerc_05() -> None:
     """
-    TODO start it
+    Carlos trabalha em um comércio e precisa saber o valor total de vendas realizadas no dia. As vendas são informadas em uma única linha separadas por espaços.
+    Sua tarefa é criar um programa que receba essa linha, converta os valores para números e exiba o total.
+    Exemplo de entrada: Digite os valores das vendas: 100 250 300
+    Saída esperada: O total de vendas foi: 650
     """
+    def process(vls: str) -> float:
+        try:
+            return sum([float(vl) for vl in list(vls.split(' '))])
+        except Exception as e:
+            print(f'{colored("[FN][05]", "white", attrs=CGATTRS)} error with input: {colored(vls, "yellow", attrs=CGATTRS)} :: {colored(e, "red", attrs=CGATTRS)}')
+            return 0.00
+
+    def process_map(vls: str) -> float:
+        try:
+            return sum(map(float, vls.split(' ')))
+        except Exception as e:
+            print(f'{colored("[FN][05]", "white", attrs=CGATTRS)} error with input: {colored(vls, "yellow", attrs=CGATTRS)} :: {colored(e, "red", attrs=CGATTRS)}')
+            return 0.00
+
     print(f'{colored("[FN][05]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[FN][05]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+    values: str = input(f'{colored("[FN][05]", "white", attrs=CGATTRS)} inform a list of sales sperated by space: ')
+    print(f'{colored("[FN][05]", "white", attrs=CGATTRS)} [PROCESS] total sales..: {colored(f"${process(values)}", "magenta", attrs=CGATTRS)}')
+    print(f'{colored("[FN][05]", "white", attrs=CGATTRS)} [MAP] total sales......: {colored(f"${process_map(values)}", "cyan", attrs=CGATTRS)}')
 
 
 def exerc_06() -> None:
     """
-    TODO start it
+    Lucas está desenvolvendo um sistema para gerar relatórios financeiros e precisa filtrar apenas os valores pares de uma lista de números informada pelo usuário.
+    Crie um programa que receba uma lista de números e exiba apenas os pares usando a função filter().
+    Exemplo de entrada: Digite os números separados por espaço: 1 2 3 4 5 6
+    Saída esperada: Números pares: 2 4 6
     """
+    def odd_filter(nums: Set[int]) -> List[int]:
+        return list(filter(lambda x: x % 2 == 0, nums))
+
     print(f'{colored("[FN][06]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[FN][06]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+    numbers: List[int] = [1, 2, 3, 4, 5, 6]
+    user_numbers: str = input(f'{colored("[FN][06]", "white", attrs=CGATTRS)} Inform a list of numbers to append (separeted by ;): ')
+    elements: Set[int] = set(numbers + list(map(int, user_numbers.split(';'))))
+    print(f'{colored("[FN][06]", "white", attrs=CGATTRS)} odd numbers {colored(odd_filter(nums=elements), "red", attrs=CGATTRS)}')
 
 
 def exerc_07() -> None:
     """
-    TODO start it
+    Clara está gerenciando o estoque de sua loja e recebeu duas listas separadas: uma contendo os nomes dos produtos e outras com seus respectivos preços. Para facilitar a organização, ela precisa combinar essas listas de forma que cada produto seja associado ao seu preço.
+    Crie um programa que junte as listas e exiba o resultado no formato produto: preço
+    Exemplo de entrada:
+    > Digite os produtos separados por vírgula: maçã, banana, pera
+    > Digite os preços separados por vírgula: 2.5, 1.2, 3.0
+    Saída esperada:
+    > maçã: 2.5
+    > banana: 1.2
+    > pera: 3.0
     """
+    def union_elements(pro: List[str], pri: List[float]) -> List[Tuple[str, float]]:
+        return zip(products, prices)
+
     print(f'{colored("[FN][07]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[FN][07]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+    products: List[str] = ['maçã', 'banana', 'pera']
+    prices: List[float] = [2.5, 1.2, 3.0]
+    print(f'{colored("[FN][07]", "white", attrs=CGATTRS)} products..: {colored([f"{p:^6}" for p in products], "red", attrs=CGATTRS)}')
+    print(f'{colored("[FN][07]", "white", attrs=CGATTRS)} prices....: {colored([f"{p:^6}" for p in prices], "yellow", attrs=CGATTRS)}')
+    for item in union_elements(pro=products, pri=prices):
+        print(f'{colored("[FN][07]", "white", attrs=CGATTRS)} item {colored(item[0], "red", attrs=CGATTRS)}: {colored(item[1], "yellow", attrs=CGATTRS)}')
 
 
 def exerc_08() -> None:
     """
-    TODO start it
+    Joana está participando de um processo seletivo para uma vaga de desenvolvedora e recebeu um desafio técnico de criar uma calculadora para somar, subtrair, multiplicar e dividir dois números.
+    Sua tarefa é criar um programa usando funções lambda que receba dois números e um operador matemático escolhido pelo usuário (+, -, * ou /) e exiba o resultado correspondente.
+    Exemplo de entrada:
+    > Digite o primeiro número: 10
+    > Digite o segundo número: 5
+    > Escolha a operação (| + | - | * | / |): +
+    Saída esperada: O resultado é: 15
     """
+    calculate = lambda lt, rt, op: float(eval(f'{lt}{op}{rt}'))  # noqa: E731
+
     print(f'{colored("[FN][08]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[FN][08]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+    left: float = float(input(f'{colored("[FN][08]", "white", attrs=CGATTRS)} Inform the left term...: '))
+    right: float = float(input(f'{colored("[FN][08]", "white", attrs=CGATTRS)} Inform the right term..: '))
+    operator: str = input(f'{colored("[FN][08]", "white", attrs=CGATTRS)} Inform the operand.....: ')
+    print(f'{colored("[FN][08]", "white", attrs=CGATTRS)} {colored(left, "red", attrs=CGATTRS)} {colored(operator, "cyan", attrs=CGATTRS)} {colored(right, "yellow", attrs=CGATTRS)} = {colored(calculate(lt=left, rt=right, op=operator), "magenta", attrs=CGATTRS)}')
 
 
 def exerc_09() -> None:
     """
-    TODO start it
+    Miguel está desenvolvendo um sistema de cupons de desconto e precisa de uma forma para aplicar diferentes taxas de desconto sobre os valores das compras.
+    Diante deste problema, crie uma closure que gere uma função capaz de calcular o preço final com um desconto fixo definido pelo usuário.
+    Exemplo de entrada:
+    > Digite a porcentagem de desconto: 10
+    > Digite o valor da compra: 200
+    Saída esperada: Preço final com desconto: 180.0
     """
+    def discount(rate: float) -> Callable:
+        def apply(value: float) -> float:
+            return value * rate
+        return apply
+
     print(f'{colored("[FN][09]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[FN][09]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+    price: float = float(input(f'{colored("[FN][09]", "white", attrs=CGATTRS)} Inform the original price: '))
+    discount_rate: float = float(input(f'{colored("[FN][09]", "white", attrs=CGATTRS)} Inform the discount rate: '))
+    percent_discount: Callable = discount(rate=discount_rate)
+    discount_value: float = percent_discount(value=price)
+    total: float = price - discount_value
+    print(f'{colored("[FN][09]", "white", attrs=CGATTRS)} {colored(f"${price} (full price)", "magenta", attrs=CGATTRS)} {colored("-", "red", attrs=CGATTRS)} {colored(f"${discount_value} (discount value)", "yellow", attrs=CGATTRS)} = {colored(f"${total} (total)", "cyan", attrs=CGATTRS)}')
 
 
 def exerc_10() -> None:
     """
-    TODO start it
+    Paulo está desenvolvendo um programa para calcular valores acumulados em um sistema financeiro. Ele precisa somar os todos os números inteiros de 1 até n, onde n é um valor escolhido pelo usuário.
+    Ajude Paulo criando uma função recursiva que receba um número n e retorne a soma de todos os números inteiros de 1 até N.
+    Exemplo de entrada: Digite um número: 5
+    Saída esperada: A soma de 1 a 5 é: 15
     """
+    def factorial(n: int) -> int:
+        if n == 1:
+            return 1
+        return n + factorial(n - 1)
+
+    number: int = int(input(f'{colored("[FN][10]", "white", attrs=CGATTRS)} inform the number: '))
     print(f'{colored("[FN][10]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[FN][10]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+    print(f'{colored("[FN][10]", "white", attrs=CGATTRS)} factorial for {colored(number, "yellow", attrs=CGATTRS)} is {colored(factorial(n=number), "red", attrs=CGATTRS)}')

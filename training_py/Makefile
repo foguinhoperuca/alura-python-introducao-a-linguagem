@@ -2,7 +2,7 @@
 
 
 TRAINING ?= "fn"
-EXERCISE ?= "e05"
+EXERCISE ?= "e10"
 
 training:
 	@clear
