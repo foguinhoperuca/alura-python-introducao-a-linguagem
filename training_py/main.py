@@ -49,6 +49,9 @@ if __name__ == "__main__":
         subparser.add_parser(training_type.name.lower()).add_argument('-e', '--exercise', choices=DEFAULT_EXERCISES, help=f'[{training_type.name}]Choose exercises: e1 - e10')
 
     args = parser.parse_args()
-    eval(exercises[args.training][args.exercise])()
+    if args.training == 'projects' and args.exercise is None:
+        alura_projects.class02()
+    else:
+        eval(exercises[args.training][args.exercise])()
 
     sys.exit(0)

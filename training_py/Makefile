@@ -1,8 +1,8 @@
 .PHONY=training
 
 
-TRAINING ?= "fn"
-EXERCISE ?= "e10"
+TRAINING ?= "projects"
+EXERCISE ?= "e01"
 
 training:
 	@clear
