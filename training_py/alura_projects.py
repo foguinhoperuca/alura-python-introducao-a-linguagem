@@ -1,6 +1,7 @@
 import logging
 import re
 import random
+import string
 from typing import List
 
 from termcolor import colored
@@ -113,10 +114,42 @@ def exerc_04() -> None:
 
 def exerc_05() -> None:
     """
-    TODO start it
+    Pedro está desenvolvendo um sistema de cadastro e precisa gerar senhas seguras para os usuários. Ele quer um programa que crie senhas aleatórias com letras maiúsculas, minúsculas, números e caracteres especiais.
+    Crie um programa que gere uma senha aleatória de 12 caracteres, contendo pelo menos uma letra maiúscula, uma minúscula, um número e um caractere especial. Exiba a senha gerada.
+    Saída esperada: Senha gerada: A1b@C3d$E5f&
     """
+    PHROHIBITED_CHARACTERS: List[str] = [' ']
+    MINIMUM_PASSOWRD_SIZE: int = 12
+
+    def generate_password(size: int = MINIMUM_PASSOWRD_SIZE, not_allowed_characters: List[str] = PHROHIBITED_CHARACTERS) -> str:
+        assert size >= MINIMUM_PASSOWRD_SIZE
+
+        lower_charcter: str = random.choices([c for c in string.ascii_lowercase if c not in not_allowed_characters and c not in PHROHIBITED_CHARACTERS], k=1)
+        upper_charcter: str = random.choices([c for c in string.ascii_uppercase if c not in not_allowed_characters and c not in PHROHIBITED_CHARACTERS], k=1)
+        digit_charcter: str = random.choices([c for c in string.digits if c not in not_allowed_characters and c not in PHROHIBITED_CHARACTERS], k=1)
+        punctuation_charcter: str = random.choices([c for c in string.punctuation if c not in not_allowed_characters and c not in PHROHIBITED_CHARACTERS], k=1)
+        characters: str = [c for c in string.ascii_letters + string.digits + string.punctuation if c not in not_allowed_characters and c not in PHROHIBITED_CHARACTERS and c not in lower_charcter and c not in upper_charcter and c not in digit_charcter and c not in punctuation_charcter]
+        generated_password: str = f'{lower_charcter[0].replace("\'", "")}{upper_charcter[0].replace("\'", "")}{digit_charcter[0].replace("\'", "")}{punctuation_charcter[0].replace("\'", "")}' + ''.join(random.choices(characters, k=size - 4))
+
+        assert all([True if c not in not_allowed_characters else False for c in generated_password])
+
+        print(f'{generated_password=} :: {lower_charcter=}')
+
+        return "".join(random.sample(generated_password, len(generated_password)))
+
     print(f'{colored("[PROJECTS][05]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[PROJECTS][05]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+    size_password: int = -1
+    try:
+        size_password = int(input(f'{colored("[PROJECTS][05]", "white", attrs=CGATTRS)} Inform the minimum size of characters: '))
+        assert size_password >= MINIMUM_PASSOWRD_SIZE
+    except Exception as e:
+        print(f'{colored("[PROJECTS][05]", "white", attrs=CGATTRS)} Invalid password size: {size_password=} :: {e}')
+        size_password = MINIMUM_PASSOWRD_SIZE
+
+    unwanted_characters: str = input(f'{colored("[PROJECTS][05]", "white", attrs=CGATTRS)} Inform a list of unwanted charcters: ')
+    not_allowed_characters: List[str] = [u for u in unwanted_characters] + PHROHIBITED_CHARACTERS
+    password: str = generate_password(size=size_password if size_password >= MINIMUM_PASSOWRD_SIZE else MINIMUM_PASSOWRD_SIZE, not_allowed_characters=not_allowed_characters)
+    print(f'{colored("[PROJECTS][05]", "white", attrs=CGATTRS)} password generated {colored(password, "yellow", attrs=CGATTRS)} :: size used: {colored(size_password, "cyan", attrs=CGATTRS)} (MINIMUM: {colored(MINIMUM_PASSOWRD_SIZE, "magenta", attrs=CGATTRS)}) :: unwanted characters: {colored(unwanted_characters, "red", attrs=CGATTRS)} :: PHROHIBITED CHARACTERS {colored(PHROHIBITED_CHARACTERS, "white", attrs=CGATTRS)} ')
 
 
 def exerc_06() -> None:
