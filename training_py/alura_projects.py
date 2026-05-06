@@ -1,9 +1,14 @@
+import logging
+import re
+import random
 from typing import List
 
 from termcolor import colored
 
 
 CGATTRS: List[str] = ['bold', ]
+LOG_FORMAT_SIMPLE = colored('[%(levelname)s]', 'red', attrs=['bold', 'dark']) + ' %(message)s'  # noqa: E501
+logging.basicConfig(level=logging.DEBUG, format=LOG_FORMAT_SIMPLE)
 
 
 def class02() -> None:
@@ -15,7 +20,15 @@ def class02() -> None:
 
 def exerc_01() -> None:
     """
-    TODO start it
+    João trabalha como garçom em um restaurante e precisa calcular a gorjeta que os clientes deixam ao pagar a conta. O restaurante sugere uma gorjeta de 10%, mas alguns clientes podem escolher dar mais ou menos.
+    Para agilizar o processo, João quer um programa que receba o valor total da conta e a porcentagem de gorjeta desejada e exiba o valor final que o cliente deverá pagar.
+    Crie um programa que peça ao usuário o valor da conta e a porcentagem de gorjeta. O programa deve calcular e exibir o valor da gorjeta e o total a ser pago.
+    Exemplo de entrada:
+    > Digite o valor da conta: 120.00
+    > Digite a porcentagem de gorjeta: 10
+    Saída esperada:
+    > Valor da gorjeta: R$ 12.00
+    > Total a pagar: R$ 132.00
     """
     print(f'{colored("[PROJECTS][01]", "white", attrs=CGATTRS)} --- EXERCISE ---')
     value: float = float(input(f'{colored("[PROJECTS][01]", "white", attrs=CGATTRS)} inform the value: $'))
@@ -27,18 +40,51 @@ def exerc_01() -> None:
 
 def exerc_02() -> None:
     """
-    TODO start it
+    Carlos trabalha em um cartório e precisa validar se um CPF informado pelo cliente tem o formato correto antes de prosseguir com o atendimento. O CPF deve conter exatamente 11 dígitos numéricos. Se a entrada contiver letras ou qualquer outro caractere que não seja um número, o programa deve exibir uma mensagem de erro.
+    Crie um programa que peça ao usuário um número de CPF e verifique se ele tem 11 dígitos e contém apenas números.
+    Exemplo de entrada: Digite seu CPF: 12345678901
+    Saída esperada: CPF válido.
+    Se for inválido:
+    Digite seu CPF: 1234abc567
+    Erro: O CPF deve conter apenas números.
+    Se o CPF tiver um número de dígitos diferente de 11:
+    Digite seu CPF: 1234567
+    Erro: O CPF deve ter exatamente 11 dígitos.
     """
+    def cpf_has_only_valid_character(document: str) -> bool:
+        chars: List[str] = re.findall(r'[A-Z][a-z]*', document)
+        logging.debug(f'{colored("[PROJECTS][02]", "white", attrs=CGATTRS)} {chars=}')
+        if chars:
+            print(f'{colored("[PROJECTS][02]", "white", attrs=CGATTRS)} invalid cpf character!!')
+            return False
+        return True
+
+    def cpf_valid_lenght(document: str) -> bool:
+        if len(document) != 11:
+            print(f'{colored("[PROJECTS][02]", "white", attrs=CGATTRS)} invalid cpf lenght!!')
+            return False
+        return True
+
     print(f'{colored("[PROJECTS][02]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[PROJECTS][02]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+    cpf: str = input(f'{colored("[PROJECTS][02]", "white", attrs=CGATTRS)} inform the document number (CPF): ')
+    is_valid: bool = cpf_has_only_valid_character(document=cpf) and cpf_valid_lenght(document=cpf)
+
+    print(f'{colored("[PROJECTS][02]", "white", attrs=CGATTRS)} cpf {colored(cpf, "yellow", attrs=CGATTRS)} is valid: {colored(is_valid, "red", attrs=CGATTRS)}')
 
 
 def exerc_03() -> None:
     """
-    TODO start it
+    Mariana é professora de língua portuguesa e quer um programa que conte quantas vogais há em um texto digitado pelos alunos. Isso ajudará a analisar a estrutura das palavras utilizadas.
+    Crie um programa que peça um texto e exiba quantas vogais (a, e, i, o, u) ele contém.
+    Exemplo de entrada: Digite um texto: A linguagem Python é muito versátil.
+    Saída esperada: O texto contém 13 vogais.
     """
+    def count_vowel(word: str) -> int:
+        return len([c for c in word.lower() if c in ['a', 'e', 'i', 'o', 'u']])
+
     print(f'{colored("[PROJECTS][03]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[PROJECTS][03]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+    word: str = input(f'{colored("[PROJECTS][03]", "white", attrs=CGATTRS)} Inform the word: ')
+    print(f'{colored("[PROJECTS][03]", "white", attrs=CGATTRS)} lenght of vowel: {colored(count_vowel(word=word), "red", attrs=CGATTRS)}')
 
 
 def exerc_04() -> None:
