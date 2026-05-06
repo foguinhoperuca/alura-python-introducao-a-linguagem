@@ -89,10 +89,26 @@ def exerc_03() -> None:
 
 def exerc_04() -> None:
     """
-    TODO start it
+    Sofia é revisora de textos e precisa identificar palavras muito longas em um parágrafo. Textos mais fáceis de ler costumam ter palavras curtas, então ela quer um programa que encontre palavras que tenham mais de 10 letras e as exiba em destaque.
+    Crie um programa que receba um texto e exiba todas as palavras que possuem mais de 10 letras. Caso nenhuma palavra longa seja encontrada, o programa deve avisar o usuário.
+    Exemplo de entrada:
+    > Digite um texto: A programação estruturada facilitou o desenvolvimento de grandes sistemas computacionais
+    Saída esperada:
+    > Palavras longas encontradas: programação, estruturada, desenvolvimento, computacionais
+    > Se nenhum palavra longa for encontrada: Nenhuma palavra longa foi encontrada no texto.
     """
+    def get_long_words(phrase: str) -> List[str] | str:
+        long_words: List[str] = [w for w in phrase.split(' ') if len(w) >= 10]
+
+        return long_words if len(long_words) > 0 else 'No long words found in text!!'
+
+    phrases: List[str] = [
+        'A programação estruturada facilitou o desenvolvimento de grandes sistemas computacionais',
+        'Algum teste sem palavras longas'
+    ]
     print(f'{colored("[PROJECTS][04]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[PROJECTS][04]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+    for phrase in phrases:
+        print(f'{colored("[PROJECTS][04]", "white", attrs=CGATTRS)} long words: {colored(get_long_words(phrase=phrase), "red", attrs=CGATTRS)}')
 
 
 def exerc_05() -> None:
