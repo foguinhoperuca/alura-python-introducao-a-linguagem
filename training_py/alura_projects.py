@@ -1,3 +1,4 @@
+from enum import auto, Enum
 import logging
 import re
 import random
@@ -154,10 +155,90 @@ def exerc_05() -> None:
 
 def exerc_06() -> None:
     """
-    TODO start it
+    Lucas quer criar um jogo de pedra, papel e tesoura para jogar contra o computador. Ele precisa de um programa que permita ao usuário escolher uma opção e depois exiba o resultado da partida.
+    Crie um programa que permita ao usuário escolher entre pedra, papel ou tesoura. O computador escolherá aleatoriamente uma opção. O programa deve exibir quem venceu a partida. Lembrando que:
+    - Pedra ganha de Tesoura (Pedra quebra Tesoura);
+    - Tesoura ganha de Papel (Tesoura corta Papel);
+    - Papel ganha de Pedra (Papel cobre Pedra);
+    - Se ambos escolherem a mesma opção, é um empate.
+    Exemplo de entrada:
+    > Escolha: pedra, papel ou tesoura? papel
+    Saída esperada:
+    > Computador escolheu: pedra
+    > Você venceu!
+    Caso o computador vença:
+    > Computador escolheu: tesoura
+    > Você perdeu!
+    Caso o computador escolha a mesma opção que você:
+    > Computador escolheu: papel
+    > Empate!
     """
-    print(f'{colored("[PROJECTS][06]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[PROJECTS][06]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+    class JokenPoPower(Enum):
+        ROCK = auto()
+        PAPER = auto()
+        SCISSORS = auto()
+
+    class Result(Enum):
+        LOSS = 0
+        DRAW = 0.5
+        WINS = 1
+
+    def fight(player: JokenPoPower, enemy: JokenPoPower) -> Result:
+        """
+        Define the result of fight of player against enemy.
+        """
+        if player == enemy:
+            return Result.DRAW
+
+        if player is JokenPoPower.ROCK:
+            if enemy == JokenPoPower.PAPER:
+                return Result.LOSS
+            elif enemy == JokenPoPower.SCISSORS:
+                return Result.WINS
+        elif player is JokenPoPower.PAPER:
+            if enemy == JokenPoPower.SCISSORS:
+                return Result.LOSS
+            elif enemy == JokenPoPower.ROCK:
+                return Result.WINS
+        elif player is JokenPoPower.SCISSORS:
+            if enemy == JokenPoPower.ROCK:
+                return Result.LOSS
+            elif enemy == JokenPoPower.PAPER:
+                return Result.WINS
+
+    score: float = 0
+    enemy_score: float = 0
+    max_point: float = 3.0
+    print(f'{colored("[PROJECTS][06]", "white", attrs=CGATTRS)} ---------- MAX SCORE {colored(max_point, "blue", attrs=CGATTRS)} ----------')
+    while True:
+        if score >= max_point or enemy_score >= max_point:
+            print(f'{colored("[PROJECTS][06]", "white", attrs=CGATTRS)} max score reached: {colored(max_point, "blue", attrs=CGATTRS)}')
+            break
+
+        choosed: int = int(input(f'{colored("[PROJECTS][06]", "white", attrs=CGATTRS)} Choose your power by number (0 - STOP): {[f"{p.value} - {p.name}" for p in JokenPoPower]} '))
+        if choosed == 0:
+            break
+
+        you: JokenPoPower = JokenPoPower(choosed)
+        computer: JokenPoPower = JokenPoPower(random.randint(1, 3))
+        result: Result = fight(player=you, enemy=computer)
+        score += result.value
+        match result:
+            case Result.WINS:
+                enemy_score += Result.LOSS.value
+            case Result.DRAW:
+                enemy_score += Result.DRAW.value
+            case Result.LOSS:
+                enemy_score += Result.WINS.value
+
+        print(f'{colored("[PROJECTS][06]", "white", attrs=CGATTRS)} --- EXERCISE ---')
+        print(f'{colored("[PROJECTS][06]", "white", attrs=CGATTRS)} player 1 choosed..: {colored(you.name, "cyan", attrs=CGATTRS)}')
+        print(f'{colored("[PROJECTS][06]", "white", attrs=CGATTRS)} player 2 choosed..: {colored(computer.name, "magenta", attrs=CGATTRS)}')
+        print(f'{colored("[PROJECTS][06]", "white", attrs=CGATTRS)} results are.......: {colored(f"{result.value}", "yellow", attrs=CGATTRS)} {colored(f"[{result.name}]", "red", attrs=CGATTRS)}')
+        print(f'{colored("[PROJECTS][06]", "white", attrs=CGATTRS)} score are.........: {colored(f"you {score}", "cyan", attrs=CGATTRS)} {colored(f"enemy {enemy_score}", "magenta", attrs=CGATTRS)}')
+
+    print(f'{colored("[PROJECTS][06]", "white", attrs=CGATTRS)} ---------- FINAL SCORE ----------')
+    print(f'{colored("[PROJECTS][06]", "white", attrs=CGATTRS)} Final score are: {colored(f"you {score}", "cyan", attrs=CGATTRS)} {colored(f"enemy {enemy_score}", "magenta", attrs=CGATTRS)}')
 
 
 def exerc_07() -> None:
