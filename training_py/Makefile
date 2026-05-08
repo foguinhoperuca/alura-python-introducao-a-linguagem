@@ -2,7 +2,7 @@
 
 
 TRAINING ?= "projects"
-EXERCISE ?= "e06"
+EXERCISE ?= "e07"
 
 training:
 	@clear

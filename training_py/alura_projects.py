@@ -243,10 +243,50 @@ def exerc_06() -> None:
 
 def exerc_07() -> None:
     """
-    TODO start it
+    Maria está criando um jogo para seus alunos praticarem lógica e pensamento rápido. Ela quer um programa onde o computador escolhe um número aleatório entre 1 e 100, e o jogador tem que adivinhar qual é.
+    Além de garantir a jogabilidade, Maria deseja que o programa trate erros de entrada, impedindo que o usuário forneça valores inválidos, como letras ou números fora do intervalo permitido.
+    Sua tarefa é criar um programa que gere um número aleatório entre 1 e 100 e permita que o usuário tente adivinhar o número. O programa deve informar se o palpite é maior ou menor que o número correto, até que o usuário acerte. Se o usuário digitar um valor inválido ou um número fora do intervalo, uma exceção ValueError deve ser lançada .
+    Exemplo de entrada:
+    > Tente adivinhar o número (1-100): 50
+    Saída esperada:
+    > Parabéns! Você acertou o número 37.
+    Caso o número esteja abaixo:
+    > Muito baixo! Tente novamente: 17
+    Agora, caso esteja acima:
+    > Muito alto! Tente novamente: 75
+    Em caso de exceção:
+    > Entrada inválida: Número fora do intervalo! Digite um número entre 1 e 100.
+    > Entrada inválida: invalid literal for int() with base 10: 'abc12'.'
     """
     print(f'{colored("[PROJECTS][07]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[PROJECTS][07]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+    MAX: int = 100
+    counter: int = 0
+    result: str = ''
+    secret: int = random.randint(1, MAX)
+    found: bool = False
+    while not found:
+        counter += 1
+        try:
+            guess: int = int(input(f'{colored("[PROJECTS][07]", "white", attrs=CGATTRS)} Inform a number (MAX {colored(MAX, "magenta", attrs=CGATTRS)}): '))
+            if guess < 0 or guess > MAX:
+                raise ValueError(f'Value out of range than 0 to MAX ({MAX}): {guess}')
+        except Exception as e:
+            print(f'{colored("[PROJECTS][07]", "white", attrs=CGATTRS)} invalid number: {colored(e, "red", attrs=CGATTRS)}')
+            continue
+
+        if guess == 0:
+            print(f'{colored("[PROJECTS][07]", "white", attrs=CGATTRS)} I gave up!! Secret is: {colored(secret, "yellow", attrs=CGATTRS)}')
+            break
+
+        if guess == secret:
+            result = 'FOUND'
+            found = True
+        elif guess > secret:
+            result = 'guess is BIGGER'
+        else:
+            result = 'guess is LOWER'
+
+        print(f'{colored("[PROJECTS][07]", "white", attrs=CGATTRS)} result: {colored(result, "cyan", attrs=CGATTRS)} counter: {colored(counter, "blue", attrs=CGATTRS)}')
 
 
 def exerc_08() -> None:
