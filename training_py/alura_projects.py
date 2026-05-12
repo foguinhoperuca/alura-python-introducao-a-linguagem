@@ -3,7 +3,7 @@ import logging
 import re
 import random
 import string
-from typing import List
+from typing import List, Tuple
 
 from termcolor import colored
 
@@ -291,19 +291,141 @@ def exerc_07() -> None:
 
 def exerc_08() -> None:
     """
-    TODO start it
+    Carlos está criando uma calculadora simples, mas quer garantir que o programa não quebre se o usuário digitar valores inválidos, ele precisa tratar os erros.
+    Crie uma calculadora que permita ao usuário escolher entre soma, subtração, multiplicação e divisão. Além de modularizar o código em funções, use try-except para tratar erros de entrada inválida, que consiste em:
+    Caso digite um caractere em vez de número | exceção a ser lançada: ValueError;
+    Caso tente fazer uma divisão por 0 | exceção a ser lançada: ZeroDivisionError.
+    Exemplo de entrada:
+    > Digite o primeiro número: 5
+    > Escolha a operação (+, -, *, /): +
+    > Digite o segundo número: 7
+    Saída esperada:
+    > Resultado: 12
+    Caso selecione nenhuma das operações listadas:
+    > Opção inválida
+    Caso digite um caractere em vez de número:
+    > Erro: Entrada inválida. Digite apenas números.
+    Caso tente fazer uma divisão por 0:
+    > Erro: Divisão por zero não é permitida.
     """
+    calculate = lambda lt, rt, op: float(eval(f'{lt}{op}{rt}'))  # noqa: E731
+    OPERATORS: Tuple[str] = ('+', '-', '*', '/')
     print(f'{colored("[PROJECTS][08]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[PROJECTS][08]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+
+    left: float | None = None
+    while left is None:
+        try:
+            left = float(input(f'{colored("[PROJECTS][08]", "white", attrs=CGATTRS)} Inform the left term...: '))
+        except ValueError as e:
+            print(f'{colored("[PROJECTS][08]", "white", attrs=CGATTRS)} gota error: {colored(e, "red", attrs=CGATTRS)}')
+            left = None
+
+    right: float | None = None
+    while right is None:
+        try:
+            right = float(input(f'{colored("[PROJECTS][08]", "white", attrs=CGATTRS)} Inform the right term..: '))
+            if right == 0:
+                raise ZeroDivisionError("Right member can't be zero!")
+        except (ValueError, ZeroDivisionError) as e:
+            print(f'{colored("[PROJECTS][08]", "white", attrs=CGATTRS)} gota error: {colored(e, "red", attrs=CGATTRS)}')
+            right = None
+
+    operator: str | None = None
+    while operator is None:
+        operator = input(f'{colored("[PROJECTS][08]", "white", attrs=CGATTRS)} Inform the operand.....: ')
+        if operator not in OPERATORS:
+            operator = None
+            print(f'{colored("[PROJECTS][08]", "white", attrs=CGATTRS)} invalid operator. It should be one of {colored(OPERATORS, "red", attrs=CGATTRS)}')
+
+    print(f'{colored("[PROJECTS][08]", "white", attrs=CGATTRS)} {colored(left, "red", attrs=CGATTRS)} {colored(operator, "cyan", attrs=CGATTRS)} {colored(right, "yellow", attrs=CGATTRS)} = {colored(calculate(lt=left, rt=right, op=operator), "magenta", attrs=CGATTRS)}')
 
 
 def exerc_09() -> None:
     """
-    TODO start it
+    Ana precisa de um programa simples para gerenciar suas tarefas diárias. Ela quer poder adicionar, visualizar e remover tarefas de uma lista.
+    Crie um programa com um menu interativo que permita ao usuário adicionar, visualizar e remover tarefas. Use uma lista para armazenar as tarefas.
+    Exemplo de entrada:
+    > 1. Adicionar tarefa
+    > 2. Visualizar tarefas
+    > 3. Remover tarefa
+    > 4. Sair
+    > Escolha uma opção: 1
+    Saída esperada:
+    > Digite a tarefa: Estudar Python
+    > Tarefa adicionada!
+    Caso selecione a opção 2 ao adicionar uma tarefa:
+    > Tarefas:
+    > 1. Estudar Python
+    Caso selecione a opção 3 com uma tarefa adicionada:
+    > Digite o número da tarefa a ser removida: 1
+    > Tarefa 'Estudar Python' removida!
+    Caso selecione a opção 3 sem uma tarefa adicionada:
+    > Digite o número da tarefa a ser removida: Estudar Python
+    > Erro: Nenhuma tarefa para remover.
+    Caso selecione a opção 3 com uma opção inválida:
+    > Escolha uma opção: 3
+    > Digite o número da tarefa a ser removida: ABC
+    > Erro: Entrada inválida! Digite um número.
+    Caso selecione nenhuma das opções listadas:
+    > Escolha uma opção: 5
+    > Erro: Opção inválida! Escolha uma opção entre 1 e 4.
+    Caso selecione a opção 4:
+    > Escolha uma opção: 4
+    > Saindo do gerenciador de tarefas. Até mais!
     """
-    print(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
 
+
+    
+    # FIXME the core is working. Need implement validations
+
+
+
+
+    
+    print(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} --- EXERCISE ---')
+
+    def add(task: str) -> None:
+        TASKS.append(task)
+        print(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} Task added: {colored(f"{task}", "yellow", attrs=CGATTRS)}')
+
+    def remove(index: int) -> str:
+        assert isinstance(index, int)
+        TASKS.pop(index)
+
+    def show(index: int) -> None:
+        print(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} {colored(f"{index}", "cyan", attrs=CGATTRS)}. {TASKS[index]}')
+
+    TASKS: List[str] = []
+    option: str | None = ''
+    while option is not None:
+        print(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} Alura TUI Task Manager {colored("Training Python: Projects", "cyan", attrs=CGATTRS)}')
+        print(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} {colored("A. ADD", "yellow", attrs=CGATTRS)} a Task;')
+        print(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} {colored("S. SHOW", "blue", attrs=CGATTRS)} a Task;')
+        print(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} {colored("R. REMOVE", "red", attrs=CGATTRS)} a Task;')
+        print(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} {colored("E. Bye!", "magenta", attrs=CGATTRS)} Go home!;')
+
+        print(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} {colored("TASKS:", "cyan", attrs=CGATTRS)}')
+        for i, t in enumerate(TASKS):
+            print(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} {colored(f"{i}", "cyan", attrs=CGATTRS)}. {t}')
+
+        option = input(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} Your option: ')
+        match option.upper():
+            case 'A':
+                task: str = input(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} Inform the task: ')
+                add(task=task)
+            case 'S':
+                index = int(input(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} Inform the index of task: '))
+                show(index=index)
+            case 'R':
+                index = int(input(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} Inform the index of task: '))
+                remove(index=index)
+            case 'E':
+                print(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} As te la {colored("Bye, Bye!", "magenta", attrs=CGATTRS)}')
+                option = None
+            case _:
+                print(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} {colored(f"Option invalid: {option}", "red", attrs=CGATTRS)}')
+
+        print(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} ---------- {colored(f"E09", "red", attrs=CGATTRS)} ----------')
 
 def exerc_10() -> None:
     """
