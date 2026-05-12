@@ -373,15 +373,6 @@ def exerc_09() -> None:
     > Escolha uma opção: 4
     > Saindo do gerenciador de tarefas. Até mais!
     """
-
-
-    
-    # FIXME the core is working. Need implement validations
-
-
-
-
-    
     print(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} --- EXERCISE ---')
 
     def add(task: str) -> None:
@@ -417,8 +408,14 @@ def exerc_09() -> None:
                 index = int(input(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} Inform the index of task: '))
                 show(index=index)
             case 'R':
-                index = int(input(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} Inform the index of task: '))
-                remove(index=index)
+                try:
+                    if len(TASKS) == 0:
+                        raise ValueError('The size of TASKS is 0! Can not delete any task.')
+
+                    index = int(input(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} Inform the index of task: '))
+                    remove(index=index)
+                except Exception as e:
+                    print(f'{colored("[PROJECTS][01]", "white", attrs=CGATTRS)} got some error: {colored(f"{e}", "red", attrs=CGATTRS)}')
             case 'E':
                 print(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} As te la {colored("Bye, Bye!", "magenta", attrs=CGATTRS)}')
                 option = None
@@ -426,6 +423,7 @@ def exerc_09() -> None:
                 print(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} {colored(f"Option invalid: {option}", "red", attrs=CGATTRS)}')
 
         print(f'{colored("[PROJECTS][09]", "white", attrs=CGATTRS)} ---------- {colored(f"E09", "red", attrs=CGATTRS)} ----------')
+
 
 def exerc_10() -> None:
     """
