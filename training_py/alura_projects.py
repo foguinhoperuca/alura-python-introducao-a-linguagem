@@ -3,7 +3,7 @@ import logging
 import re
 import random
 import string
-from typing import List, Tuple
+from typing import Dict, List, Tuple
 
 from termcolor import colored
 
@@ -427,7 +427,60 @@ def exerc_09() -> None:
 
 def exerc_10() -> None:
     """
-    TODO start it
+    Um banco está desenvolvendo um sistema para caixas eletrônicos e precisa de um programa que simule o saque de dinheiro. O caixa deve entregar o valor solicitado pelo usuário usando a menor quantidade possível de cédulas. As cédulas disponíveis são: R$ 100, R$ 50, R$ 20, R$ 10, R$ 5 e R$ 2.
+    Crie um programa que solicite ao usuário o valor do saque e calcule quantas cédulas de cada tipo serão necessárias para entregar o valor. O programa deve garantir que o valor solicitado seja válido (múltiplo de 2, já que não há cédulas de R$ 1) e tratar erros de entrada caso não seja digitado um valor numérico válido.
+    Exemplo de entrada:
+    > Digite o valor do saque: 188
+    Saída esperada:
+    Cédulas entregues:
+    > 1 de R$ 100
+    > 1 de R$ 50
+    > 1 de R$ 20
+    > 1 de R$ 10
+    > 1 de R$ 5
+    > 1 de R$ 2
+    Caso faça um saque de valor não inválido (ímpar):
+    > Erro: O valor deve ser múltiplo de 2.
     """
+    def get_banknotes(vl: int) -> Dict[int, int]:
+        remainder: int = vl
+        banknotes: Dict[int, int] = {
+            200: 0,
+            100: 0,
+            50: 0,
+            20: 0,
+            10: 0,
+            5: 0,
+            2: 0
+        }
+
+        for banknote in banknotes.keys():
+            if banknote > remainder:
+                logging.debug(f'{colored("[PROJECTS][10]", "white", attrs=CGATTRS)} {banknote=}')
+                continue
+
+            if (remainder % banknote) % 2 > 0:
+                logging.info(f'{colored("[PROJECTS][10]", "white", attrs=CGATTRS)} Not using banknote ${colored(banknote, "cyan", attrs=CGATTRS)} (odd banknote) because the remainder after will be odd!')
+                continue
+
+            banknotes[banknote] = remainder // banknote
+            remainder = remainder % banknote
+            logging.debug(f'{colored("[PROJECTS][10]", "white", attrs=CGATTRS)} {banknote=} {banknotes[banknote]=} {remainder=}')
+
+        return banknotes
+
     print(f'{colored("[PROJECTS][10]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[PROJECTS][10]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+
+    while True:
+        try:
+            value: int = int(input(f'{colored("[PROJECTS][10]", "white", attrs=CGATTRS)} Inform the value. There is no banknotes of value $1, so, only even values are accepted (inform 0 or negative to end the program): '))
+            if value <= 0:
+                print(f'{colored("[PROJECTS][10]", "white", attrs=CGATTRS)} {colored("Bye", "red", attrs=CGATTRS)}')
+                break
+
+            if value % 2 == 1:
+                raise ValueError(f'{colored("[PROJECTS][10]", "white", attrs=CGATTRS)} unacepted value: ${colored(value, "magenta", attrs=CGATTRS)} - it should be even and greater than zero!!')
+
+            print(f'{colored("[PROJECTS][10]", "white", attrs=CGATTRS)} total banknotes for value {colored(f"${value}", "blue", attrs=CGATTRS)} -> {colored(get_banknotes(vl=value), "yellow", attrs=CGATTRS)}')
+        except Exception as e:
+            print(f'{colored("[PROJECTS][10]", "white", attrs=CGATTRS)} ERROR: {colored(e, "red", attrs=CGATTRS)}')
