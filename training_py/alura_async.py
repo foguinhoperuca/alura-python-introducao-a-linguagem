@@ -8,12 +8,34 @@ from termcolor import colored
 CGATTRS: List[str] = ['bold', ]
 
 
-def exerc_01() -> None:
+async def exerc_01() -> None:
     """
     TODO start it
     """
+    async def coroutine(number: int) -> None:
+        print(f'Running task {number}')
+        await asyncio.sleep(number)
+        print(f'Finished task {number}')
+
+    async def coroutine_from_future(number: int, future: asyncio.Future) -> None:
+        print(f'Start for number {number}')
+        await asyncio.sleep(number)
+        future.set_result(f'End for number {number}')
+
     print(f'{colored("[ALURA_ASYNC][01]", "white", attrs=CGATTRS)} --- EXERCISE ---')
+    # await asyncio.sleep(1)
+    task_01 = asyncio.create_task(coroutine(number=1))
+    task_02 = asyncio.create_task(coroutine(number=2))
+    await task_01
+    await task_02
+
+    future_01 = asyncio.Future()
+    asyncio.create_task(coroutine_from_future(number=1, future=future_01))
+    result_01 = await future_01
+    print(f'{result_01=}')
+
     print(f'{colored("[ALURA_ASYNC][01]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+    time.sleep(1)
 
 
 def exerc_02() -> None:

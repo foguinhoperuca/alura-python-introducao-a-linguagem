@@ -9,8 +9,6 @@ from termcolor import colored
 
 
 CGATTRS: List[str] = ['bold', ]
-LOG_FORMAT_SIMPLE = colored('[%(levelname)s]', 'red', attrs=['bold', 'dark']) + ' %(message)s'  # noqa: E501
-logging.basicConfig(level=logging.DEBUG, format=LOG_FORMAT_SIMPLE)
 
 
 def class02() -> None:

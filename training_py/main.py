@@ -1,7 +1,11 @@
 import argparse
+import asyncio
 from enum import auto, StrEnum
+import logging
 import sys
 from typing import Dict, List
+
+from termcolor import colored
 
 import alura_conditional              # noqa: F401
 import alura_loop                     # noqa: F401
@@ -38,6 +42,9 @@ class TrainingExerciseTypes(StrEnum):
 
 
 if __name__ == "__main__":
+    LOG_FORMAT_SIMPLE = colored('[%(levelname)s]', 'red', attrs=['bold', 'dark']) + ' %(message)s'  # noqa: E501
+    logging.basicConfig(level=logging.INFO, format=LOG_FORMAT_SIMPLE)
+
     DEFAULT_EXERCISES: List[str] = [vl.name.lower() for vl in TrainingExerciseTypes]
     exercises: Dict[str, Dict[str, str]] = {
         f'{training_type.name.lower()}': {f'{key}': f'alura_{training_type.name.lower()}.exerc_{key.replace("e", "")}' for key in DEFAULT_EXERCISES} for training_type in TrainingTypes
@@ -51,6 +58,10 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.training == 'projects' and args.exercise is None:
         alura_projects.class02()
+    elif args.training == 'async':
+        if args.exercise is None:
+            asyncio.run(alura_async.class02())
+        asyncio.run(eval(exercises[args.training][args.exercise])())
     else:
         eval(exercises[args.training][args.exercise])()
 
