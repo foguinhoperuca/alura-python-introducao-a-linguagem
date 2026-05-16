@@ -61,7 +61,8 @@ if __name__ == "__main__":
     elif args.training == 'async':
         if args.exercise is None:
             asyncio.run(alura_async.class02())
-        asyncio.run(eval(exercises[args.training][args.exercise])())
+        else:
+            asyncio.run(eval(exercises[args.training][args.exercise])())
     else:
         eval(exercises[args.training][args.exercise])()
 
