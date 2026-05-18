@@ -92,15 +92,22 @@ async def exerc_03() -> None:
     > Fatorial de 7 = 5040
     """
     async def recursive_factorial(number: int, sl: int = 1) -> int:
+        """
+        Expected for the bigger number (e.g.: 7 -> would be the max wait for all program): number=7 -> 27s.
+        """
         if number == 1:
             return 1
 
-        sub = await recursive_factorial(number - 1)
+        nx_num: int = number - 1
+        sub = await recursive_factorial(number=nx_num, sl=nx_num)
         await asyncio.sleep(sl)
 
         return number * sub
 
     async def factorial(number: int) -> None:
+        """
+        Expected for the biugger number: (e.g.: 7 -> would be the max wait for all program): number=7 -> 7s.
+        """
         await asyncio.sleep(number)
         print(f'{colored("[ALURA_ASYNC][03]", "white", attrs=CGATTRS)} Factorial for {colored(number, "blue", attrs=CGATTRS)} is {colored(math.factorial(number), "magenta", attrs=CGATTRS)}')
 
