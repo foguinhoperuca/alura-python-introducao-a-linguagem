@@ -1,7 +1,7 @@
 import asyncio
 import math
 import time
-from typing import List
+from typing import Dict, List
 
 from termcolor import colored
 
@@ -126,10 +126,56 @@ async def exerc_03() -> None:
 
 async def exerc_04() -> None:
     """
-    TODO start it
+    Lucas trabalha em um sistema de notificações que precisa enviar mensagens para usuários. No entanto, algumas notificações só devem ser enviadas se o usuário tiver ativado essa opção no sistema. Além disso, se o usuário for VIP, ele deve receber uma notificação prioritária antes das demais.
+    Com base nesse cenário, crie um programa que simule o envio de notificações para três usuários. Cada usuário tem um status diferente:
+    Ana: VIP (deve receber uma notificação prioritária antes das normais).
+    João: Usuário comum, mas ativou as notificações.
+    Carla: Usuária comum, mas desativou as notificações (não deve receber nada).
+    O programa deve exibir quais notificações foram enviadas e quais usuários não receberam nada.
+    Saída esperada:
+    > Enviando notificações...
+    > Notificação VIP para Ana enviada!
+    > Notificação normal para João enviada!
+    > Carla desativou as notificações. Nada foi enviado.
+    > Todas as notificações foram processadas!
     """
+    async def send_message(user: Dict[str, str | bool], message: str = '') -> None:
+        MIN_DELAY: int = 1
+        MAX_DELAY: int = 5
+        delay: int = MIN_DELAY if user['status'] == 'VIP' else MAX_DELAY
+        if user['notify']:
+            print(f'{colored("[ALURA_ASYNC][04]", "white", attrs=CGATTRS)} preparing for send message {colored(message, "cyan", attrs=CGATTRS)}')
+            await asyncio.sleep(delay)
+            print(f'{colored("[ALURA_ASYNC][04]", "white", attrs=CGATTRS)} message successfuly sended for {colored(f"{user["name"]} ({user["status"]})", "magenta", attrs=CGATTRS)}')
+        else:
+            await asyncio.sleep(MAX_DELAY + MIN_DELAY + delay)
+            print(f'{colored("[ALURA_ASYNC][04]", "white", attrs=CGATTRS)} message not sended for {colored(f"{user["name"]} ({user["status"]})", "yellow", attrs=CGATTRS)} --> Notify is {colored(user["notify"], "red", attrs=CGATTRS)}')
+
     print(f'{colored("[ALURA_ASYNC][04]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[ALURA_ASYNC][04]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+    users: List[Dict[str, str | bool]] = [
+        {'name': 'Ana', 'status': 'VIP', 'notify': True},
+        {'name': 'João', 'status': 'NORMAL', 'notify': True},
+        {'name': 'Carla', 'status': 'NORMAL', 'notify': False},
+        {'name': 'José', 'status': 'VIP', 'notify': False},
+        {'name': 'Maria', 'status': 'VIP', 'notify': True},
+        {'name': 'Luiza', 'status': 'NORMAL', 'notify': True},
+        {'name': 'Francisco', 'status': 'VIP', 'notify': False},
+        {'name': 'Eduardo', 'status': 'NORMAL', 'notify': True},
+        {'name': 'Thiago', 'status': 'NORMAL', 'notify': False},
+    ]
+    messages: List[str] = [
+        'msg_01',
+        'msg_02',
+        'msg_03',
+        'msg_04',
+        'msg_05',
+        'msg_06',
+        'msg_07',
+        'msg_08',
+        'msg_09',
+    ]
+    tasks: List[asyncio.Task] = [asyncio.create_task(send_message(user=u, message=msg)) for u, msg in zip(users, messages)]
+    await asyncio.gather(*tasks)
 
 
 async def exerc_05() -> None:
