@@ -1,4 +1,5 @@
 import asyncio
+import math
 import time
 from typing import List
 
@@ -29,6 +30,9 @@ async def class02() -> None:
     asyncio.create_task(coroutine_from_future(number=1, future=future_01))
     result_01 = await future_01
     print(f'{result_01=}')
+
+    print('Time sleep without async:')
+    time.sleep(2)
 
 
 async def exerc_01() -> None:
@@ -76,10 +80,41 @@ async def exerc_02() -> None:
 
 async def exerc_03() -> None:
     """
-    TODO start it
+    Carlos precisa calcular o fatorial de cinco números diferentes simultaneamente. Como cálculos pesados podem demorar, ele quer garantir que todos sejam processados ao mesmo tempo, e os resultados exibidos assim que estiverem prontos.
+    Crie um programa que calcule o fatorial de cinco números diferentes de forma assíncrona, onde os cálculos devem ser realizados paralelamente e exiba os resultados conforme forem concluídos, em ordem de menor número para maior número.
+    Dica: use a função sleep para simular um tempo de processamento.
+    Dica: para testar o funcionamento do seu código, utilize uma lista de números em ordem de tamanho aleatória. Exemplo: numeros = [5, 3, 7, 4, 6]
+    Saída esperada:
+    > Fatorial de 3 = 6
+    > Fatorial de 4 = 24
+    > Fatorial de 5 = 120
+    > Fatorial de 6 = 720
+    > Fatorial de 7 = 5040
     """
+    async def recursive_factorial(number: int, sl: int = 1) -> int:
+        if number == 1:
+            return 1
+
+        sub = await recursive_factorial(number - 1)
+        await asyncio.sleep(sl)
+
+        return number * sub
+
+    async def factorial(number: int) -> None:
+        await asyncio.sleep(number)
+        print(f'{colored("[ALURA_ASYNC][03]", "white", attrs=CGATTRS)} Factorial for {colored(number, "blue", attrs=CGATTRS)} is {colored(math.factorial(number), "magenta", attrs=CGATTRS)}')
+
     print(f'{colored("[ALURA_ASYNC][03]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[ALURA_ASYNC][03]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+    numbers: List[int] = [5, 3, 7, 4, 6]
+
+    tasks = [asyncio.create_task(factorial(number=n)) for n in numbers]
+    await asyncio.gather(*tasks)
+
+    print(f'{colored("[ALURA_ASYNC][03]", "white", attrs=CGATTRS)} --- RECURSIVE ---')
+    recursive_tasks = [recursive_factorial(number=n, sl=n) for n in numbers]
+    results: List[int] = await asyncio.gather(*recursive_tasks)
+    for num, res in zip(numbers, results):
+        print(f'{colored("[ALURA_ASYNC][03]", "white", attrs=CGATTRS)} Factorial for {colored(num, "cyan", attrs=CGATTRS)} is {colored(res, "yellow", attrs=CGATTRS)}')
 
 
 async def exerc_04() -> None:
