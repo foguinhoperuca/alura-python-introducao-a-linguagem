@@ -1,4 +1,5 @@
 import asyncio
+import logging
 import math
 import time
 from typing import Dict, List
@@ -180,10 +181,72 @@ async def exerc_04() -> None:
 
 async def exerc_05() -> None:
     """
-    TODO start it
+    Marcos é dono de uma loja online e precisa de um sistema que processe pedidos de forma assíncrona. O sistema deve seguir a seguinte lógica:
+    - Primeiro, verificar se o pagamento foi aprovado;
+    - Se o pagamento for aprovado, verificar se há estoque disponível;
+    - Somente se houver estoque disponível, confirmar o pedido e enviá-lo para entrega;
+    - Se o pagamento falhar ou não houver estoque, o pedido deve ser cancelado.
+    A lista de pedidos já está definida no sistema, com o status do pagamento e do estoque previamente cadastrados. Confira o código:
+    pedidos = [
+        {"id": 101, "pagamento_aprovado": True, "estoque_disponivel": True},
+        {"id": 102, "pagamento_aprovado": True, "estoque_disponivel": False},
+        {"id": 103, "pagamento_aprovado": False, "estoque_disponivel": True},
+        {"id": 104, "pagamento_aprovado": True, "estoque_disponivel": True},
+        {"id": 105, "pagamento_aprovado": False, "estoque_disponivel": False},
+    ]
+    O programa deve simular essa lógica para três pedidos, exibindo mensagens conforme o processamento ocorre.
+    Saída esperada:
+    > Processando pedido #101...
+    > Pagamento aprovado para pedido #101.
+    > Estoque disponível para pedido #101.
+    > Pedido #101 confirmado! Enviado para entrega.
+    > Processando pedido #102...
+    > Pagamento aprovado para pedido #102.
+    > Estoque indisponível para pedido #102. Pedido cancelado.
+    > Processando pedido #103...
+    > Pagamento recusado para pedido #103. Pedido cancelado.
+    > Todos os pedidos foram processados!
     """
+    async def process_payment(order_id: int, future: asyncio.Future) -> None:
+        print(f'{colored("[ALURA_ASYNC][05]", "white", attrs=CGATTRS)} processing payment for {colored(order_id, "yellow", attrs=CGATTRS)}')
+        order: Dict[str, int | bool] = list(filter(lambda o: o["id"] == order_id, orders))[0]
+        logging.debug(f'----- {order} -----')
+        await asyncio.sleep(3)
+        future.set_result(order['payment_approved'])
+
+    async def validate_stock(order_id: int, future: asyncio.Future) -> None:
+        print(f'{colored("[ALURA_ASYNC][05]", "white", attrs=CGATTRS)} validating stock for {colored(order_id, "yellow", attrs=CGATTRS)}')
+        order: Dict[str, int | bool] = list(filter(lambda o: o["id"] == order_id, orders))[0]
+        logging.debug(f'----- {order} -----')
+        await asyncio.sleep(2)
+        future.set_result(order['available_stock'])
+
     print(f'{colored("[ALURA_ASYNC][05]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[ALURA_ASYNC][05]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+    orders: List[Dict[str, int | bool]] = [
+        {"id": 101, "payment_approved": True,  "available_stock": True},
+        {"id": 102, "payment_approved": True,  "available_stock": False},
+        {"id": 103, "payment_approved": False, "available_stock": True},
+        {"id": 104, "payment_approved": True,  "available_stock": True},
+        {"id": 105, "payment_approved": False, "available_stock": False},
+    ]
+    for ord in orders:
+        print(f'{colored("[ALURA_ASYNC][05]", "white", attrs=CGATTRS)} order: {colored(ord, "yellow", attrs=CGATTRS)}')
+        fut_pay_appr: asyncio.Future = asyncio.Future()
+        asyncio.create_task(process_payment(order_id=ord['id'], future=fut_pay_appr))
+        payment_approved: bool = await fut_pay_appr
+        if payment_approved:
+            print(f'{colored("[ALURA_ASYNC][05]", "white", attrs=CGATTRS)} processing payment {colored("APPROVED", "blue", attrs=CGATTRS)} for {colored(ord["id"], "blue", attrs=CGATTRS)}')
+            fut_valid_stock: asyncio.Future = asyncio.Future()
+            asyncio.create_task(validate_stock(order_id=ord['id'], future=fut_valid_stock))
+            avail_stock: bool = await fut_valid_stock
+            if avail_stock:
+                print(f'{colored("[ALURA_ASYNC][05]", "white", attrs=CGATTRS)} stock availability {colored("APPROVED", "blue", attrs=CGATTRS)} for {colored(ord["id"], "blue", attrs=CGATTRS)} - {colored("ORDER WILL BE DELIVERED!!", "blue", attrs=CGATTRS)}')
+            else:
+                print(f'{colored("[ALURA_ASYNC][05]", "white", attrs=CGATTRS)} stock availability {colored("NOT APPROVED", "red", attrs=CGATTRS)} for {colored(ord["id"], "red", attrs=CGATTRS)} - {colored("ORDER IS CANCELED", "red", attrs=CGATTRS)}')
+        else:
+            print(f'{colored("[ALURA_ASYNC][05]", "white", attrs=CGATTRS)} processing payment {colored("NOT APPROVED", "red", attrs=CGATTRS)} for {colored(ord["id"], "red", attrs=CGATTRS)} - {colored("ORDER IS CANCELED", "red", attrs=CGATTRS)}')
+
+        print(f'{colored("[ALURA_ASYNC][05]", "white", attrs=CGATTRS)} --- </ORDER id={ord["id"]}> ---')
 
 
 async def exerc_06() -> None:
