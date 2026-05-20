@@ -1,6 +1,8 @@
 import asyncio
+from datetime import datetime
 import logging
 import math
+import random
 import time
 from typing import Dict, List
 
@@ -212,6 +214,7 @@ async def exerc_05() -> None:
         order: Dict[str, int | bool] = list(filter(lambda o: o["id"] == order_id, orders))[0]
         logging.debug(f'----- {order} -----')
         await asyncio.sleep(3)
+        # Instead use future here, I can return the value directly
         future.set_result(order['payment_approved'])
 
     async def validate_stock(order_id: int, future: asyncio.Future) -> None:
@@ -219,14 +222,15 @@ async def exerc_05() -> None:
         order: Dict[str, int | bool] = list(filter(lambda o: o["id"] == order_id, orders))[0]
         logging.debug(f'----- {order} -----')
         await asyncio.sleep(2)
+        # Instead use future here, I can return the value directly
         future.set_result(order['available_stock'])
 
     print(f'{colored("[ALURA_ASYNC][05]", "white", attrs=CGATTRS)} --- EXERCISE ---')
     orders: List[Dict[str, int | bool]] = [
-        {"id": 101, "payment_approved": True,  "available_stock": True},
-        {"id": 102, "payment_approved": True,  "available_stock": False},
+        {"id": 101, "payment_approved": True, "available_stock": True},
+        {"id": 102, "payment_approved": True, "available_stock": False},
         {"id": 103, "payment_approved": False, "available_stock": True},
-        {"id": 104, "payment_approved": True,  "available_stock": True},
+        {"id": 104, "payment_approved": True, "available_stock": True},
         {"id": 105, "payment_approved": False, "available_stock": False},
     ]
     for ord in orders:
@@ -251,10 +255,76 @@ async def exerc_05() -> None:
 
 async def exerc_06() -> None:
     """
-    TODO start it
+    Paula trabalha em uma plataforma de ensino online e precisa garantir que os alunos sejam inscritos corretamente nos cursos desejados. O sistema deve seguir as seguintes regras:
+    - Cada aluno pode se inscrever em um curso, mas antes a plataforma precisa verificar se há vagas disponíveis;
+    - Se houver vagas, o aluno deve ser confirmado na turma e a vaga deve ser reduzida;
+    - Se não houver vagas, o aluno deve ser notificado de que a turma está lotada;
+    - Se um aluno já estiver inscrito, ele não pode se inscrever novamente no mesmo curso.
+    A lista de alunos e os cursos disponíveis já está definida no sistema. Lembre-se de processar múltiplas inscrições em paralelo. Confira o código:
+    cursos = {
+        "Python Avançado": {"vagas": 2, "inscritos": []},
+        "Java para Iniciantes": {"vagas": 1, "inscritos": []},
+        "Machine Learning": {"vagas": 0, "inscritos": []},
+    }
+    alunos = [
+        {"nome": "Alice", "curso": "Python Avançado"},
+        {"nome": "Bruno", "curso": "Python Avançado"},
+        {"nome": "Carlos", "curso": "Java para Iniciantes"},
+        {"nome": "Daniela", "curso": "Machine Learning"},
+        {"nome": "Alice", "curso": "Python Avançado"},  # Tentativa de inscrição duplicada
+    ]
+    Saída esperada:
+    > Inscrevendo Alice no curso Python Avançado...
+    > Inscrição confirmada para Alice no curso Python Avançado!
+    > Inscrevendo Bruno no curso Python Avançado...
+    > Inscrição confirmada para Bruno no curso Python Avançado!
+    > Inscrevendo Carlos no curso Java para Iniciantes...
+    > Inscrição confirmada para Carlos no curso Java para Iniciantes!
+    > Inscrevendo Daniela no curso Machine Learning...
+    > Turma lotada! Daniela não pôde se inscrever no curso Machine Learning.
+    > Inscrevendo Alice no curso Python Avançado...
+    > Alice já está inscrita no curso Python Avançado! Inscrição rejeitada.
+    > Todas as inscrições foram processadas!
     """
+    async def enrollment(student: Dict[str, str]) -> None:
+        delay: int = 1 + (list(courses.values()).index(courses[student["course"]]) + 1) * random.uniform(1.0, 2.0)
+        await asyncio.sleep(delay)
+        print(f'{colored(f"[ALURA_ASYNC][06][{datetime.now().strftime("%H:%M:%S")}][{delay}]", "white", attrs=CGATTRS)} --- Enrollment Student --- {colored(student["name"], "magenta", attrs=CGATTRS)} on course {colored(student["course"], "magenta", attrs=CGATTRS)}')
+        if courses[student["course"]]["vacancies"] > 0:
+            logging.debug(f'{colored(f"[ALURA_ASYNC][06][{datetime.now().strftime("%H:%M:%S")}][{delay}]", "white", attrs=CGATTRS)} has vacancies')
+            if student['name'] in courses[student['course']]['enrolled']:
+                print(f'{colored(f"[ALURA_ASYNC][06][{datetime.now().strftime("%H:%M:%S")}][{delay}]", "white", attrs=CGATTRS)} Student {colored(student["name"], "yellow", attrs=CGATTRS)} ALREADY enrolled!')
+            else:
+                courses[student['course']]['vacancies'] -= 1
+                courses[student['course']]['enrolled'].append(student['name'])
+                print(f'{colored(f"[ALURA_ASYNC][06][{datetime.now().strftime("%H:%M:%S")}][{delay}]", "white", attrs=CGATTRS)} Student {colored(student["name"], "cyan", attrs=CGATTRS)} enrolled!!')
+        else:
+            print(f'{colored(f"[ALURA_ASYNC][06][{datetime.now().strftime("%H:%M:%S")}][{delay}]", "white", attrs=CGATTRS)} Student {colored(student["name"], "red", attrs=CGATTRS)} NO VACANCIES not allowed!')
+
+    courses = {
+        "Bash para Sysadmins": {"vacancies": 3, "enrolled": []},
+        "Python Avançado": {"vacancies": 2, "enrolled": []},
+        "Java para Iniciantes": {"vacancies": 1, "enrolled": []},
+        "Machine Learning": {"vacancies": 0, "enrolled": []},
+    }
+    students = [
+        {"name": "Alice", "course": "Python Avançado"},
+        {"name": "Bruno", "course": "Python Avançado"},
+        {"name": "Carlos", "course": "Java para Iniciantes"},
+        {"name": "Daniela", "course": "Machine Learning"},
+        {"name": "Alice", "course": "Python Avançado"},  # Duplicated
+        {"name": "Diego", "course": "Python Avançado"},  # No more vacancies
+        {"name": "João", "course": "Bash para Sysadmins"},
+        {"name": "José", "course": "Bash para Sysadmins"},
+        {"name": "João", "course": "Bash para Sysadmins"},
+    ]
     print(f'{colored("[ALURA_ASYNC][06]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[ALURA_ASYNC][06]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+    tasks: List[asyncio.Task] = [asyncio.create_task(enrollment(student=s)) for s in students]
+    await asyncio.gather(*tasks)
+
+    print(f'{colored("[ALURA_ASYNC][06]", "white", attrs=CGATTRS)} --- ENROLLMENTS ---')
+    for name, course in courses.items():
+        print(f'{colored("[ALURA_ASYNC][06]", "white", attrs=CGATTRS)} {name} -> {course}')
 
 
 async def exerc_07() -> None:

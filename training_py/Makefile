@@ -1,7 +1,7 @@
 .PHONY=training
 
 TRAINING ?= "async"
-EXERCISE ?= "e05"
+EXERCISE ?= "e06"
 
 training:
 	@clear
