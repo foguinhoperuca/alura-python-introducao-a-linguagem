@@ -375,10 +375,41 @@ async def exerc_07() -> None:
 
 async def exerc_08() -> None:
     """
-    TODO start it
+    Lucas está desenvolvendo um sistema de monitoramento ambiental. Para isso, ele precisa criar sensores assíncronos que coletam dados periodicamente, sem que o programa fique travado esperando por cada um.
+    O sistema deve ter três sensores, que coletam e exibem dados em intervalos diferentes:
+    - Sensor de temperatura: Atualiza os dados a cada 2 segundos.
+    - Sensor de umidade: Atualiza os dados a cada 3 segundos.
+    - Sensor de qualidade do ar: Atualiza os dados a cada 5 segundos.
+    O sistema nunca deve parar de rodar, exibindo os valores atualizados de cada sensor assim que novos dados estiverem disponíveis.
+    Dica: Utilize uma corrotinas para resolver este problema e use o método random.choice para definir a temperatura e qualidade do ar.
+    Saída esperada:
+    > [2s] Temperatura: 22°C
+    > [3s] Umidade: 60%
+    > [4s] Temperatura: 23°C
+    > [5s] Qualidade do ar: Boa
+    > [6s] Umidade: 58%
+    > [8s] Temperatura: 21°C
+    > [10s] Qualidade do ar: Regular
+    ...
     """
+    async def measure(base_delay: int, study_object: str) -> None:
+        delay: int = base_delay + (1 * random.uniform(1.0, 2.0))
+        await asyncio.sleep(delay)
+        match study_object:
+            case 'temperature':
+                print(f'{colored(f"[ALURA_ASYNC][08][{datetime.now().strftime('%H:%M:%S')}][{round(delay, 5):.5f}]", "white", attrs=CGATTRS)} temperature..: {colored(round(random.uniform(-10.0, 40.0), 1), "yellow", attrs=CGATTRS)}°C')
+            case 'humidity':
+                print(f'{colored(f"[ALURA_ASYNC][08][{datetime.now().strftime('%H:%M:%S')}][{round(delay, 5):.5f}]", "white", attrs=CGATTRS)} humdity......: {colored(round(random.uniform(0.00, 100.00), 2), "cyan", attrs=CGATTRS)}%')
+            case 'air_quality':
+                print(f'{colored(f"[ALURA_ASYNC][08][{datetime.now().strftime('%H:%M:%S')}][{round(delay, 5):.5f}]", "white", attrs=CGATTRS)} air quality..: {colored(random.choice(["GOOD", "AVARAGE", "BAD"]), "magenta", attrs=CGATTRS)}')
+            case _:
+                raise Exception(f'Study object not found: {study_object}')
+
     print(f'{colored("[ALURA_ASYNC][08]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[ALURA_ASYNC][08]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+    while True:
+        tasks: List[asyncio.Task] = [asyncio.create_task(measure(base_delay=d, study_object=s)) for d, s in [(2, 'temperature'), (3, 'humidity'), (5, 'air_quality')]]
+        await asyncio.gather(*tasks)
+        print(f'{colored("[ALURA_ASYNC][08]", "white", attrs=CGATTRS)} --- NEXT MEASUREMENT ---')
 
 
 async def exerc_09() -> None:
