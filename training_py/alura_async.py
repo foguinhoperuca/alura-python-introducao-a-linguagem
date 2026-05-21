@@ -329,10 +329,48 @@ async def exerc_06() -> None:
 
 async def exerc_07() -> None:
     """
-    TODO start it
+    Lucas é responsável por um sistema de processamento de dados, onde múltiplas tarefas são executadas ao mesmo tempo. No entanto, ele precisa garantir que o sistema seja capaz de monitorar quais tarefas já foram concluídas e quais ainda estão em andamento.
+    Seu objetivo é criar um programa assíncrono que execute três tarefas simultaneamente, simulando um processamento de dados com tempos diferentes. Existem três tarefas, cada uma com um tempo fixo de execução:
+    - Tarefa 1: 3 segundos.
+    - Tarefa 2: 5 segundos.
+    - Tarefa 3: 7 segundos.
+    O sistema deve verificar a cada segundo o status de todas as tarefas e exibir quais ainda estão "Em andamento" e quais já foram "Finalizadas";
+    Assim que uma tarefa for concluída, o programa deve exibir uma mensagem informando sua finalização;
+    O programa só deve terminar quando todas as tarefas forem finalizadas.
+    Saída esperada:
+    > Status das tarefas: ['Em andamento', 'Em andamento', 'Em andamento']
+    > Status das tarefas: ['Em andamento', 'Em andamento', 'Em andamento']
+    > Status das tarefas: ['Em andamento', 'Em andamento', 'Em andamento']
+    > Tarefa 1 finalizada!
+    > Status das tarefas: ['Finalizado', 'Em andamento', 'Em andamento']
+    > Status das tarefas: ['Finalizado', 'Em andamento', 'Em andamento']
+    > Tarefa 2 finalizada!
+    > Status das tarefas: ['Finalizado', 'Finalizado', 'Em andamento']
+    > Status das tarefas: ['Finalizado', 'Finalizado', 'Em andamento']
+    > Tarefa 3 finalizada!
     """
+    async def processing_data(base_delay: int, index: int) -> None:
+        delay: int = base_delay + ((index + 1) * random.uniform(1.0, 2.0))
+        await asyncio.sleep(delay)
+        results[index] = True
+        print(f'{colored(f"[ALURA_ASYNC][07][{datetime.now().strftime('%H:%M:%S')}][{delay}]", "white", attrs=CGATTRS)} finished task: {colored(index, "red", attrs=CGATTRS)}')
+
     print(f'{colored("[ALURA_ASYNC][07]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[ALURA_ASYNC][07]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+    results: List[bool] = [False, False, False]
+    task_01: asyncio.Task = asyncio.create_task(processing_data(base_delay=3, index=0))
+    task_02: asyncio.Task = asyncio.create_task(processing_data(base_delay=5, index=1))
+    task_03: asyncio.Task = asyncio.create_task(processing_data(base_delay=7, index=2))
+
+    while True:
+        if all(results):
+            print(f'{colored("[ALURA_ASYNC][07]", "white", attrs=CGATTRS)} ALL TASKS FINISHED!! Status: {colored(results, "red", attrs=CGATTRS)}')
+            break
+
+        print(f'{colored("[ALURA_ASYNC][07]", "white", attrs=CGATTRS)} status: {colored(results, "red", attrs=CGATTRS)}')
+        await asyncio.sleep(1)
+
+    await asyncio.gather(task_01, task_02, task_03)
+    print(f'{colored("[ALURA_ASYNC][07]", "white", attrs=CGATTRS)} --- FINISH ---')
 
 
 async def exerc_08() -> None:
