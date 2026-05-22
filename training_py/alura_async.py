@@ -482,7 +482,48 @@ async def exerc_09() -> None:
 
 async def exerc_10() -> None:
     """
-    TODO start it
+    Você foi contratado para desenvolver um sistema de apostas esportivas assíncrono. Os jogadores fazem suas apostas em jogos de futebol, mas os resultados só são revelados depois de um tempo aleatório, simulando a espera real por um resultado.
+    Nesta tarefa, você deve:
+    - Criar um sistema onde cada aposta é armazenada em um asyncio.Future() e só é definida após um tempo determinado;
+    - Simular três jogos diferentes, nos quais os apostadores fizeram suas apostas;
+    - O resultado de cada jogo será "Vitória do Time A", "Vitória do Time B" ou "Empate", escolhido aleatoriamente;
+    - Cada jogo levará entre 2 e 8 segundos para ter seu resultado definido;
+    - O programa não deve esperar cada aposta individualmente, ele deve registrar todas e continuar rodando;
+    - Assim que um resultado for definido, ele deve ser exibido imediatamente;
+    - Quando todos os jogos forem finalizados, o programa exibe a mensagem "Todos os resultados foram revelados!".
+    Variáveis pré-definidas:
+    jogos = [
+        {"id": 1, "times": "Flamengo vs Palmeiras"},
+        {"id": 2, "times": "São Paulo vs Corinthians"},
+        {"id": 3, "times": "Grêmio vs Internacional"},
+    ]
+    RESULTADOS = ["Vitória do Time A", "Vitória do Time B", "Empate"]
+    Saída esperada:
+    > Aposta no jogo 1 (Flamengo vs Palmeiras) registrada! Aguardando resultado...
+    > Aposta no jogo 2 (São Paulo vs Corinthians) registrada! Aguardando resultado...
+    > Aposta no jogo 3 (Grêmio vs Internacional) registrada! Aguardando resultado...
+    > Aposta no jogo 2 definida: Vitória do Corinthians (após 3s).
+    > Aposta no jogo 1 definida: Empate (após 5s).
+    > Aposta no jogo 3 definida: Vitória do Grêmio (após 7s).
+    > Todos os resultados foram revelados!
     """
+    async def set_game_result(game: Dict[str, int | str | asyncio.Future]) -> None:
+        delay: float = random.uniform(2.0, 8.0)
+        print(f'{colored(f"[ALURA_ASYNC][10][{datetime.now().strftime('%H:%M:%S')}][{round(delay, 5):.5f}]", "white", attrs=CGATTRS)} game {colored(game, "yellow", attrs=CGATTRS)}')
+        await asyncio.sleep(delay)
+        game['result'].set_result(random.choice(['SQUAD A WINS', 'DRAW', 'SQUAD B WINS']))
+        if game['result'].done():
+            result = game['result'].result()
+        print(f'{colored(f"[ALURA_ASYNC][10][{datetime.now().strftime('%H:%M:%S')}][{round(delay, 5):.5f}]", "white", attrs=CGATTRS)} game {colored(game, "yellow", attrs=CGATTRS)} {colored(result, "red", attrs=CGATTRS)}')
+
     print(f'{colored("[ALURA_ASYNC][10]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[ALURA_ASYNC][10]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+    games: List[Dict[str, int | str | asyncio.Future]] = [
+        {"id": 1, "squad": "Flamengo vs Palmeiras", "result": asyncio.Future()},
+        {"id": 2, "squad": "São Paulo vs Corinthians", "result": asyncio.Future()},
+        {"id": 3, "squad": "Grêmio vs Internacional", "result": asyncio.Future()},
+    ]
+
+    tasks: List[asyncio.Task] = [asyncio.create_task(set_game_result(game=g)) for g in games]
+    await asyncio.gather(*tasks)
+
+    print(f'{colored("[ALURA_ASYNC][10]", "white", attrs=CGATTRS)} --- ALL GAMES ARE FINISHED!! ---')
