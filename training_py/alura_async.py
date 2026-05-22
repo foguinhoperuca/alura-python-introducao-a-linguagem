@@ -4,7 +4,7 @@ import logging
 import math
 import random
 import time
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 from termcolor import colored
 
@@ -414,10 +414,70 @@ async def exerc_08() -> None:
 
 async def exerc_09() -> None:
     """
-    TODO start it
+    Imagine que você está desenvolvendo um gerenciador de downloads que permite baixar múltiplos arquivos simultaneamente. Como nem todos os arquivos têm o mesmo tamanho, alguns downloads demoram mais que outros. Seu programa deve:
+    - Baixar cinco arquivos diferentes, cada um com um tamanho aleatório entre 10MB e 50MB;
+    - A velocidade de download de cada arquivo é de 5MB por segundo;
+    - Exibir mensagens de progresso a cada segundo, mostrando quanto já foi baixado de cada arquivo;
+    - Exibir uma mensagem quando cada download for concluído;
+    - Aguarde todos os downloads antes de encerrar o programa.
+    Saída esperada:
+    > Iniciando download de arquivo_1.txt (tamanho: 30MB)...
+    > Iniciando download de arquivo_2.txt (tamanho: 45MB)...
+    > Iniciando download de arquivo_3.txt (tamanho: 20MB)...
+    > Iniciando download de arquivo_4.txt (tamanho: 10MB)...
+    > Iniciando download de arquivo_5.txt (tamanho: 50MB)...
+    >
+    > [1s] arquivo_1.txt: 5MB baixados
+    > [1s] arquivo_2.txt: 5MB baixados
+    > [1s] arquivo_3.txt: 5MB baixados
+    > [1s] arquivo_4.txt: 5MB baixados
+    > [1s] arquivo_5.txt: 5MB baixados
+    >
+    > [2s] arquivo_1.txt: 10MB baixados
+    > [2s] arquivo_2.txt: 10MB baixados
+    > [2s] arquivo_3.txt: 10MB baixados
+    > [2s] arquivo_4.txt: 10MB baixados
+    > arquivo_4.txt concluído!
+    >
+    > [3s] arquivo_1.txt: 15MB baixados
+    > [3s] arquivo_2.txt: 15MB baixados
+    > [3s] arquivo_3.txt: 15MB baixados
+    >
+    > [4s] arquivo_1.txt: 20MB baixados
+    > [4s] arquivo_2.txt: 20MB baixados
+    > arquivo_3.txt concluído!
+    >
+    > ...
+    >
+    > arquivo_1.txt concluído!
+    > arquivo_2.txt concluído!
+    > arquivo_5.txt concluído!
+    >
+    > Todos os downloads foram finalizados!
     """
+    async def download(base_delay: int, artefact: Tuple[str, int]) -> None:
+        delay: int = base_delay + (1 * random.uniform(1.0, 2.0))
+        print(f'{colored(f"[ALURA_ASYNC][09][{datetime.now().strftime('%H:%M:%S')}][{round(delay, 5):.5f}]", "white", attrs=CGATTRS)} downloading {colored(artefact, "red", attrs=CGATTRS)}')
+        # await asyncio.sleep(delay)
+
+        total_downloaded: int = 0
+        while total_downloaded < artefact[1]:
+            await asyncio.sleep(1)
+            total_downloaded += 5
+            print(f'{colored(f"[ALURA_ASYNC][09][{datetime.now().strftime('%H:%M:%S')}][{round(delay, 5):.5f}]", "white", attrs=CGATTRS)} ALREADY downloaded {colored(artefact[0], "yellow", attrs=CGATTRS)}: {colored(total_downloaded, "yellow", attrs=CGATTRS)}MB')
+
+        print(f'{colored(f"[ALURA_ASYNC][09][{datetime.now().strftime('%H:%M:%S')}][{round(delay, 5):.5f}]", "white", attrs=CGATTRS)} FINISHED {colored(artefact[0], "cyan", attrs=CGATTRS)}')
+
     print(f'{colored("[ALURA_ASYNC][09]", "white", attrs=CGATTRS)} --- EXERCISE ---')
-    print(f'{colored("[ALURA_ASYNC][09]", "white", attrs=CGATTRS)} TODO {colored("implement it!!", "red", attrs=CGATTRS)}')
+    artefacts: List[Tuple[str, int]] = [
+        ('file_1.txt', 30),
+        ('file_2.txt', 45),
+        ('file_3.txt', 20),
+        ('file_4.txt', 10),
+        ('file_5.txt', 50),
+    ]
+    tasks: List[asyncio.Task] = [asyncio.create_task(download(base_delay=artefact[1] / 10, artefact=artefact)) for artefact in artefacts]
+    await asyncio.gather(*tasks)
 
 
 async def exerc_10() -> None:
