@@ -66,3 +66,14 @@ Learn python with pratical exercises.
 - [Praticando Python: funções](https://cursos.alura.com.br/course/praticando-python-funcoes "https://cdn3.gnarususercontent.com.br/4521-python/Praticando%20Python%20-%20Fun%C3%A7%C3%B5es.pdf")
 - [Praticando python: programação assíncrona](https://cursos.alura.com.br/course/praticando-python-programacao-assincrona "https://cdn3.gnarususercontent.com.br/4522-praticando-python-programacao-assincrona/Praticando%20Python%20-%20Programa%C3%A7%C3%A3o%20Ass%C3%ADncrona.pdf")
 - [Praticando Python: trabalhando com projetos](https://cursos.alura.com.br/course/praticando-python-trabalhando-projetos "https://cdn3.gnarususercontent.com.br/4541-praticando-python-praticando-projetos/Praticando-Python-projetos.pdf")
+
+
+### [Python para Data Science](https://cursos.alura.com.br/formacao-data-science-python) ###
+
+- [Curso de Python para Dados: primeiros passos](https://cursos.alura.com.br/course/python-data-science-primeiros-passos "pyds_intro")
+
+https://cdn3.gnarususercontent.com.br/2922-python-data-science/Projeto_Python_Data_Science.ipynb
+
+
+
+
