@@ -71,9 +71,4 @@ Learn python with pratical exercises.
 ### [Python para Data Science](https://cursos.alura.com.br/formacao-data-science-python) ###
 
 - [Curso de Python para Dados: primeiros passos](https://cursos.alura.com.br/course/python-data-science-primeiros-passos "pyds_intro")
-
-https://cdn3.gnarususercontent.com.br/2922-python-data-science/Projeto_Python_Data_Science.ipynb
-
-
-
-
+- [Python para Dados: Trabalhando com Funções, Estrutura de Dados e Exceções](https://cursos.alura.com.br/course/python-data-science-funcoes-estruturas-dados-excecoes "pyds_intro_advanced")
