@@ -2,3 +2,6 @@
 
 notebook
 ipykernel
+
+numpy
+matplotlib
